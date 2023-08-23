@@ -5,9 +5,9 @@
 	"author" : "Emran Ahmed",
 	"private" : true,
 	"license" : "GPLv3",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/EmranAhmed/storepress-base-plugin"
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/EmranAhmed/storepress-base-plugin"
 	},
 	"bin" : {
 		"package" : "./bin/package.js"
