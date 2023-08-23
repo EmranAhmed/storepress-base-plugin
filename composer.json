@@ -1,0 +1,42 @@
+{
+	"name" : "storepress/base-plugin",
+	"description" : "StorePress base Plugin",
+	"license" : "GPLv3",
+	"version" : "1.0.0",
+	"keywords" : [
+		"gutenberg",
+		"wordpress",
+		"plugin"
+	],
+	"homepage" : "https://github.com/EmranAhmed/image-hotspot-blocks-for-gutenberg#readme",
+	"authors" : [
+		{
+			"name" : "StorePress",
+			"email" : "storepresshq@gmail.com"
+		}
+	],
+	"require" : {
+		"composer/installers" : "v2.2.0"
+	},
+	"require-dev" : {
+		"squizlabs/php_codesniffer" : "3.7.2",
+		"wp-coding-standards/wpcs" : "3.0.0",
+		"phpcompatibility/php-compatibility" : "9.3.5",
+		"dealerdirect/phpcodesniffer-composer-installer" : "v1.0.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"StorePress\\" : "includes/"
+		},
+		"files" : [
+			"includes/functions.php"
+		]
+	},
+	"config" : {
+		"optimize-autoloader" : true,
+		"allow-plugins" : {
+			"dealerdirect/phpcodesniffer-composer-installer" : true,
+			"composer/installers" : true
+		}
+	}
+}

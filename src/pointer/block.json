@@ -1,0 +1,54 @@
+{
+  "$schema" : "https://schemas.wp.org/trunk/block.json",
+  "apiVersion" : 3,
+  "name" : "storepress/hotspot-pointer",
+  "version" : "0.1.0",
+  "title" : "Pointer for Image Hotspot",
+  "category" : "storepress",
+	"icon" : "sticky",
+  "description" : "Pointer block for Image Hotspot",
+  "parent" : [
+    "storepress/hotspot-popup",
+    "storepress/hotspot-slider"
+  ],
+  "attributes" : {
+    "x" : {
+      "type" : "number"
+    },
+    "y" : {
+      "type" : "number"
+    },
+    "id" : {
+      "type" : "integer",
+      "default" : 0
+    },
+    "parent" : {
+      "enum" : [
+        "popup",
+        "slider"
+      ],
+      "default" : "popup"
+    },
+    "tooltipPosition" : {
+      "type" : "string",
+      "default" : "bottom"
+    },
+    "tooltipWidth" : {
+      "type" : "number",
+      "default" : 300
+    },
+    "isOpenedDefault" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  },
+  "supports" : {
+    "html" : false,
+    "inserter" : false
+  },
+  "textdomain" : "image-hotspot-blocks",
+  "editorScript" : "file:./index.js",
+  "editorStyle" : "file:./index.css",
+  "style" : "file:./style-index.css",
+  "viewScript" : "file:./view.js"
+}
