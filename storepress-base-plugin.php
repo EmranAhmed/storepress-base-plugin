@@ -26,8 +26,7 @@
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-
-	use StorePress\Plugin;
+	use StorePress\Base\Plugin;
 
 if ( ! defined( 'STOREPRESS_BASE_PLUGIN_VERSION' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_VERSION', '1.0.0' );
@@ -43,7 +42,7 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 
-if ( class_exists( 'StorePress\Plugin' ) ) {
+if ( class_exists( 'StorePress\Base\Plugin' ) ) {
 	/**
 	 * Plugin class init
 	 */
