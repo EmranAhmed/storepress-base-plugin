@@ -1,63 +1,67 @@
 {
-	"name" : "storepress-base-plugin",
-	"version" : "1.0.0",
-	"description" : "StorePress base Plugin",
-	"author" : "Emran Ahmed",
-	"private" : true,
-	"license" : "GPLv3",
-	"repository" : {
-		"type" : "git",
-		"url" : "https://github.com/EmranAhmed/storepress-base-plugin"
+	"name": "storepress-base-plugin",
+	"version": "1.0.0",
+	"description": "StorePress base Plugin",
+	"author": "Emran Ahmed",
+	"private": true,
+	"license": "GPLv3",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/EmranAhmed/storepress-base-plugin"
 	},
-	"bin" : {
-		"package" : "./bin/package.js"
+	"bin": {
+		"package": "./bin/package.js"
 	},
-	"scripts" : {
-		"clean" : "rimraf vendor && rimraf build && rimraf languages",
-		"ready" : "npm run clean && npm run build && npm run build:php && npm run language",
-		"build:php" : "composer install --no-dev --optimize-autoloader",
-		"lint:php" : "vendor/bin/phpcs",
-		"lint:php-fix" : "vendor/bin/phpcbf",
-		"build" : "wp-scripts build",
-		"check-engines" : "wp-scripts check-engines",
-		"check-licenses" : "wp-scripts check-licenses",
-		"format" : "wp-scripts format",
-		"lint:css" : "wp-scripts lint-style",
-		"lint:js" : "wp-scripts lint-js",
-		"lint:md:docs" : "wp-scripts lint-md-docs",
-		"lint:pkg-json" : "wp-scripts lint-pkg-json",
-		"packages-update" : "wp-scripts packages-update",
-		"plugin-zip" : "wp-scripts plugin-zip",
-		"prepackage" : "npm run ready",
-		"package" : "./bin/package.js",
-		"prezip" : "npm run ready",
-		"zip" : "./bin/package.js --zip",
-		"test:e2e" : "wp-scripts test-e2e",
-		"test:unit" : "wp-scripts test-unit-js",
-		"rimraf" : "./node_modules/rimraf/bin.js",
-		"start" : "rimraf build && wp-scripts start",
-		"language" : "wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=src --package-name=\"StorePress Base Plugin\"",
-		"language-json" : "wp i18n make-json languages"
+	"scripts": {
+		"clean": "rimraf vendor && rimraf build && rimraf languages",
+		"ready": "npm run clean && npm run build && npm run build:php && npm run language",
+		"build:php": "composer install --no-dev --optimize-autoloader",
+		"lint:php": "./vendor/bin/phpcs",
+		"lint:php-fix": "./bin/phpcbf.sh",
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"prepackage": "npm run ready",
+		"package": "./bin/package.js",
+		"prezip": "npm run ready",
+		"zip": "./bin/package.js --zip",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js",
+		"rimraf": "./node_modules/rimraf/bin.js",
+		"start": "rimraf build && wp-scripts start",
+		"language": "wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=src --package-name=\"StorePress Base Plugin\"",
+		"language-json": "wp i18n make-json languages"
 	},
-	"dependencies" : {
-		"@wordpress/icons" : "^9.31.0",
-		"classnames" : "^2.3.2"
+	"dependencies": {
+		"@storepress/icons": "file:src/packages/icons",
+		"@storepress/utils": "file:src/packages/utils",
+		"@wordpress/icons": "^9.31.0",
+		"classnames": "^2.3.2"
 	},
-	"devDependencies" : {
-		"@woocommerce/dependency-extraction-webpack-plugin" : "^2.2.0",
-		"@woocommerce/eslint-plugin" : "^2.2.0",
-		"@wordpress/base-styles" : "^4.31.0",
-		"@wordpress/prettier-config" : "^2.23.0",
-		"@wordpress/scripts" : "^26.11.0",
-		"eslint" : "^8.47.0",
-		"eslint-import-resolver-typescript" : "3.2.4",
-		"eslint-import-resolver-webpack" : "0.13.2",
-		"eslint-plugin-import" : "2.26.0",
-		"eslint-plugin-prettier" : "^5.0.0",
-		"eslint-plugin-you-dont-need-lodash-underscore" : "6.12.0",
-		"fs-extra" : "^11.1.1",
-		"prettier" : "^3.0.1",
-		"rimraf" : "3.0.2",
-		"webpack-remove-empty-scripts" : "^1.0.3"
+	"devDependencies": {
+		"@woocommerce/dependency-extraction-webpack-plugin": "^2.2.0",
+		"@woocommerce/eslint-plugin": "^2.2.0",
+		"@wordpress/base-styles": "^4.31.0",
+		"@wordpress/blocks": "^12.17.0",
+		"@wordpress/i18n": "^4.40.0",
+		"@wordpress/prettier-config": "^2.23.0",
+		"@wordpress/scripts": "^26.11.0",
+		"eslint": "^8.47.0",
+		"eslint-import-resolver-typescript": "3.2.4",
+		"eslint-import-resolver-webpack": "0.13.2",
+		"eslint-plugin-import": "2.26.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-you-dont-need-lodash-underscore": "6.12.0",
+		"fs-extra": "^11.1.1",
+		"prettier": "^3.0.1",
+		"rimraf": "3.0.2",
+		"webpack-remove-empty-scripts": "^1.0.3"
 	}
 }
