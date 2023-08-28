@@ -84,8 +84,8 @@ class Plugin {
 		// Register with hook.
 		add_action( 'init', array( $this, 'language' ), 1 );
 		add_action( 'init', array( $this, 'register_blocks' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
+		// add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
+		// add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
 		add_filter( 'block_categories_all', array( $this, 'add_block_category' ), 10, 2 );
 	}
 

@@ -15,7 +15,7 @@ module.exports = {
 	...defaultConfig,
 	entry : {
 		...getWebpackEntryPoints(),
-		// 'product/index': getFile('product/index.js')
+		'editor-scripts' : getFile('editor-scripts.js')
 	},
 
 	resolve : {
