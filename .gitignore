@@ -43,7 +43,7 @@ dist/
 node_modules/
 vendor/
 languages/
-image-hotspot-blocks-for-gutenberg/
+storepress-base-plugin/
 
 # TypeScript files
 tsconfig.tsbuildinfo
