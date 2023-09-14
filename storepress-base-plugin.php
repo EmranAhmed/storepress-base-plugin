@@ -11,7 +11,7 @@
 	 * Description:       A starter WordPress plugin scaffold which comes pre-configured for block development, admin dashboard with settings and standard plugin code.
 	 * Version:           1.0.0
 	 * Requires at least: 6.3
-	 * Requires PHP:      8.0
+	 * Requires PHP:      7.4
 	 * Author:            Emran Ahmed.
 	 * Author URI:        https://smalltowndev.com
 	 * Text Domain:       storepress-base-plugin

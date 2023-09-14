@@ -16,7 +16,7 @@ Base plugin
 == Installation ==
 = Minimum Requirements =
 
-* PHP 7.3 or greater is required (PHP 8.0 or greater is recommended)
+* PHP 7.4 or greater is required (PHP 8.0 or greater is recommended)
 * MySQL 5.6 or greater, OR MariaDB version 10.1 or greater, is required
 
 = Automatic installation =

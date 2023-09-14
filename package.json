@@ -42,8 +42,7 @@
 		"language-json": "wp i18n make-json languages"
 	},
 	"dependencies": {
-		"@storepress/icons": "file:src/packages/icons",
-		"@storepress/utils": "file:src/packages/utils",
+		"@storepress/components": "file:src/packages/components",
 		"@wordpress/icons": "^9.31.0",
 		"classnames": "^2.3.2"
 	},
