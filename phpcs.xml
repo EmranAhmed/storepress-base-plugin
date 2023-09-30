@@ -37,55 +37,37 @@
 	<config name="testVersion" value="7.4-"/>
 
 	<!-- Rules -->
-	<rule ref="WordPress-Core"/>
-	<rule ref="WordPress-Extra"/>
-	<rule ref="WordPress-Docs">
-		<exclude-pattern>src/*</exclude-pattern>
-		<exclude-pattern>tests/*</exclude-pattern>
-	</rule>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array">
-				<element value="storepress-base-plugin"/>
-				<element value="default"/>
-			</property>
+			<property name="text_domain" type="array" value="storepress-base-plugin" />
 		</properties>
+	</rule>
+
+	<rule ref="WordPress-Extra">
+		<exclude name="Generic.Commenting.DocComment.SpacingAfter"/>
+		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma"/>
+		<exclude name="PEAR.Functions.FunctionCallSignature"/>
+		<exclude name="Squiz.Commenting"/>
+		<exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops.Found"/>
+		<exclude name="Squiz.WhiteSpace"/>
+		<exclude name="WordPress.Arrays"/>
+		<exclude name="WordPress.Files.FileName"/>
+		<exclude name="WordPress.NamingConventions"/>
+		<exclude name="WordPress.Security.ValidatedSanitizedInput.MissingUnslash"/>
+		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralText"/>
+		<exclude name="WordPress.WhiteSpace"/>
+	</rule>
+
+	<rule ref="WooCommerce-Core">
+		<exclude name="Core.Commenting.CommentTags.AuthorTag"/>
+		<exclude name="WordPress.PHP.DontExtract"/>
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/>
 	</rule>
 
 	<rule ref="PHPCompatibility">
 		<exclude-pattern>tests/</exclude-pattern>
-		<exclude-pattern>src/*</exclude-pattern>
 	</rule>
-
-	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
-		<exclude-pattern>*/**/abstract-*.php</exclude-pattern>
-		<exclude-pattern>tests/*</exclude-pattern>
-		<exclude-pattern>includes/*</exclude-pattern>
-	</rule>
-
-	<rule ref="WordPress.Files.FileName.NotHyphenatedLowercase">
-		<exclude-pattern>tests/*</exclude-pattern>
-		<exclude-pattern>includes/*</exclude-pattern>
-	</rule>
-
-	<rule ref="Squiz.Commenting.FileComment.MissingPackageTag">
-		<exclude-pattern>tests/php</exclude-pattern>
-		<exclude-pattern>src/*</exclude-pattern>
-	</rule>
-	<rule ref="Squiz.Commenting.FileComment.Missing">
-		<exclude-pattern>tests/php</exclude-pattern>
-		<exclude-pattern>src/*</exclude-pattern>
-	</rule>
-
-	<rule ref="Generic.Commenting">
-		<exclude-pattern>tests/</exclude-pattern>
-	</rule>
-
-	<rule ref="Generic.Commenting.Todo">
-		<exclude name="Generic.Commenting.Todo.TaskFound"/>
-		<exclude name="Generic.Commenting.Todo.CommentFound"/>
-	</rule>
-
-	<exclude-pattern>./src/packages/*</exclude-pattern>
 </ruleset>

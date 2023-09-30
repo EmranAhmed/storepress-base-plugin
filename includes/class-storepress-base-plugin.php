@@ -6,20 +6,18 @@
 	 * @subpackage Base
 	 */
 
-	namespace StorePress\Base;
-
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 
 	/**
 	 * Class Plugin.
 	 */
-class Plugin {
+class StorePress_Base_Plugin {
 
 	/**
 	 * Class Instance.
 	 *
-	 * @var Plugin
+	 * @var StorePress_Base_Plugin
 	 */
 	protected static $instance = null;
 
@@ -30,11 +28,21 @@ class Plugin {
 		$this->includes();
 		$this->hooks();
 		$this->init();
+
+		/**
+		 * Action to signal that Plugin has finished loading.
+		 *
+		 * @param StorePress_Base_Plugin $this Plugin Object.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'storepress_base_plugin_loaded', $this );
 	}
 
 	/**
 	 * Plugin Version.
+	 *
+	 * @return string
 	 */
 	public function version() {
 		return esc_attr( STOREPRESS_BASE_PLUGIN_VERSION );
@@ -46,7 +54,7 @@ class Plugin {
 	 * @param string $name  Constant name.
 	 * @param array  $value Constant value.
 	 *
-	 * @return void No Return.
+	 * @return void.
 	 */
 	protected function define( $name, $value ) {
 		if ( ! defined( $name ) ) {
@@ -56,6 +64,8 @@ class Plugin {
 
 	/**
 	 * Instance.
+	 *
+	 * @return StorePress_Base_Plugin
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -67,18 +77,38 @@ class Plugin {
 
 	/**
 	 * Includes.
+	 *
+	 * @return void
+	 * @throws Exception When class files loading fails.
 	 */
 	public function includes() {
+		$loader = include_once $this->plugin_path() . '/vendor/autoload.php';
+
+		if ( ! $loader ) {
+			throw new Exception( 'vendor/autoload.php missing please run `composer install`' );
+		}
+
+		require_once $this->include_path() . '/functions.php';
 	}
 
 	/**
 	 * Initialize
 	 */
 	public function init() {
+		// Set up cache management.
+		// new Extension_Cache();.
+
+		// Initialize REST API.
+		// new Extension_REST_API();.
+
+		// Set up email management.
+		// new Extension_Email_Manager();.
 	}
 
 	/**
 	 * Hooks.
+	 *
+	 * @return void
 	 */
 	public function hooks() {
 		// Register with hook.
@@ -86,14 +116,14 @@ class Plugin {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		// add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 		// add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
-		add_filter( 'block_categories_all', array( $this, 'add_block_category' ), 10, 2 );
+		// add_filter( 'block_categories_all', array( $this, 'add_block_category' ), 10, 2 );
 	}
 
 	/**
 	 *  Add Custom block category
 	 *
 	 * @param array  $block_categories     Available block category.
-	 * @param object $block_editor_context Editor contaxt.
+	 * @param object $block_editor_context Editor context.
 	 *
 	 * @return array With New category.
 	 */

@@ -3,6 +3,7 @@
 	"description" : "StorePress base Plugin",
 	"minimum-stability" : "stable",
 	"license" : "GPLv3",
+	"type": "wordpress-plugin",
 	"keywords" : [
 		"gutenberg",
 		"wordpress",
@@ -16,9 +17,10 @@
 		}
 	],
 	"require-dev" : {
-		"wp-coding-standards/wpcs" : "3.0.0",
-		"phpcompatibility/php-compatibility" : "9.3.5",
-		"dealerdirect/phpcodesniffer-composer-installer" : "v1.0.0"
+		"dealerdirect/phpcodesniffer-composer-installer": "v1.0.0",
+		"phpcompatibility/php-compatibility": "9.3.5",
+		"woocommerce/woocommerce-sniffs": "^1.0",
+		"wp-coding-standards/wpcs": "3.0.0"
 	},
 	"autoload" : {
 		"psr-4" : {
