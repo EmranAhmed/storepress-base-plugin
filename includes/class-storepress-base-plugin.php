@@ -6,8 +6,8 @@
 	 * @subpackage Base
 	 */
 
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	/**
 	 * Class Plugin.
@@ -25,6 +25,7 @@ class StorePress_Base_Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
+
 		$this->includes();
 		$this->hooks();
 		$this->init();
@@ -56,7 +57,7 @@ class StorePress_Base_Plugin {
 	 *
 	 * @return void.
 	 */
-	protected function define( $name, $value ) {
+	public function define( $name, $value ) {
 		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
@@ -87,14 +88,16 @@ class StorePress_Base_Plugin {
 		if ( ! $loader ) {
 			throw new Exception( 'vendor/autoload.php missing please run `composer install`' );
 		}
-
-		require_once $this->include_path() . '/functions.php';
 	}
 
 	/**
 	 * Initialize
 	 */
 	public function init() {
+
+		// Setup BLocks.
+		$this->get_blocks();
+
 		// Set up cache management.
 		// new Extension_Cache();.
 
@@ -113,67 +116,6 @@ class StorePress_Base_Plugin {
 	public function hooks() {
 		// Register with hook.
 		add_action( 'init', array( $this, 'language' ), 1 );
-		add_action( 'init', array( $this, 'register_blocks' ) );
-		// add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
-		// add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
-		// add_filter( 'block_categories_all', array( $this, 'add_block_category' ), 10, 2 );
-	}
-
-	/**
-	 *  Add Custom block category
-	 *
-	 * @param array  $block_categories     Available block category.
-	 * @param object $block_editor_context Editor context.
-	 *
-	 * @return array With New category.
-	 */
-	public function add_block_category( $block_categories, $block_editor_context ) {
-		if ( empty( $block_editor_context->post ) ) {
-			return $block_categories;
-		}
-
-		$category = array(
-			'slug'  => 'storepress',
-			'title' => esc_html__( 'StorePress', 'storepress-base-plugin' ),
-			'icon'  => null,
-		);
-
-		array_unshift( $block_categories, $category );
-
-		return $block_categories;
-	}
-
-	/**
-	 * Block Editor Script
-	 */
-	public function block_editor_scripts() {
-
-		// Editor Scripts.
-		$editor_script_src_url    = $this->build_url() . '/editor-scripts.js';
-		$editor_script_asset_file = $this->build_path() . '/editor-scripts.asset.php';
-		$editor_script_asset      = include_once $editor_script_asset_file;
-
-		wp_enqueue_script( 'storepress-base-plugin-editor-scripts', $editor_script_src_url, $editor_script_asset['dependencies'], $editor_script_asset['version'], array( 'strategy' => 'defer' ) );
-	}
-
-	/**
-	 * Block Frontend Script
-	 */
-	public function frontend_scripts() {
-		$js_file_url  = $this->build_url() . '/frontend.js';
-		$css_file_url = $this->build_url() . '/frontend.css';
-		$asset_file   = $this->build_path() . '/frontend.asset.php';
-		$asset        = include_once $asset_file;
-
-		wp_register_style( 'storepress-base-plugin-style', $css_file_url, array(), $asset['version'] );
-		wp_register_script( 'storepress-base-plugin-script', $js_file_url, $asset['dependencies'], $asset['version'], array( 'strategy' => 'defer' ) );
-	}
-
-	/**
-	 * Block Register
-	 */
-	public function register_blocks() {
-		register_block_type( $this->build_path() . '/pointer' );
 	}
 
 	/**
@@ -281,5 +223,12 @@ class StorePress_Base_Plugin {
 	 */
 	public function include_path() {
 		return untrailingslashit( plugin_dir_path( STOREPRESS_BASE_PLUGIN_FILE ) . 'includes' );
+	}
+
+	/**
+	 * Get Blocks
+	 */
+	public function get_blocks() {
+		return new \StorePress\Base\Blocks();
 	}
 }

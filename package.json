@@ -39,30 +39,31 @@
 		"rimraf": "./node_modules/rimraf/bin.js",
 		"start": "rimraf build && wp-scripts start",
 		"language": "wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=src --package-name=\"StorePress Base Plugin\"",
-		"language-json": "wp i18n make-json languages"
+		"language-json": "wp i18n make-json languages",
+		"add": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
+		"add-static": "npx @wordpress/create-block@latest --namespace storepress --no-plugin"
 	},
 	"dependencies": {
-		"@storepress/components": "file:src/packages/components",
-		"@wordpress/icons": "^9.31.0",
+		"@wordpress/icons": "^9.35.0",
 		"classnames": "^2.3.2"
 	},
 	"devDependencies": {
 		"@woocommerce/dependency-extraction-webpack-plugin": "^2.2.0",
 		"@woocommerce/eslint-plugin": "^2.2.0",
-		"@wordpress/base-styles": "^4.31.0",
-		"@wordpress/blocks": "^12.17.0",
-		"@wordpress/i18n": "^4.40.0",
-		"@wordpress/prettier-config": "^2.23.0",
-		"@wordpress/scripts": "^26.11.0",
-		"eslint": "^8.47.0",
-		"eslint-import-resolver-typescript": "3.2.4",
-		"eslint-import-resolver-webpack": "0.13.2",
-		"eslint-plugin-import": "2.26.0",
-		"eslint-plugin-prettier": "^5.0.0",
-		"eslint-plugin-you-dont-need-lodash-underscore": "6.12.0",
+		"@wordpress/base-styles": "^4.35.0",
+		"@wordpress/blocks": "^12.21.0",
+		"@wordpress/i18n": "^4.44.0",
+		"@wordpress/prettier-config": "^3.1.0",
+		"@wordpress/scripts": "^26.15.0",
+		"eslint": "^8.52.0",
+		"eslint-import-resolver-typescript": "3.6.1",
+		"eslint-import-resolver-webpack": "0.13.8",
+		"eslint-plugin-import": "2.29.0",
+		"eslint-plugin-prettier": "^5.0.1",
+		"eslint-plugin-you-dont-need-lodash-underscore": "6.13.0",
 		"fs-extra": "^11.1.1",
-		"prettier": "^3.0.1",
+		"prettier": "^3.0.3",
 		"rimraf": "3.0.2",
-		"webpack-remove-empty-scripts": "^1.0.3"
+		"webpack-remove-empty-scripts": "^1.0.4"
 	}
 }

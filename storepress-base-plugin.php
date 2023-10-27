@@ -43,11 +43,11 @@ if ( ! class_exists( 'StorePress_Base_Plugin', false ) ) {
 	 *
 	 * @return object|false StorePress_Base_Plugin|false
 	 */
-function storepress_base_plugin_init() {
+function storepress_base_plugin() {
 	// Include the main class.
 
 	if ( ! class_exists( 'WooCommerce', false ) ) {
-		return false;
+		// return false;
 	}
 
 	if ( function_exists( 'storepress_base_plugin_pro' ) ) {
@@ -57,7 +57,7 @@ function storepress_base_plugin_init() {
 	return StorePress_Base_Plugin::instance();
 }
 
-	add_action( 'plugins_loaded', 'storepress_base_plugin_init' );
+	add_action( 'plugins_loaded', 'storepress_base_plugin' );
 
 	// Declare compatibility with custom order tables for WooCommerce.
 	add_action(
