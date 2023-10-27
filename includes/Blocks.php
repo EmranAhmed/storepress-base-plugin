@@ -135,6 +135,7 @@ class Blocks {
 			return;
 		}
 
+		// Scanning block.json directory.
 		$block_json_files = glob( storepress_base_plugin()->build_path() . '/**/block.json' );
 
 		// Auto register all blocks that were found.
