@@ -144,4 +144,55 @@ class Blocks {
 			register_block_type( $block_type );
 		}
 	}
+
+	public function inline_styles( $inline_styles_array = array() ) {
+
+		$styles = array();
+
+		foreach ( $inline_styles_array as $property => $value ) {
+			$styles[] = sprintf( '%s: %s;', trim( $property ), $value );
+		}
+
+		return implode( ' ', $styles );
+	}
+
+	public function css_classes( $classes_array = array() ) {
+
+		$classes = array();
+
+		foreach ( $classes_array as $class_name => $should_include ) {
+
+			if ( ! empty( $should_include ) ) {
+				$classes[] = $class_name;
+			}
+		}
+
+		return implode( ' ', array_unique( $classes ) );
+	}
+
+	public function get_kses_allowed_html( $args = array() ) {
+
+		$defaults = wp_kses_allowed_html( 'post' );
+
+		$svg_args = array(
+			'svg'   => array(
+				'class'           => true,
+				'aria-hidden'     => true,
+				'aria-labelledby' => true,
+				'role'            => true,
+				'xmlns'           => true,
+				'width'           => true,
+				'height'          => true,
+				'viewbox'         => true, // <= Must be Lower case!
+			),
+			'g'     => array( 'fill' => true ),
+			'title' => array( 'title' => true ),
+			'path'  => array(
+				'd'    => true,
+				'fill' => true,
+			),
+		);
+
+		return array_merge( $defaults, $svg_args, $args );
+	}
 }
