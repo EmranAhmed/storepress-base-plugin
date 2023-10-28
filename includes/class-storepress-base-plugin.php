@@ -229,6 +229,6 @@ class StorePress_Base_Plugin {
 	 * Get Blocks
 	 */
 	public function get_blocks() {
-		return new \StorePress\Base\Blocks();
+		return \StorePress\Base\Blocks::instance();
 	}
 }

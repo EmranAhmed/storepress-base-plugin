@@ -7,68 +7,65 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 import classNames from 'classnames';
 
-function SliderPointers({ attributes }) {
-	const { id } = attributes;
+function StaticBlock01({attributes}) {
+	const {x} = attributes;
 
-	// const pointerClasses = classNames({ pointer: true, pointer__item: true });
+	const classes = classNames({'class-01' : true});
 
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		className : classes,
+		style     : {
+			'--css-variable' : `${x}%`
+		},
+	});
 
-	const { children } = useInnerBlocksProps.save();
+	const {children} = useInnerBlocksProps.save();
 
 	return (
-		<div className="storepress-hotspot-slider-item" data-slider_id={id}>
-			<div {...blockProps}>{children}</div>
+		<div {...blockProps}>
+			<h1>StorePress Base Block - save.js</h1>
+			{children}
 		</div>
 	);
 }
 
-function PopupPointers({ attributes }) {
-	const { x, y, tooltipPosition, tooltipWidth, isOpenedDefault } = attributes;
+function StaticBlock02({attributes}) {
+	const {x} = attributes;
 
-	const pointerClasses = classNames({
-		pointer: true,
-		pointer__item: true,
-		active: isOpenedDefault,
-	});
-
-	const pointerStyles = {
-		'--left': `${x}%`,
-		'--top': `${y}%`,
-	};
-
-	const tooltipClasses = classNames(
-		{
-			'hotspot-tooltip': true,
-		},
-		tooltipPosition
-	);
+	const classes = classNames({'class-01' : true});
 
 	const blockProps = useBlockProps.save({
-		className: tooltipClasses,
-		style: {
-			'--left': `${x}%`,
-			'--top': `${y}%`,
-			'--tooltip-width': `${tooltipWidth}px`,
+		className : classes,
+		style     : {
+			'--css-variable' : `${x}%`
 		},
 	});
 
-	const { children } = useInnerBlocksProps.save();
+	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
 
 	return (
-		<>
-			<button className={pointerClasses} style={pointerStyles}>
-				<Icon icon={plus} />
-			</button>
-			<div {...blockProps}>{children}</div>
-		</>
+		<div {...innerBlocksProps} />
 	);
 }
 
-export default function Save({ attributes }) {
-	return attributes.parent === 'slider' ? (
-		<SliderPointers attributes={attributes} />
-	) : (
-		<PopupPointers attributes={attributes} />
-	);
+function DynamicBlock({attributes}) {
+	const {x} = attributes;
+
+	const classes = classNames({'class-01' : true});
+
+	const blockProps = useBlockProps.save({
+		className : classes,
+		style     : {
+			'--css-variable' : `${x}%`
+		},
+	});
+
+	const {children}       = useInnerBlocksProps.save(blockProps);
+	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
+
+	return children;
+}
+
+export default function Save({attributes}) {
+	return <DynamicBlock attributes={attributes}/>
 }

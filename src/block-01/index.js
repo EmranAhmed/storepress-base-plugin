@@ -20,7 +20,6 @@ registerBlockType(metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
-	edit: Edit,
-	save: Save,
-	// save: () => <InnerBlocks.Content/> // If render php with innerBlock
+	edit : Edit,
+	save : Save
 });

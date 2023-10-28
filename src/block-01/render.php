@@ -16,7 +16,7 @@
 	);
 
 	$styles = array(
-		'--css_variable' => $attributes['x'] . '%',
+		'--css-variable' => $attributes['x'] . '%',
 	);
 
 	$context = $block->context;
@@ -31,5 +31,6 @@
 	$allowed_html = storepress_base_plugin()->get_blocks()->get_kses_allowed_html();
 	?>
 <div <?php echo wp_kses_data( $wrapper_attributes ); ?>>
+	<h1>StorePress Base Block - render.php</h1>
 	<?php echo wp_kses( $content, $allowed_html ); ?>
 </div>

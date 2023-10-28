@@ -30,10 +30,10 @@ import apiFetch from '@wordpress/api-fetch';
  */
 import './editor.scss';
 
-export default function Edit({attributes, setAttributes}) {
+export default function Edit({attributes, setAttributes, clientId}) {
 
 	const [sugessionList, setSugessionList] = useState([])
-	const [loding, setLoading]              = useState(true)
+	const [loading, setLoading]              = useState(true)
 
 	const blockProps = useBlockProps();
 
@@ -50,15 +50,15 @@ export default function Edit({attributes, setAttributes}) {
 				setSugessionList(result)
 			}
 		})
-	}, []);
+	}, [clientId]);
 
 	return (
 		<div {...blockProps}>
-			<SearchList
+			{/*<SearchList
 				selected={['17', '23', '36']}
 				valueName='name'
 				isMultiSelect={true}
-				isLoading={loding}
+				isLoading={loading}
 
 				onSearch={(input) => {
 					console.log(input)
@@ -67,7 +67,8 @@ export default function Edit({attributes, setAttributes}) {
 					console.log(item)
 				}}
 				suggestions={sugessionList}
-			/>
+			/>*/}
+			<h1>StorePress Base Block - edit.js</h1>
 			<div {...innerBlockProps} />
 		</div>
 	);
