@@ -6,18 +6,19 @@
 	 * @subpackage Base
 	 */
 
+	namespace StorePress\Base;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	/**
 	 * Class Plugin.
 	 */
-class StorePress_Base_Plugin {
+class Plugin {
 
 	/**
 	 * Class Instance.
 	 *
-	 * @var StorePress_Base_Plugin
+	 * @var Plugin
 	 */
 	protected static $instance = null;
 
@@ -33,7 +34,7 @@ class StorePress_Base_Plugin {
 		/**
 		 * Action to signal that Plugin has finished loading.
 		 *
-		 * @param StorePress_Base_Plugin $this Plugin Object.
+		 * @param Plugin $this Plugin Object.
 		 *
 		 * @since 1.0.0
 		 */
@@ -47,6 +48,15 @@ class StorePress_Base_Plugin {
 	 */
 	public function version() {
 		return esc_attr( STOREPRESS_BASE_PLUGIN_VERSION );
+	}
+
+	/**
+	 * Plugin File.
+	 *
+	 * @return string
+	 */
+	public function get_plugin_file() {
+		return STOREPRESS_BASE_PLUGIN_FILE;
 	}
 
 	/**
@@ -66,7 +76,7 @@ class StorePress_Base_Plugin {
 	/**
 	 * Instance.
 	 *
-	 * @return StorePress_Base_Plugin
+	 * @return Plugin
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -79,15 +89,18 @@ class StorePress_Base_Plugin {
 	/**
 	 * Includes.
 	 *
-	 * @return void
-	 * @throws Exception When class files loading fails.
+	 * @return bool
+	 * @throws \Exception When class files loading fails.
 	 */
 	public function includes() {
-		$loader = include_once $this->plugin_path() . '/vendor/autoload.php';
 
-		if ( ! $loader ) {
-			throw new Exception( 'vendor/autoload.php missing please run `composer install`' );
+		if ( file_exists( $this->vendor_path() . '/autoload.php' ) ) {
+			include_once $this->vendor_path() . '/autoload.php';
+
+			return true;
 		}
+
+		throw new \Exception( 'vendor/autoload.php missing please run `composer install`' );
 	}
 
 	/**
@@ -129,42 +142,42 @@ class StorePress_Base_Plugin {
 	 * Get Plugin basename directory name
 	 */
 	public function basename() {
-		return basename( dirname( STOREPRESS_BASE_PLUGIN_FILE ) );
+		return basename( dirname( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin basename
 	 */
 	public function plugin_basename() {
-		return plugin_basename( STOREPRESS_BASE_PLUGIN_FILE );
+		return plugin_basename( $this->get_plugin_file() );
 	}
 
 	/**
 	 * Get Plugin directory name
 	 */
 	public function plugin_dirname() {
-		return dirname( plugin_basename( STOREPRESS_BASE_PLUGIN_FILE ) );
+		return dirname( plugin_basename( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin directory path
 	 */
 	public function plugin_path() {
-		return untrailingslashit( plugin_dir_path( STOREPRESS_BASE_PLUGIN_FILE ) );
+		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin directory url
 	 */
 	public function plugin_url() {
-		return untrailingslashit( plugin_dir_url( STOREPRESS_BASE_PLUGIN_FILE ) );
+		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin image url
 	 */
 	public function images_url() {
-		return untrailingslashit( plugin_dir_url( STOREPRESS_BASE_PLUGIN_FILE ) . 'images' );
+		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'images' );
 	}
 
 
@@ -183,7 +196,7 @@ class StorePress_Base_Plugin {
 	 * Get Asset URL
 	 */
 	public function assets_url() {
-		return untrailingslashit( plugin_dir_url( STOREPRESS_BASE_PLUGIN_FILE ) . 'assets' );
+		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'assets' );
 	}
 
 	/**
@@ -194,10 +207,24 @@ class StorePress_Base_Plugin {
 	}
 
 	/**
+	 * Get Vendor path
+	 */
+	public function vendor_path() {
+		return $this->plugin_path() . '/vendor';
+	}
+
+	/**
+	 * Get Vendor URL
+	 */
+	public function vendor_url() {
+		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'vendor' );
+	}
+
+	/**
 	 * Get Build URL
 	 */
 	public function build_url() {
-		return untrailingslashit( plugin_dir_url( STOREPRESS_BASE_PLUGIN_FILE ) . 'build' );
+		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'build' );
 	}
 
 	/**
@@ -222,13 +249,18 @@ class StorePress_Base_Plugin {
 	 * Get Include path
 	 */
 	public function include_path() {
-		return untrailingslashit( plugin_dir_path( STOREPRESS_BASE_PLUGIN_FILE ) . 'includes' );
+		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'includes' );
 	}
 
 	/**
 	 * Get Blocks
 	 */
 	public function get_blocks() {
+
+		if ( ! class_exists( '\StorePress\Base\Blocks' ) ) {
+			return false;
+		}
+
 		return \StorePress\Base\Blocks::instance();
 	}
 }

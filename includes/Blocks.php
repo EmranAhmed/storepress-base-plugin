@@ -7,9 +7,8 @@
 
 	namespace StorePress\Base;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );
+
 
 	/**
 	 * Class Blocks.
