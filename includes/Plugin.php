@@ -180,18 +180,6 @@ class Plugin {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'images' );
 	}
 
-
-	/**
-	 * Get WordPress.org asset url
-	 *
-	 * @param string $file Asset file name.
-	 *
-	 * @return string WordPress.org file url
-	 */
-	public function org_assets_url( $file = '' ) {
-		return 'https://ps.w.org/storepress-base-plugin/assets' . $file . '?ver=' . $this->version();
-	}
-
 	/**
 	 * Get Asset URL
 	 */
