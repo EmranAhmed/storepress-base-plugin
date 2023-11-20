@@ -4,5 +4,3 @@
 	 *
 	 * @package StorePress
 	 */
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
-

@@ -38,7 +38,7 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_TEXT_DOMAIN' ) ) {
 }
 
 	// Include the main class.
-if ( ! class_exists( '\StorePress\Base\Plugin', false ) ) {
+if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
 	require_once __DIR__ . '/includes/Plugin.php';
 }
 

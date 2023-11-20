@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards">
-	<description>StorePress dev PHP_CodeSniffer ruleset</description>
+<ruleset name="Plugin">
+	<description>Rules for the Plugin</description>
 
-	<file>.</file>
+	<file>./</file>
 	<!-- Exclude paths -->
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
@@ -11,6 +11,7 @@
 	<exclude-pattern>*/build/*</exclude-pattern>
 	<exclude-pattern>*/bin/*</exclude-pattern>
 	<exclude-pattern>*/src/*</exclude-pattern>
+	<exclude-pattern>*/\.*</exclude-pattern>
 
 	<!-- Show progress, show the error codes for each message (source). -->
 	<arg value="ps"/>
@@ -35,39 +36,41 @@
 	<!-- Configs -->
 	<config name="minimum_supported_wp_version" value="6.1"/>
 	<config name="testVersion" value="7.4-"/>
+	<!-- Check for PHP cross-version compatibility. -->
+	<rule ref="PHPCompatibilityWP"/>
 
 	<!-- Rules -->
 
+	<!--
+	To get the optimal benefits of using WPCS, we should add a couple of
+	custom properties. Adjust the values of these properties to fit our needs.
+	For information on additional custom properties available, check out
+	the wiki:
+	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
+	-->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="storepress-base-plugin" />
+			<property name="text_domain" value="storepress-base-plugin"/>
 		</properties>
 	</rule>
 
+	<!-- Include the WordPress-Extra standard. -->
 	<rule ref="WordPress-Extra">
-		<exclude name="Generic.Commenting.DocComment.SpacingAfter"/>
-		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
-		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma"/>
-		<exclude name="PEAR.Functions.FunctionCallSignature"/>
-		<exclude name="Squiz.Commenting"/>
-		<exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops.Found"/>
-		<exclude name="Squiz.WhiteSpace"/>
-		<exclude name="WordPress.Arrays"/>
 		<exclude name="WordPress.Files.FileName"/>
-		<exclude name="WordPress.NamingConventions"/>
-		<exclude name="WordPress.Security.ValidatedSanitizedInput.MissingUnslash"/>
-		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralText"/>
-		<exclude name="WordPress.WhiteSpace"/>
 	</rule>
 
-	<rule ref="WooCommerce-Core">
-		<exclude name="Core.Commenting.CommentTags.AuthorTag"/>
-		<exclude name="WordPress.PHP.DontExtract"/>
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
-		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/>
-	</rule>
+	<!-- Let's also check that everything is properly documented. -->
+	<rule ref="WordPress-Docs"/>
 
-	<rule ref="PHPCompatibility">
-		<exclude-pattern>tests/</exclude-pattern>
-	</rule>
+	<!-- Add in some extra rules from other standards. -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="Generic.Commenting.Todo"/>
+
+	<!--
+	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
+	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
+	-->
+	<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED"/>
+
+
 </ruleset>

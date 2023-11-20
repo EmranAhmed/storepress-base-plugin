@@ -1,7 +1,7 @@
 <?php
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
-	
+
 	/**
 	 * Dynamic Block Template.
 	 * @global   array    $attributes -  A clean associative array of block attributes.
