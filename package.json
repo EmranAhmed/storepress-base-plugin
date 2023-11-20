@@ -39,7 +39,7 @@
 		"rimraf": "./node_modules/rimraf/bin.js",
 		"start": "rimraf build && wp-scripts start",
 		"language": "wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=src --package-name=\"StorePress Base Plugin\"",
-		"language-json": "wp i18n make-json languages",
+		"language-json": "wp i18n make-json languages/storepress-base-plugin.pot --no-purge --pretty-print",
 		"add": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
 		"add-static": "npx @wordpress/create-block@latest --namespace storepress --no-plugin"
 	},

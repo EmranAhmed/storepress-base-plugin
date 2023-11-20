@@ -55,8 +55,15 @@ class Plugin {
 	 *
 	 * @return string
 	 */
-	public function get_plugin_file() {
+	public function get_plugin_file(): string {
 		return STOREPRESS_BASE_PLUGIN_FILE;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_text_domain(): string {
+		return STOREPRESS_BASE_PLUGIN_TEXT_DOMAIN;
 	}
 
 	/**
@@ -135,7 +142,7 @@ class Plugin {
 	 * Language
 	 */
 	public function language() {
-		load_plugin_textdomain( 'storepress-base-plugin', false, $this->plugin_path() . '/languages' );
+		load_plugin_textdomain( $this->get_text_domain(), false, $this->plugin_path() . '/languages' );
 	}
 
 	/**

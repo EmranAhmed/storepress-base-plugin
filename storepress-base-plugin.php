@@ -33,6 +33,10 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_FILE', __FILE__ );
 }
 
+if ( ! defined( 'STOREPRESS_BASE_PLUGIN_TEXT_DOMAIN' ) ) {
+	define( 'STOREPRESS_BASE_PLUGIN_TEXT_DOMAIN', 'storepress-base-plugin' );
+}
+
 	// Include the main class.
 if ( ! class_exists( '\StorePress\Base\Plugin', false ) ) {
 	require_once __DIR__ . '/includes/Plugin.php';
@@ -41,7 +45,7 @@ if ( ! class_exists( '\StorePress\Base\Plugin', false ) ) {
 	/**
 	 * Plugin class init
 	 *
-	 * @return object|false StorePress_Base_Plugin|false
+	 * @return \StorePress\Base\Plugin|false
 	 */
 function storepress_base_plugin() {
 	// Include the main class.
