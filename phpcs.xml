@@ -35,9 +35,14 @@
 
 	<!-- Configs -->
 	<config name="minimum_supported_wp_version" value="6.1"/>
+
+	<!-- Check for cross-version support for PHP 7.4 and higher. -->
 	<config name="testVersion" value="7.4-"/>
+
 	<!-- Check for PHP cross-version compatibility. -->
-	<rule ref="PHPCompatibilityWP"/>
+	<rule ref="PHPCompatibilityWP">
+		<include-pattern>*\.php$</include-pattern>
+	</rule>
 
 	<!-- Rules -->
 
@@ -48,6 +53,8 @@
 	the wiki:
 	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
 	-->
+	<rule ref="WordPress-Core"/>
+	<rule ref="WordPress-Docs"/>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" value="storepress-base-plugin"/>

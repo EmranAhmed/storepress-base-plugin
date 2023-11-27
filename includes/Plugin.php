@@ -10,6 +10,8 @@
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
+	use StorePress\Base\Blocks;
+
 	/**
 	 * Class Plugin.
 	 */
@@ -149,7 +151,7 @@ class Plugin {
 	 * Get Plugin basename directory name
 	 */
 	public function basename() {
-		return basename( dirname( $this->get_plugin_file() ) );
+		return wp_basename( dirname( $this->get_plugin_file() ) );
 	}
 
 	/**
@@ -256,6 +258,6 @@ class Plugin {
 			return false;
 		}
 
-		return \StorePress\Base\Blocks::instance();
+		return Blocks::instance();
 	}
 }

@@ -25,6 +25,10 @@
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
+	use StorePress\Base\Plugin;
+	use Automattic\WooCommerce\Utilities\FeaturesUtil;
+
+
 if ( ! defined( 'STOREPRESS_BASE_PLUGIN_VERSION' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_VERSION', '1.0.0' );
 }
@@ -45,20 +49,20 @@ if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
 	/**
 	 * Plugin class init
 	 *
-	 * @return \StorePress\Base\Plugin|false
+	 * @return Plugin|false
 	 */
 function storepress_base_plugin() {
 	// Include the main class.
 
 	if ( ! class_exists( 'WooCommerce', false ) ) {
-		// return false;
+		return false;
 	}
 
 	if ( function_exists( 'storepress_base_plugin_pro' ) ) {
 		return storepress_base_plugin_pro();
 	}
 
-	return \StorePress\Base\Plugin::instance();
+	return Plugin::instance();
 }
 
 	add_action( 'plugins_loaded', 'storepress_base_plugin' );
@@ -68,7 +72,7 @@ function storepress_base_plugin() {
 		'before_woocommerce_init',
 		function () {
 			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+				FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 			}
 		}
 	);
