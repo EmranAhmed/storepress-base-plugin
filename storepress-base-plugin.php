@@ -37,7 +37,7 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 
 	// Include the Plugin class.
 if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
-	require_once __DIR__ . '/includes/Plugin.php';
+	require_once plugin_dir_path( __FILE__ ) . '/includes/Plugin.php';
 }
 
 	/**
