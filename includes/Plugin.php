@@ -1,16 +1,17 @@
 <?php
 	/**
-	 * Plugin Class.
+	 * Main Plugin Class.
 	 *
 	 * @package    StorePress
 	 * @subpackage Base
+	 * @since      1.0.0
 	 */
 
 	namespace StorePress\Base;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-	use StorePress\Base\Blocks;
+	use Exception;
 
 	/**
 	 * Class Plugin.
@@ -18,16 +19,27 @@
 class Plugin {
 
 	/**
-	 * Class Instance.
+	 * Return singleton instance of Plugin.
+	 * The instance will be created if it does not exist yet.
 	 *
-	 * @var Plugin
+	 * @return Plugin The main instance.
+	 * @since 1.0.0
 	 */
-	protected static $instance = null;
+	public static function instance(): Plugin {
+		static $instance = null;
+		if ( null === $instance ) {
+			$instance = new self();
+		}
+
+		return $instance;
+	}
 
 	/**
-	 * Constructor.
+	 * Initialise the plugin.
+	 *
+	 * @since 1.0.0
 	 */
-	public function __construct() {
+	protected function __construct() {
 
 		$this->includes();
 		$this->hooks();
@@ -44,64 +56,55 @@ class Plugin {
 	}
 
 	/**
-	 * Plugin Version.
+	 * Plugin Absolute File.
 	 *
 	 * @return string
-	 */
-	public function version() {
-		return esc_attr( STOREPRESS_BASE_PLUGIN_VERSION );
-	}
-
-	/**
-	 * Plugin File.
-	 *
-	 * @return string
+	 * @since 1.0.0
 	 */
 	public function get_plugin_file(): string {
 		return STOREPRESS_BASE_PLUGIN_FILE;
 	}
 
 	/**
+	 * Get Plugin Version.
+	 *
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public function get_text_domain(): string {
-		return STOREPRESS_BASE_PLUGIN_TEXT_DOMAIN;
+	public function version(): string {
+		static $versions;
+
+		if ( is_null( $versions ) ) {
+			$versions = get_file_data( __FILE__, array( 'Version' ) );
+		}
+
+		return esc_attr( $versions[0] );
 	}
 
 	/**
 	 * Set constant if not defined and prevent reassign
 	 *
 	 * @param string $name  Constant name.
-	 * @param array  $value Constant value.
+	 * @param mixed  $value Constant value.
 	 *
 	 * @return void.
+	 * @since 1.0.0
 	 */
-	public function define( $name, $value ) {
+	public function define( string $name, $value ) {
 		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
 	}
 
-	/**
-	 * Instance.
-	 *
-	 * @return Plugin
-	 */
-	public static function instance() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
 
 	/**
 	 * Includes.
 	 *
 	 * @return bool
-	 * @throws \Exception When class files loading fails.
+	 * @throws Exception When class files loading fails.
+	 * @since 1.0.0
 	 */
-	public function includes() {
+	public function includes(): bool {
 
 		if ( file_exists( $this->vendor_path() . '/autoload.php' ) ) {
 			include_once $this->vendor_path() . '/autoload.php';
@@ -109,11 +112,13 @@ class Plugin {
 			return true;
 		}
 
-		throw new \Exception( 'vendor/autoload.php missing please run `composer install`' );
+		throw new Exception( 'vendor/autoload.php missing please run `composer install`' );
 	}
 
 	/**
-	 * Initialize
+	 * Initialize Classes.
+	 *
+	 * @since 1.0.0
 	 */
 	public function init() {
 
@@ -134,6 +139,7 @@ class Plugin {
 	 * Hooks.
 	 *
 	 * @return void
+	 * @since 1.0.0
 	 */
 	public function hooks() {
 		// Register with hook.
@@ -142,115 +148,161 @@ class Plugin {
 
 	/**
 	 * Language
+	 *
+	 * @return void
+	 * @since 1.0.0
 	 */
 	public function language() {
-		load_plugin_textdomain( $this->get_text_domain(), false, $this->plugin_path() . '/languages' );
+		load_plugin_textdomain( 'storepress-base-plugin', false, $this->plugin_path() . '/languages' );
 	}
 
 	/**
 	 * Get Plugin basename directory name
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function basename() {
+	public function basename(): string {
 		return wp_basename( dirname( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin basename
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function plugin_basename() {
+	public function plugin_basename(): string {
 		return plugin_basename( $this->get_plugin_file() );
 	}
 
 	/**
 	 * Get Plugin directory name
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function plugin_dirname() {
+	public function plugin_dirname(): string {
 		return dirname( plugin_basename( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin directory path
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function plugin_path() {
+	public function plugin_path(): string {
 		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin directory url
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function plugin_url() {
+	public function plugin_url(): string {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) );
 	}
 
 	/**
 	 * Get Plugin image url
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function images_url() {
+	public function images_url(): string {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'images' );
 	}
 
 	/**
-	 * Get Asset URL
+	 * Get Assets URL
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function assets_url() {
+	public function assets_url(): string {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'assets' );
 	}
 
 	/**
-	 * Get Asset path
+	 * Get Asset Absolute Path
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function assets_path() {
+	public function assets_path(): string {
 		return $this->plugin_path() . '/assets';
 	}
 
 	/**
 	 * Get Vendor path
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function vendor_path() {
+	public function vendor_path(): string {
 		return $this->plugin_path() . '/vendor';
 	}
 
 	/**
 	 * Get Vendor URL
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function vendor_url() {
+	public function vendor_url(): string {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'vendor' );
 	}
 
 	/**
-	 * Get Build URL
+	 * Get Node Modules build URL
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function build_url() {
+	public function build_url(): string {
 		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'build' );
 	}
 
 	/**
-	 * Get Build path
+	 * Get Node Modules build path
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function build_path() {
+	public function build_path(): string {
 		return $this->plugin_path() . '/build';
 	}
 
 	/**
-	 * Get Asset version
+	 * Get Asset file make time for versioning.
 	 *
 	 * @param string $file Asset file name.
 	 *
-	 * @return numeric asset file make time.
+	 * @return int asset file make time.
+	 * @since 1.0.0
 	 */
-	public function assets_version( $file ) {
+	public function assets_version( string $file ): int {
 		return filemtime( $this->assets_path() . $file );
 	}
 
 	/**
-	 * Get Include path
+	 * Get includes directory absolute path
+	 *
+	 * @return string
+	 * @since 1.0.0
 	 */
-	public function include_path() {
+	public function include_path(): string {
 		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'includes' );
 	}
 
 	/**
-	 * Get Blocks
+	 * Get Block Instance.
+	 *
+	 * @return false|Blocks
+	 * @since 1.0.0
 	 */
 	public function get_blocks() {
 

@@ -2,7 +2,9 @@
 	/**
 	 * Utility Functions.
 	 *
-	 * @package StorePress
+	 * @package    StorePress
+	 * @subpackage Base
+	 * @since      1.0.0
 	 */
 
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
+	namespace StorePress\Base;

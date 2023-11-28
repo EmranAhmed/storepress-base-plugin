@@ -10,7 +10,7 @@
 		"storepress",
 		"plugin"
 	],
-	"homepage" : "https://github.com/EmranAhmed/image-hotspot-blocks-for-gutenberg#readme",
+	"homepage" : "https://github.com/EmranAhmed/storepress-base-plugin#readme",
 	"authors" : [
 		{
 			"name" : "StorePress",
@@ -18,7 +18,7 @@
 		}
 	],
 	"require" : {
-		"storepress/admin-utils" : "^1.0"
+		"storepress/admin-utils" : "^1.1.0"
 	},
 	"require-dev" : {
 		"phpcompatibility/phpcompatibility-wp" : "^2.1.4",
