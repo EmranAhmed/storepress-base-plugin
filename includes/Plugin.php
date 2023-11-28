@@ -75,7 +75,7 @@ class Plugin {
 		static $versions;
 
 		if ( is_null( $versions ) ) {
-			$versions = get_file_data( __FILE__, array( 'Version' ) );
+			$versions = get_file_data( $this->get_plugin_file(), array( 'Version' ) );
 		}
 
 		return esc_attr( $versions[0] );
