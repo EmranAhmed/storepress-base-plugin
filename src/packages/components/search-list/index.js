@@ -2,16 +2,8 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	Button,
-	Spinner,
-	BaseControl
-} from '@wordpress/components';
-import {
-	useState,
-	useRef,
-	useLayoutEffect
-} from '@wordpress/element';
+import { Button, Spinner, BaseControl } from '@wordpress/components';
+import { useState, useRef, useLayoutEffect } from '@wordpress/element';
 import { Icon, closeSmall, search } from '@wordpress/icons';
 import classnames from 'classnames';
 import { useInstanceId } from '@wordpress/compose';
@@ -22,35 +14,32 @@ import { get } from 'lodash';
 import './style.scss';
 
 function SearchControl({
-						   className,
-						   onChange,
-						   onKeyDown,
-						   value,
-						   label,
-						   isLoading = false,
-						   placeholder = __('Search'),
-						   hideLabelFromVision = true,
-						   help,
-						   onClose,
-						   ...restProps
-					   }) {
-	const searchRef  = useRef();
+	className,
+	onChange,
+	onKeyDown,
+	value,
+	label,
+	isLoading = false,
+	placeholder = __('Search', 'storepress-base-plugin'),
+	hideLabelFromVision = true,
+	help,
+	onClose,
+	...restProps
+}) {
+	const searchRef = useRef();
 	const instanceId = useInstanceId(SearchControl);
-	const id         = `storepress-components-search-control-${instanceId}`;
+	const id = `storepress-components-search-control-${instanceId}`;
 
 	const renderRightButton = () => {
-
 		if (isLoading) {
-			return (
-				<Spinner/>
-			);
+			return <Spinner />;
 		}
 
 		if (onClose) {
 			return (
 				<Button
 					icon={closeSmall}
-					label={__('Close search')}
+					label={__('Close search', 'storepress-base-plugin')}
 					onClick={onClose}
 				/>
 			);
@@ -60,7 +49,7 @@ function SearchControl({
 			return (
 				<Button
 					icon={closeSmall}
-					label={__('Reset search')}
+					label={__('Reset search', 'storepress-base-plugin')}
 					onClick={() => {
 						onChange('');
 						searchRef.current?.focus();
@@ -69,7 +58,7 @@ function SearchControl({
 			);
 		}
 
-		return <Icon icon={search}/>;
+		return <Icon icon={search} />;
 	};
 
 	return (
@@ -79,7 +68,10 @@ function SearchControl({
 			__nextHasNoMarginBottom={true}
 			hideLabelFromVision={hideLabelFromVision}
 			help={help}
-			className={classnames(className, 'storepress-components-search-control')}
+			className={classnames(
+				className,
+				'storepress-components-search-control'
+			)}
 		>
 			<div className="storepress-components-search-control__input-wrapper">
 				<input
@@ -102,93 +94,109 @@ function SearchControl({
 	);
 }
 
-function SearchResults({useKey, useValue, selected, suggestions, isMultiSelect, onSelect}) {
-
+function SearchResults({
+	useKey,
+	useValue,
+	selected,
+	suggestions,
+	isMultiSelect,
+	onSelect,
+}) {
 	const instanceId = useInstanceId(SearchResults);
-	const id         = `storepress-components-search-result-item-${instanceId}`;
+	const id = `storepress-components-search-result-item-${instanceId}`;
 
-	const [selectedItem, setSelectedItem] = useState(selected)
+	const [selectedItem, setSelectedItem] = useState(selected);
 
 	const handleMultiSelection = (id, isSelected) => {
 		if (isSelected) {
 			setSelectedItem((values) => {
-				values.push(id)
-				return [...new Set(values)]
-			})
+				values.push(id);
+				return [...new Set(values)];
+			});
+		} else {
+			setSelectedItem((values) => values.filter((value) => value !== id));
 		}
-		else {
-			setSelectedItem((values) => values.filter((value) => value !== id))
-		}
-	}
+	};
 
 	const handleSingleSelection = (id, isSelected) => {
 		if (isSelected) {
-			setSelectedItem([id])
+			setSelectedItem([id]);
+		} else {
+			setSelectedItem([]);
 		}
-		else {
-			setSelectedItem([])
-		}
-	}
+	};
 
 	const handleSelected = (event) => {
-		const {value, checked} = event?.target;
+		const { value, checked } = event?.target;
 
 		if (isMultiSelect) {
-			handleMultiSelection(value, checked)
+			handleMultiSelection(value, checked);
+		} else {
+			handleSingleSelection(value, checked);
 		}
-		else {
-			handleSingleSelection(value, checked)
-		}
-	}
+	};
 
 	const handleChecked = (selected, current) => {
-		return selected.includes(current) || selected.includes(current?.toString())
-	}
+		return (
+			selected.includes(current) || selected.includes(current?.toString())
+		);
+	};
 
 	useLayoutEffect(() => {
-		onSelect(selectedItem)
+		onSelect(selectedItem);
 	}, [selectedItem]);
 
 	return suggestions.length > 0 ? (
 		<div className="storepress-search-list-search-result-wrapper">
 			<ul>
 				{suggestions.map((suggestion, index) => {
-
-					const key = get(suggestion, useKey)
-					const value = get(suggestion, useValue)
+					const key = get(suggestion, useKey);
+					const value = get(suggestion, useValue);
 
 					return (
-						<li key={index} className="storepress-search-list-search-result-item">
+						<li
+							key={index}
+							className="storepress-search-list-search-result-item"
+						>
 							<label className="storepress-search-list-search-result-item__label">
-								<input checked={handleChecked(selectedItem, key)} onChange={handleSelected} name={id} value={key} type={isMultiSelect ? 'checkbox' : 'radio'}/>
-								<span className="storepress-search-list-search-result-item__title">{value}</span>
+								<input
+									checked={handleChecked(selectedItem, key)}
+									onChange={handleSelected}
+									name={id}
+									value={key}
+									type={isMultiSelect ? 'checkbox' : 'radio'}
+								/>
+								<span className="storepress-search-list-search-result-item__title">
+									{value}
+								</span>
 							</label>
 						</li>
-					)
+					);
 				})}
 			</ul>
 		</div>
-	) : ''
+	) : (
+		''
+	);
 }
 
 export function SearchList({
-							   selected = [],
-							   suggestions = [],
-							   isLoading = false,
-							   isMultiSelect = false,
-							   hideSearchBox = false,
-							   keyName = 'id',
-							   valueName = 'title',
-							   onSearch = (input) => {},
-							   onSelect = (input) => {}
-						   }) {
-
-	const [currentValue, setCurrentValue] = useState('')
+	selected = [],
+	suggestions = [],
+	isLoading = false,
+	isMultiSelect = false,
+	hideSearchBox = false,
+	keyName = 'id',
+	valueName = 'title',
+	onSearch = (input) => {},
+	onSelect = (input) => {},
+}) {
+	const [currentValue, setCurrentValue] = useState('');
 
 	const onStartTyping = (input) => {
-		setCurrentValue(input)
-		onSearch(input)
-	}
+		setCurrentValue(input);
+		onSearch(input);
+	};
 
 	return (
 		<div className="storepress-search-list-wrapper">
@@ -202,7 +210,14 @@ export function SearchList({
 				</div>
 			)}
 
-			<SearchResults useKey={keyName} useValue={valueName} selected={selected} suggestions={suggestions} onSelect={onSelect} isMultiSelect={isMultiSelect}/>
+			<SearchResults
+				useKey={keyName}
+				useValue={valueName}
+				selected={selected}
+				suggestions={suggestions}
+				onSelect={onSelect}
+				isMultiSelect={isMultiSelect}
+			/>
 		</div>
 	);
 }

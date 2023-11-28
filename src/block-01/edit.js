@@ -18,11 +18,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 
-import {
-	useState,
-	useRef,
-	useEffect
-} from '@wordpress/element';
+import { useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
@@ -30,10 +26,9 @@ import apiFetch from '@wordpress/api-fetch';
  */
 import './editor.scss';
 
-export default function Edit({attributes, setAttributes, clientId}) {
-
-	const [sugessionList, setSugessionList] = useState([])
-	const [loading, setLoading]              = useState(true)
+export default function Edit({ attributes, setAttributes, clientId }) {
+	const [sugessionList, setSugessionList] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const blockProps = useBlockProps();
 
@@ -42,14 +37,14 @@ export default function Edit({attributes, setAttributes, clientId}) {
 	// Fetch Attributes
 	useEffect(() => {
 		apiFetch({
-			url : 'http://sites.local/woo-variation-swatches/wp-json/wc/store/v1/products/attributes',
+			url: 'http://sites.local/woo-variation-swatches/wp-json/wc/store/v1/products/attributes',
 			// path : 'wc/store/v1/products/attributes',
 		}).then((result) => {
 			if (result && result.length > 0) {
-				setLoading(false)
-				setSugessionList(result)
+				setLoading(false);
+				setSugessionList(result);
 			}
-		})
+		});
 	}, [clientId]);
 
 	return (

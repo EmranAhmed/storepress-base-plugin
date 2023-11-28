@@ -7,19 +7,19 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 import classNames from 'classnames';
 
-function StaticBlock01({attributes}) {
-	const {x} = attributes;
+function StaticBlock01({ attributes }) {
+	const { x } = attributes;
 
-	const classes = classNames({'class-01' : true});
+	const classes = classNames({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
-		className : classes,
-		style     : {
-			'--css-variable' : `${x}%`
+		className: classes,
+		style: {
+			'--css-variable': `${x}%`,
 		},
 	});
 
-	const {children} = useInnerBlocksProps.save();
+	const { children } = useInnerBlocksProps.save();
 
 	return (
 		<div {...blockProps}>
@@ -29,43 +29,41 @@ function StaticBlock01({attributes}) {
 	);
 }
 
-function StaticBlock02({attributes}) {
-	const {x} = attributes;
+function StaticBlock02({ attributes }) {
+	const { x } = attributes;
 
-	const classes = classNames({'class-01' : true});
+	const classes = classNames({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
-		className : classes,
-		style     : {
-			'--css-variable' : `${x}%`
+		className: classes,
+		style: {
+			'--css-variable': `${x}%`,
 		},
 	});
 
 	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
 
-	return (
-		<div {...innerBlocksProps} />
-	);
+	return <div {...innerBlocksProps} />;
 }
 
-function DynamicBlock({attributes}) {
-	const {x} = attributes;
+function DynamicBlock({ attributes }) {
+	const { x } = attributes;
 
-	const classes = classNames({'class-01' : true});
+	const classes = classNames({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
-		className : classes,
-		style     : {
-			'--css-variable' : `${x}%`
+		className: classes,
+		style: {
+			'--css-variable': `${x}%`,
 		},
 	});
 
-	const {children}       = useInnerBlocksProps.save(blockProps);
+	const { children } = useInnerBlocksProps.save(blockProps);
 	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
 
 	return children;
 }
 
-export default function Save({attributes}) {
-	return <DynamicBlock attributes={attributes}/>
+export default function Save({ attributes }) {
+	return <DynamicBlock attributes={attributes} />;
 }

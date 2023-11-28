@@ -1,4 +1,7 @@
 <?php
+	namespace StorePress\Base;
+
+	use WP_Block;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
