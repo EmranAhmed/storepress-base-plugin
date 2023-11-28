@@ -92,6 +92,7 @@ class Plugin {
 	 */
 	public function define( string $name, $value ) {
 		if ( ! defined( $name ) ) {
+			// phpcs:ignore
 			define( $name, $value );
 		}
 	}

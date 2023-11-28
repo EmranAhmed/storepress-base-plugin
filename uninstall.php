@@ -21,9 +21,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 	global $wpdb;
 
-	$settings = get_option( 'plugin_settings' );
+	$storepress_settings = get_option( 'plugin_settings' );
 
 	// Delete all Block Visibility settings.
-if ( $settings['plugin_settings']['remove_on_uninstall'] ) {
+if ( $storepress_settings['plugin_settings']['remove_on_uninstall'] ) {
 	delete_option( 'plugin_settings' );
 }

@@ -54,12 +54,22 @@
 	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
 	-->
 	<rule ref="WordPress-Core"/>
-	
+	<rule ref="WordPress-Extra"/>
 	<!-- Let's also check that everything is properly documented. -->
 	<rule ref="WordPress-Docs"/>
+
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" value="storepress-base-plugin"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="storepress"/>
+				<element value="StorePress"/>
+			</property>
 		</properties>
 	</rule>
 
