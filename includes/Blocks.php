@@ -18,21 +18,7 @@
 	 */
 class Blocks {
 
-	/**
-	 * Return singleton instance of Plugin.
-	 * The instance will be created if it does not exist yet.
-	 *
-	 * @return Blocks The main instance.
-	 * @since 1.0.0
-	 */
-	public static function instance(): Blocks {
-		static $instance;
-		if ( is_null( $instance ) ) {
-			$instance = new self();
-		}
-
-		return $instance;
-	}
+	use Common;
 
 	/**
 	 * Initialise class.
@@ -159,46 +145,6 @@ class Blocks {
 			$block_type = dirname( $filename );
 			register_block_type( $block_type );
 		}
-	}
-
-	/**
-	 * Generate Inline Style from array
-	 *
-	 * @param array $inline_styles_array Inline style as array.
-	 *
-	 * @return string
-	 * @since      1.0.0
-	 */
-	public function inline_styles( array $inline_styles_array = array() ): string {
-
-		$styles = array();
-
-		foreach ( $inline_styles_array as $property => $value ) {
-			$styles[] = sprintf( '%s: %s;', trim( $property ), $value );
-		}
-
-		return implode( ' ', $styles );
-	}
-
-	/**
-	 * Array to css class.
-	 *
-	 * @param array $classes_array css classes array.
-	 *
-	 * @return string
-	 */
-	public function css_classes( array $classes_array = array() ): string {
-
-		$classes = array();
-
-		foreach ( $classes_array as $class_name => $should_include ) {
-
-			if ( ! empty( $should_include ) ) {
-				$classes[] = $class_name;
-			}
-		}
-
-		return implode( ' ', array_unique( $classes ) );
 	}
 
 	/**
