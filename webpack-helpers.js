@@ -2,16 +2,16 @@
 /**
  * External dependencies
  */
-const {getWordPressSrcDirectory} = require('@wordpress/scripts/utils/config');
-const {fromProjectRoot}          = require('@wordpress/scripts/utils/file');
+const { getWordPressSrcDirectory } = require('@wordpress/scripts/utils/config');
+const { fromProjectRoot } = require('@wordpress/scripts/utils/file');
 
-const {sep}       = require('path');
+const { sep } = require('path');
 const externalMap = {
-	'slick-carousel' : ['Slick'],
+	//'slick-carousel' : ['Slick'],
 };
 
 const scriptHandleMap = {
-	'slick-carousel' : 'slick-carousel',
+	//'slick-carousel' : 'slick-carousel',
 };
 
 /**
@@ -54,9 +54,9 @@ function getFile(fileName) {
 
 function getWebPackAlias() {
 	return {
-		'@storepress/icons' : getFile('packages/icons'),
-		'@storepress/utils' : getFile('packages/utils'),
-		'@storepress/components' : getFile('packages/components'),
+		'@storepress/icons': getFile('packages/icons'),
+		'@storepress/utils': getFile('packages/utils'),
+		'@storepress/components': getFile('packages/components'),
 	};
 }
 

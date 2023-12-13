@@ -22,12 +22,12 @@ class Plugin {
 	 * Return singleton instance of Plugin.
 	 * The instance will be created if it does not exist yet.
 	 *
-	 * @return Plugin The main instance.
+	 * @return self The main instance.
 	 * @since 1.0.0
 	 */
-	public static function instance(): Plugin {
+	public static function instance(): self {
 		static $instance = null;
-		if ( null === $instance ) {
+		if ( is_null( $instance ) ) {
 			$instance = new self();
 		}
 
@@ -40,10 +40,13 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	protected function __construct() {
-
-		$this->includes();
-		$this->hooks();
-		$this->init();
+		try {
+			$this->includes();
+			$this->hooks();
+			$this->init();
+		} catch ( Exception $e ) {
+			$this->trigger_error( __METHOD__, $e->getMessage() );
+		}
 
 		/**
 		 * Action to signal that Plugin has finished loading.
@@ -62,7 +65,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function get_plugin_file(): string {
-		return STOREPRESS_BASE_PLUGIN_FILE;
+		return constant( 'STOREPRESS_BASE_PLUGIN_FILE' );
 	}
 
 	/**
@@ -97,7 +100,6 @@ class Plugin {
 		}
 	}
 
-
 	/**
 	 * Includes.
 	 *
@@ -113,7 +115,7 @@ class Plugin {
 			return true;
 		}
 
-		throw new Exception( 'vendor/autoload.php missing please run `composer install`' );
+		throw new Exception( '"vendor/autoload.php" file missing. Please run `composer install`' );
 	}
 
 	/**
@@ -300,17 +302,60 @@ class Plugin {
 	}
 
 	/**
-	 * Get Block Instance.
+	 * Generates a user-level error/warning/notice/deprecation message.
 	 *
-	 * @return false|Blocks
+	 * Generates the message when `WP_DEBUG` is true.
+	 *
+	 * @param string $function_name The function that triggered the error.
+	 * @param string $message       The message explaining the error.
+	 *                              The message can contain allowed HTML 'a' (with href), 'code',
+	 *                              'br', 'em', and 'strong' tags and http or https protocols.
+	 *                              If it contains other HTML tags or protocols, the message should be escaped
+	 *                              before passing to this function to avoid being stripped {@see wp_kses()}.
+	 *
 	 * @since 1.0.0
 	 */
-	public function get_blocks() {
+	public function trigger_error( string $function_name, string $message ) {
 
-		if ( ! class_exists( '\StorePress\Base\Blocks' ) ) {
-			return false;
+		// Bail out if WP_DEBUG is not turned on.
+		if ( ! WP_DEBUG ) {
+			return;
 		}
 
+		if ( function_exists( 'wp_trigger_error' ) ) {
+			wp_trigger_error( $function_name, $message );
+		} else {
+
+			if ( ! empty( $function_name ) ) {
+				$message = sprintf( '%s(): %s', $function_name, $message );
+			}
+
+			$message = wp_kses(
+				$message,
+				array(
+					'a' => array( 'href' ),
+					'br',
+					'code',
+					'em',
+					'strong',
+				),
+				array( 'http', 'https' )
+			);
+
+			// phpcs:ignore
+			trigger_error( $message );
+		}
+	}
+
+	// Add feature classes from here...
+
+	/**
+	 * Get Block Instance.
+	 *
+	 * @return Blocks
+	 * @since 1.0.0
+	 */
+	public function get_blocks(): Blocks {
 		return Blocks::instance();
 	}
 }

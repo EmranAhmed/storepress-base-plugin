@@ -26,7 +26,6 @@ class Blocks {
 	 * @since      1.0.0
 	 */
 	protected function __construct() {
-		$this->includes();
 		$this->hooks();
 		$this->init();
 
@@ -38,15 +37,6 @@ class Blocks {
 		 * @since 1.0.0
 		 */
 		do_action( 'storepress_blocks_loaded', $this );
-	}
-
-
-	/**
-	 * Include Blocks Dependencies
-	 *
-	 * @since      1.0.0
-	 */
-	public function includes() {
 	}
 
 	/**
