@@ -4,7 +4,7 @@ const {
 	requestToHandle,
 	getFile,
 	getWebPackAlias,
-} = require('./webpack-helpers');
+} = require('./bin/webpack-helpers');
 const WooCommerceDependencyExtractionWebpackPlugin = require('@woocommerce/dependency-extraction-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
