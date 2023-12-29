@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { SearchList } from '@storepress/components';
+import { SearchListControl } from '@storepress/components';
 
 import {
 	useBlockProps,
@@ -24,6 +24,7 @@ import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies
  */
+import { getProductsRequests } from '../utils';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {

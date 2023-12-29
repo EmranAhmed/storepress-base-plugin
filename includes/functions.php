@@ -8,3 +8,5 @@
 	 */
 
 	namespace StorePress\Base;
+
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );

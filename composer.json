@@ -27,10 +27,7 @@
 	"autoload" : {
 		"psr-4" : {
 			"StorePress\\Base\\" : "includes/"
-		},
-		"files" : [
-			"includes/functions.php"
-		]
+		}
 	},
 	"config" : {
 		"optimize-autoloader" : true,

@@ -110,7 +110,8 @@ class Plugin {
 	public function includes(): bool {
 
 		if ( file_exists( $this->vendor_path() . '/autoload.php' ) ) {
-			include_once $this->vendor_path() . '/autoload.php';
+			require_once $this->vendor_path() . '/autoload.php';
+			require_once __DIR__ . '/functions.php';
 
 			return true;
 		}

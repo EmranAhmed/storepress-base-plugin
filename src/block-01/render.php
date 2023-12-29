@@ -28,8 +28,8 @@
 	$context = $block->context;
 
 	$wrapper_attributes = get_block_wrapper_attributes( array(
-															'class' => esc_attr( storepress_base_plugin()->get_blocks()->css_classes( $classes ) ),
-															'style' => esc_attr( storepress_base_plugin()->get_blocks()->inline_styles( $styles ) ),
+															'class' => esc_attr( storepress_base_plugin()->get_blocks()->get_css_classes( $classes ) ),
+															'style' => esc_attr( storepress_base_plugin()->get_blocks()->get_inline_styles( $styles ) ),
 														) );
 
 	$allowed_html = storepress_base_plugin()->get_blocks()->get_kses_allowed_html();

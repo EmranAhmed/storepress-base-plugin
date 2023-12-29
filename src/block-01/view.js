@@ -2,6 +2,7 @@
  * External dependencies
  */
 import domReady from '@wordpress/dom-ready';
+import { getProductsRequests } from '../utils';
 
 domReady(function () {
 	const points = document.querySelectorAll(

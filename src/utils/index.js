@@ -13,19 +13,19 @@ import apiFetch from '@wordpress/api-fetch';
  * @param {(Record<string, unknown>)=} request.queryArgs Query args to pass in.
  */
 const getProductsRequests = ({
-								 selected = [],
-								 search = '',
-								 queryArgs = {},
-							 }) => {
-	const isLargeCatalog = blocksConfig.productCount > 100;
-	const defaultArgs    = {
-		per_page           : isLargeCatalog ? 100 : 0,
-		catalog_visibility : 'any',
+	selected = [],
+	search = '',
+	queryArgs = {},
+}) => {
+	const isLargeCatalog = true;
+	const defaultArgs = {
+		per_page: isLargeCatalog ? 100 : 0,
+		catalog_visibility: 'any',
 		search,
-		orderby            : 'title',
-		order              : 'asc',
+		orderby: 'title',
+		order: 'asc',
 	};
-	const requests       = [
+	const requests = [
 		addQueryArgs('/wc/store/v1/products', {
 			...defaultArgs,
 			...queryArgs,
@@ -36,9 +36,9 @@ const getProductsRequests = ({
 	if (isLargeCatalog && selected.length) {
 		requests.push(
 			addQueryArgs('/wc/store/v1/products', {
-				catalog_visibility : 'any',
-				include            : selected,
-				per_page           : 0,
+				catalog_visibility: 'any',
+				include: selected,
+				per_page: 0,
 			})
 		);
 	}
@@ -68,20 +68,16 @@ const uniqBy = (array, iteratee) => {
  * @return {Promise<unknown>} Promise resolving to a Product list.
  * @throws Exception if there is an error.
  */
-export const getProducts = ({
-								selected = [],
-								search = '',
-								queryArgs = {},
-							}) => {
-	const requests = getProductsRequests({selected, search, queryArgs});
+export const getProducts = ({ selected = [], search = '', queryArgs = {} }) => {
+	const requests = getProductsRequests({ selected, search, queryArgs });
 
-	return Promise.all(requests.map((path) => apiFetch({path})))
+	return Promise.all(requests.map((path) => apiFetch({ path })))
 		.then((data) => {
 			const flatData = data.flat();
 			const products = uniqBy(flatData, (item) => item.id);
-			const list     = products.map((product) => ({
+			const list = products.map((product) => ({
 				...product,
-				parent : 0,
+				parent: 0,
 			}));
 			return list;
 		})
@@ -97,7 +93,7 @@ export const getProducts = ({
  */
 export const getProduct = (productId) => {
 	return apiFetch({
-		path : `/wc/store/v1/products/${productId}`,
+		path: `/wc/store/v1/products/${productId}`,
 	});
 };
 
@@ -106,7 +102,7 @@ export const getProduct = (productId) => {
  */
 export const getAttributes = () => {
 	return apiFetch({
-		path : `wc/store/v1/products/attributes`,
+		path: `wc/store/v1/products/attributes`,
 	});
 };
 
@@ -117,6 +113,6 @@ export const getAttributes = () => {
  */
 export const getTerms = (attribute) => {
 	return apiFetch({
-		path : `wc/store/v1/products/attributes/${attribute}/terms`,
+		path: `wc/store/v1/products/attributes/${attribute}/terms`,
 	});
 };
