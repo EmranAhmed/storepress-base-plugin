@@ -18,7 +18,7 @@
 		}
 	],
 	"require" : {
-		"storepress/admin-utils" : "^1.4.0"
+		"storepress/admin-utils" : "^1.7.0"
 	},
 	"require-dev" : {
 		"phpcompatibility/phpcompatibility-wp" : "^2.1.4",
