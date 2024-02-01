@@ -39,8 +39,8 @@
 		"test:unit" : "wp-scripts test-unit-js",
 		"rimraf" : "./node_modules/rimraf/bin.js",
 		"start" : "rimraf build && wp-scripts start",
-		"language" : "wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=src --package-name=\"StorePress Base Plugin\"",
-		"language-json" : "wp i18n make-json languages/storepress-base-plugin.pot --no-purge --pretty-print",
+		"language" : "./vendor/bin/wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=assets,bin,build,node_modules,vendor,languages --package-name=\"StorePress Base Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
+		"language-json" : "./vendor/bin/wp i18n make-json languages --no-purge --pretty-print",
 		"add" : "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
 		"add-static" : "npx @wordpress/create-block@latest --namespace storepress --no-plugin"
 	},

@@ -127,8 +127,8 @@ module.exports = {
 		// This helps the `import/no-extraneous-dependencies` and
 		//`import/no-unresolved` rules account for them.
 		'import/core-modules': [
-			'@storepress/icons',
-			'@storepress/utils',
+			'@woocommerce/blocks-registry',
+			'@wordpress/is-shallow-equal',
 			'@woocommerce/block-data',
 			'@woocommerce/blocks-checkout',
 			'@woocommerce/price-format',

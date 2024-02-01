@@ -1,10 +1,13 @@
 {
 	"extends" : "@wordpress/stylelint-config/scss",
+	"syntax" : "scss",
 	"rules" : {
 		"at-rule-empty-line-before" : null,
 		"at-rule-no-unknown" : null,
 		"comment-empty-line-before" : null,
 		"font-weight-notation" : null,
+		"font-family-name-quotes" : "always-unless-keyword",
+		"font-family-no-missing-generic-family-keyword" : null,
 		"max-line-length" : null,
 		"no-descending-specificity" : null,
 		"no-duplicate-selectors" : null,
@@ -24,4 +27,3 @@
 		"no-invalid-position-at-import-rule" : null
 	}
 }
-
