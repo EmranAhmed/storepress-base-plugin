@@ -19,7 +19,7 @@ trait Common {
 	 * @return self The main instance.
 	 * @since 1.0.0
 	 */
-	public static function instance(): self {
+	final public static function instance(): self {
 		static $instance = null;
 		if ( is_null( $instance ) ) {
 			$instance = new self();
