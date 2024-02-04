@@ -8,13 +8,10 @@ const {
 const WooCommerceDependencyExtractionWebpackPlugin = require( '@woocommerce/dependency-extraction-webpack-plugin' );
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 
-// Import the helper to find and generate the entry points in the src directory
-const { getWebpackEntryPoints } = require( '@wordpress/scripts/utils/config' );
-
 module.exports = {
 	...defaultConfig,
 	entry: {
-		...getWebpackEntryPoints(),
+		...defaultConfig.entry(),
 		'editor-scripts': getFile( 'editor-scripts.js' ),
 	},
 
