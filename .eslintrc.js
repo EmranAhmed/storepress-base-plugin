@@ -168,7 +168,19 @@ module.exports = {
 			typescript: {},
 		},
 	},
+	env: {
+		browser: true,
+		es6: true,
+		node: true,
+	},
+	globals: {
+		wp: true,
+		wpApiSettings: true,
+		wcSettings: true,
+		es6: true,
+	},
 	rules: {
+		'@woocommerce/dependency-group': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'no-restricted-imports': [
 			'error',
@@ -180,7 +192,7 @@ module.exports = {
 		'@wordpress/i18n-text-domain': [
 			'error',
 			{
-				allowedTextDomain: ['storepress-base-plugin'],
+				allowedTextDomain: [ 'storepress-base-plugin' ],
 			},
 		],
 	},

@@ -2,10 +2,12 @@
 /**
  * External dependencies
  */
-const { getWordPressSrcDirectory } = require('@wordpress/scripts/utils/config');
-const { fromProjectRoot } = require('@wordpress/scripts/utils/file');
+const {
+	getWordPressSrcDirectory,
+} = require( '@wordpress/scripts/utils/config' );
+const { fromProjectRoot } = require( '@wordpress/scripts/utils/file' );
 
-const { sep } = require('path');
+const { sep } = require( 'path' );
 const externalMap = {
 	//'slick-carousel' : ['Slick'],
 };
@@ -25,9 +27,9 @@ const scriptHandleMap = {
  * @return {string|string[]|undefined} The resulting external definition. Return `undefined`
  *   to ignore the request. Return `string|string[]` to map the request to an external.
  */
-function requestToExternal(request) {
-	if (externalMap[request]) {
-		return externalMap[request];
+function requestToExternal( request ) {
+	if ( externalMap[ request ] ) {
+		return externalMap[ request ];
 	}
 }
 
@@ -42,14 +44,14 @@ function requestToExternal(request) {
  * @return {string|undefined} WordPress script handle to map the request to. Return `undefined`
  *   to use the same name as the module.
  */
-function requestToHandle(request) {
-	if (scriptHandleMap[request]) {
-		return scriptHandleMap[request];
+function requestToHandle( request ) {
+	if ( scriptHandleMap[ request ] ) {
+		return scriptHandleMap[ request ];
 	}
 }
 
-function getFile(fileName) {
-	return fromProjectRoot(getWordPressSrcDirectory() + sep + fileName);
+function getFile( fileName ) {
+	return fromProjectRoot( getWordPressSrcDirectory() + sep + fileName );
 }
 
 function getWebPackAlias() {

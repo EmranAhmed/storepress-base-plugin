@@ -2,8 +2,7 @@
 	/**
 	 *  StorePress Base Plugin
 	 *
-	 * @package    StorePress
-	 * @subpackage Base
+	 * @package    StorePress/Base
 	 *
 	 * @wordpress-plugin
 	 * Plugin Name:       StorePress Base Plugin

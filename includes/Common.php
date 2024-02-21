@@ -2,8 +2,7 @@
 	/**
 	 * Common Methods for Classes.
 	 *
-	 * @package    StorePress
-	 * @subpackage Base
+	 * @package    StorePress/Base
 	 * @since      1.0.0
 	 */
 
@@ -19,7 +18,7 @@ trait Common {
 	 * @return self The main instance.
 	 * @since 1.0.0
 	 */
-	final public static function instance(): self {
+	public static function instance(): self {
 		static $instance = null;
 		if ( is_null( $instance ) ) {
 			$instance = new self();

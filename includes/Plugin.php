@@ -2,8 +2,7 @@
 	/**
 	 * Main Plugin Class.
 	 *
-	 * @package    StorePress
-	 * @subpackage Base
+	 * @package    StorePress/Base
 	 * @since      1.0.0
 	 */
 
@@ -300,6 +299,16 @@ class Plugin {
 	 */
 	public function include_path(): string {
 		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'includes' );
+	}
+
+	/**
+	 * Get templates directory absolute path
+	 *
+	 * @return string
+	 * @since 1.0.0
+	 */
+	public function template_path(): string {
+		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'templates' );
 	}
 
 	/**

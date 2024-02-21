@@ -14,8 +14,8 @@
 	},
 	"scripts" : {
 		"postinstall" : "composer install",
-		"clean" : "rimraf vendor && rimraf build && rimraf languages",
-		"ready" : "npm run clean && npm run build && npm run build:php && npm run language",
+		"clean" : "rimraf vendor && rimraf build",
+		"ready" : "npm run clean && npm run build && npm run build:php",
 		"build:php" : "composer install --no-dev --optimize-autoloader",
 		"lint:php" : "./vendor/bin/phpcs",
 		"lint:php-fix" : "./bin/phpcbf.sh",
@@ -29,10 +29,10 @@
 		"lint:pkg-json" : "wp-scripts lint-pkg-json",
 		"packages-update" : "wp-scripts packages-update",
 		"plugin-zip" : "wp-scripts plugin-zip",
-		"prepackage" : "npm run ready",
+		"prepackage" : "rimraf languages && npm run language && npm run ready",
 		"package" : "./bin/package.js",
 		"postpackage" : "composer install",
-		"prezip" : "npm run ready",
+		"prezip" : "rimraf languages && npm run language && npm run ready",
 		"zip" : "./bin/package.js --zip",
 		"postzip" : "composer install",
 		"test:e2e" : "wp-scripts test-e2e",
@@ -49,10 +49,10 @@
 		"@storepress/utils" : "^0.1.0",
 		"@wordpress/dom-ready" : "^3.50.0",
 		"@wordpress/icons" : "^9.41.0",
-		"classnames" : "^2.3.2"
+		"classnames" : "^2.3.2",
+		"@storepress/components" : "^0.0.1"
 	},
 	"devDependencies" : {
-		"@storepress/components" : "^0.0.1",
 		"@woocommerce/dependency-extraction-webpack-plugin" : "^2.3.0",
 		"@woocommerce/eslint-plugin" : "^2.2.0",
 		"@wordpress/base-styles" : "^4.41.0",

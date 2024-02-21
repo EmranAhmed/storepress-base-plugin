@@ -1,6 +1,6 @@
 {
 	"name" : "storepress/base-plugin",
-	"description" : "StorePress base Plugin",
+	"description" : "StorePress Base Plugin",
 	"minimum-stability" : "stable",
 	"license" : "GPLv3",
 	"type" : "wordpress-plugin",

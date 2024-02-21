@@ -2,8 +2,7 @@
 	/**
 	 * Utility Functions.
 	 *
-	 * @package    StorePress
-	 * @subpackage Base
+	 * @package    StorePress/Base
 	 * @since      1.0.0
 	 */
 
