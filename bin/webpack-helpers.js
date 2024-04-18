@@ -8,12 +8,23 @@ const {
 const { fromProjectRoot } = require( '@wordpress/scripts/utils/file' );
 
 const { sep } = require( 'path' );
-const externalMap = {
+
+// jquery --> window.jQuery
+// react-dom --> window.ReactDOM
+const externalScriptsMap = {
 	//'slick-carousel' : ['Slick'],
 };
 
+// @babel/runtime/regenerator --> wp-polyfill
 const scriptHandleMap = {
 	//'slick-carousel' : 'slick-carousel',
+};
+
+const externalModulesMap = {
+	// static import.
+	//'@wordpress/interactivity': 'module @wordpress/interactivity',
+	// dynamic import.
+	//'@wordpress/interactivity-router': 'import @wordpress/interactivity-router',
 };
 
 /**
@@ -28,8 +39,8 @@ const scriptHandleMap = {
  *   to ignore the request. Return `string|string[]` to map the request to an external.
  */
 function requestToExternal( request ) {
-	if ( externalMap[ request ] ) {
-		return externalMap[ request ];
+	if ( externalScriptsMap[ request ] ) {
+		return externalScriptsMap[ request ];
 	}
 }
 
@@ -50,6 +61,28 @@ function requestToHandle( request ) {
 	}
 }
 
+/**
+ * Default request to external module transformation
+ *
+ * Currently Supports:
+ * - @wordpress/interactivity
+ * - @wordpress/interactivity-router
+ *
+ * Do not use the boolean shorthand here, it's only handled for the
+ * `requestToExternalModule` option.
+ *
+ * @param {string} request Module request (the module name in `import from`) to be transformed
+ * @return {string|Error|undefined} The resulting external definition.
+ *   - Return `undefined` to ignore the request (do not externalize).
+ *   - Return `string` to map the request to an external.
+ *   - Return `Error` to emit an error.
+ */
+function requestToExternalModule( request ) {
+	if ( externalModulesMap[ request ] ) {
+		return externalModulesMap[ request ];
+	}
+}
+
 function getFile( fileName ) {
 	return fromProjectRoot( getWordPressSrcDirectory() + sep + fileName );
 }
@@ -67,4 +100,5 @@ module.exports = {
 	getWebPackAlias,
 	requestToExternal,
 	requestToHandle,
+	requestToExternalModule,
 };
