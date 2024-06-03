@@ -146,17 +146,6 @@ class Plugin {
 	 */
 	public function hooks() {
 		// Register with hook.
-		add_action( 'init', array( $this, 'language' ), 1 );
-	}
-
-	/**
-	 * Language
-	 *
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public function language() {
-		load_plugin_textdomain( 'storepress-base-plugin', false, $this->plugin_path() . '/languages' );
 	}
 
 	/**
@@ -340,20 +329,7 @@ class Plugin {
 				$message = sprintf( '%s(): %s', $function_name, $message );
 			}
 
-			$message = wp_kses(
-				$message,
-				array(
-					'a' => array( 'href' ),
-					'br',
-					'code',
-					'em',
-					'strong',
-				),
-				array( 'http', 'https' )
-			);
-
-			// phpcs:ignore
-			trigger_error( $message );
+			trigger_error( wp_kses_post( $message ) ); // phpcs:ignore
 		}
 	}
 

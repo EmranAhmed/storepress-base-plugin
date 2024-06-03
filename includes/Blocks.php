@@ -55,8 +55,7 @@ class Blocks {
 	 *
 	 * @since      1.0.0
 	 */
-	public function init() {
-	}
+	public function init() {}
 
 	/**
 	 *  Add custom block category
@@ -147,25 +146,24 @@ class Blocks {
 
 		$defaults = wp_kses_allowed_html( 'post' );
 
-		$svg_args = array(
-			'svg'   => array(
-				'class'           => true,
-				'aria-hidden'     => true,
-				'aria-labelledby' => true,
-				'role'            => true,
-				'xmlns'           => true,
-				'width'           => true,
-				'height'          => true,
-				'viewbox'         => true, // <= Must be Lowercase!
-			),
-			'g'     => array( 'fill' => true ),
-			'title' => array( 'title' => true ),
-			'path'  => array(
-				'd'    => true,
-				'fill' => true,
-			),
+		$tags = array(
+			'svg'   => array( 'class', 'data-*', 'aria-hidden', 'aria-labelledby', 'role', 'xmlns', 'width', 'height', 'viewbox', 'height' ),
+			'g'     => array( 'fill' ),
+			'title' => array( 'title' ),
+			'path'  => array( 'd', 'fill' ),
+			// 'select' => array( 'data-*', 'id', 'multiple', 'type', 'name', 'class', 'size', 'required', 'checked', 'selected', 'value' ),
+			// 'option' => array( 'class', 'checked', 'selected', 'value' ),
 		);
 
-		return array_merge( $defaults, $svg_args, $args );
+		$allowed_args = array_reduce(
+			array_keys( $tags ),
+			function ( $carry, $tag ) use ( $tags ) {
+				$carry[ $tag ] = array_fill_keys( $tags[ $tag ], true );
+				return $carry;
+			},
+			array()
+		);
+
+		return array_merge( $defaults, $allowed_args, $args );
 	}
 }

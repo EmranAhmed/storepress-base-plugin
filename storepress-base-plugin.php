@@ -33,10 +33,19 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_FILE', __FILE__ );
 }
 
-
 	// Include the Plugin class.
 if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . '/includes/Plugin.php';
+}
+
+	/**
+	 * WooCommerce fallback notice.
+	 *
+	 * @since 1.0.0
+	 */
+function storepress_base_plugin_missing_wc_notice() {
+	/* translators: %s WC download URL link. */
+	echo '<div class="error"><p><strong>' . sprintf( esc_html__( 'StorePress Base Plugin requires WooCommerce to be installed and active. You can download %s here.', 'storepress-base-plugin' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' ) . '</strong></p></div>';
 }
 
 	/**
@@ -46,14 +55,17 @@ if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
 	 * @since 1.0.0
 	 */
 function storepress_base_plugin(): Plugin {
+
+	load_plugin_textdomain( 'storepress-base-plugin', false, plugin_dir_path( __FILE__ ) . 'languages' );
 	// Include the main class.
 
 	/**
 	 * If plugin dependent with woocommerce.
 	 *
 	 * @example:
-	 * if ( ! class_exists( 'WooCommerce', false ) ) {
-	 * return false;
+	 * if ( ! class_exists( 'WooCommerce' ) ) {
+	 * add_action( 'admin_notices', 'storepress_base_plugin_missing_wc_notice' );
+	 * return;
 	 * }
 	 */
 
