@@ -22,11 +22,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-	// Load main plugin file.
-	require_once 'storepress-base-plugin.php';
-
-	global $wpdb;
-
 	$storepress_settings = get_option( 'plugin_settings' );
 
 	// Delete all settings.

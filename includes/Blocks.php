@@ -62,10 +62,12 @@ class Blocks {
 	 *
 	 * @param array $block_categories Available block category.
 	 *
-	 * @return array New category.
+	 * @return array With new block categories.
 	 * @since      1.0.0
 	 */
 	public function add_block_category( array $block_categories ): array {
+
+		$available_slugs = wp_list_pluck( $block_categories, 'slug' );
 
 		$category = array(
 			'slug'  => 'storepress',
@@ -73,7 +75,9 @@ class Blocks {
 			'icon'  => null,
 		);
 
-		array_unshift( $block_categories, $category );
+		if ( ! in_array( 'storepress', $available_slugs, true ) ) {
+			array_unshift( $block_categories, $category );
+		}
 
 		return $block_categories;
 	}
@@ -108,7 +112,7 @@ class Blocks {
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
-		$asset = require $asset_file;
+		$asset = include_once $asset_file;
 
 		wp_register_style( 'storepress-base-plugin-style', $css_file_url, array(), $asset['version'] );
 		wp_register_script( 'storepress-base-plugin-script', $js_file_url, $asset['dependencies'], $asset['version'], array( 'strategy' => 'defer' ) );
@@ -151,8 +155,6 @@ class Blocks {
 			'g'     => array( 'fill' ),
 			'title' => array( 'title' ),
 			'path'  => array( 'd', 'fill' ),
-			// 'select' => array( 'data-*', 'id', 'multiple', 'type', 'name', 'class', 'size', 'required', 'checked', 'selected', 'value' ),
-			// 'option' => array( 'class', 'checked', 'selected', 'value' ),
 		);
 
 		$allowed_args = array_reduce(
