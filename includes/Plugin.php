@@ -2,8 +2,7 @@
 	/**
 	 * Main Plugin Class.
 	 *
-	 * @package    StorePress/Base
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 
 	namespace StorePress\Base;
@@ -92,14 +91,14 @@ class Plugin {
 	 */
 	public function includes(): bool {
 
-		if ( file_exists( $this->vendor_path() . '/autoload.php' ) ) {
-			require_once $this->vendor_path() . '/autoload.php';
+		if ( file_exists( $this->vendor_path() . '/autoload_packages.php' ) ) {
+			require_once $this->vendor_path() . '/autoload_packages.php';
 			require_once __DIR__ . '/functions.php';
 
 			return true;
 		}
 
-		throw new Exception( '"vendor/autoload.php" file missing. Please run `composer install`' );
+		throw new Exception( '"vendor/autoload_packages.php" file missing. Please run `composer install`' );
 	}
 
 	/**

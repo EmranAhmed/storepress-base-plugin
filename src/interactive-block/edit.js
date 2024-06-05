@@ -25,12 +25,15 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
-	
+
 	return (
-		<p { ...blockProps }>
-			{ __( 'Example Interactive – hello from the editor!', 'example-interactive' ) }
+		<p {...blockProps}>
+			{__(
+				'Example Interactive – hello from the editor!',
+				'storepress-base-plugin'
+			)}
 		</p>
 	);
 }

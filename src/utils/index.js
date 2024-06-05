@@ -12,11 +12,11 @@ import apiFetch from '@wordpress/api-fetch';
  * @param {string=}                    request.search    Search string.
  * @param {(Record<string, unknown>)=} request.queryArgs Query args to pass in.
  */
-const getProductsRequests = ( {
+const getProductsRequests = ({
 	selected = [],
 	search = '',
 	queryArgs = {},
-} ) => {
+}) => {
 	const isLargeCatalog = true;
 	const defaultArgs = {
 		per_page: isLargeCatalog ? 100 : 0,
@@ -26,36 +26,36 @@ const getProductsRequests = ( {
 		order: 'asc',
 	};
 	const requests = [
-		addQueryArgs( '/wc/store/v1/products', {
+		addQueryArgs('/wc/store/v1/products', {
 			...defaultArgs,
 			...queryArgs,
-		} ),
+		}),
 	];
 
 	// If we have a large catalog, we might not get all selected products in the first page.
-	if ( isLargeCatalog && selected.length ) {
+	if (isLargeCatalog && selected.length) {
 		requests.push(
-			addQueryArgs( '/wc/store/v1/products', {
+			addQueryArgs('/wc/store/v1/products', {
 				catalog_visibility: 'any',
 				include: selected,
 				per_page: 0,
-			} )
+			})
 		);
 	}
 
 	return requests;
 };
 
-const uniqBy = ( array, iteratee ) => {
+const uniqBy = (array, iteratee) => {
 	const seen = new Map();
-	return array.filter( ( item ) => {
-		const key = iteratee( item );
-		if ( ! seen.has( key ) ) {
-			seen.set( key, item );
+	return array.filter((item) => {
+		const key = iteratee(item);
+		if (!seen.has(key)) {
+			seen.set(key, item);
 			return true;
 		}
 		return false;
-	} );
+	});
 };
 
 /**
@@ -68,25 +68,21 @@ const uniqBy = ( array, iteratee ) => {
  * @return {Promise<unknown>} Promise resolving to a Product list.
  * @throws Exception if there is an error.
  */
-export const getProducts = ( {
-	selected = [],
-	search = '',
-	queryArgs = {},
-} ) => {
-	const requests = getProductsRequests( { selected, search, queryArgs } );
+export const getProducts = ({ selected = [], search = '', queryArgs = {} }) => {
+	const requests = getProductsRequests({ selected, search, queryArgs });
 
-	return Promise.all( requests.map( ( path ) => apiFetch( { path } ) ) )
-		.then( ( data ) => {
+	return Promise.all(requests.map((path) => apiFetch({ path })))
+		.then((data) => {
 			const flatData = data.flat();
-			const products = uniqBy( flatData, ( item ) => item.id );
-			return products.map( ( product ) => ( {
+			const products = uniqBy(flatData, (item) => item.id);
+			return products.map((product) => ({
 				...product,
 				parent: 0,
-			} ) );
-		} )
-		.catch( ( e ) => {
+			}));
+		})
+		.catch((e) => {
 			throw e;
-		} );
+		});
 };
 
 /**
@@ -94,19 +90,19 @@ export const getProducts = ( {
  *
  * @param {number} productId Id of the product to retrieve.
  */
-export const getProduct = ( productId ) => {
-	return apiFetch( {
-		path: `/wc/store/v1/products/${ productId }`,
-	} );
+export const getProduct = (productId) => {
+	return apiFetch({
+		path: `/wc/store/v1/products/${productId}`,
+	});
 };
 
 /**
  * Get a promise that resolves to a list of attribute objects from the Store API.
  */
 export const getAttributes = () => {
-	return apiFetch( {
+	return apiFetch({
 		path: `wc/store/v1/products/attributes`,
-	} );
+	});
 };
 
 /**
@@ -114,8 +110,8 @@ export const getAttributes = () => {
  *
  * @param {number} attribute Id of the attribute to retrieve terms for.
  */
-export const getTerms = ( attribute ) => {
-	return apiFetch( {
-		path: `wc/store/v1/products/attributes/${ attribute }/terms`,
-	} );
+export const getTerms = (attribute) => {
+	return apiFetch({
+		path: `wc/store/v1/products/attributes/${attribute}/terms`,
+	});
 };
