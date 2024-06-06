@@ -4,7 +4,7 @@
 	"name" : "storepress/interactive",
 	"version" : "0.1.0",
 	"title" : "Example Interactive",
-	"category" : "theme",
+	"category" : "storepress",
 	"icon" : "media-interactive",
 	"description" : "An interactive block with the Interactivity API",
 	"example" : {},
@@ -16,5 +16,5 @@
 	"editorStyle" : "file:./index.css",
 	"style" : "file:./style-index.css",
 	"render" : "file:./render.php",
-	"viewScriptModule" : "file:./view.js"
+	"viewScriptModule" : "file:./viewModule.js"
 }
