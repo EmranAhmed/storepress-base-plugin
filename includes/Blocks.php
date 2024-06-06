@@ -96,7 +96,8 @@ class Blocks {
 
 		wp_enqueue_script( 'storepress-base-plugin-editor-scripts', $editor_script_src_url, $editor_script_asset['dependencies'], $editor_script_asset['version'], array( 'strategy' => 'defer' ) );
 
-		// Docs: https://developer.wordpress.org/reference/functions/wp_set_script_translations/.
+		// See: https://developer.wordpress.org/reference/functions/wp_set_script_translations/.
+		// See: https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file.
 		wp_set_script_translations( 'storepress-base-plugin-editor-scripts', 'storepress-base-plugin', storepress_base_plugin()->plugin_path() . '/languages' );
 	}
 

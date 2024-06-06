@@ -26,19 +26,21 @@
 
 ### Create New Block(s)
 
-- `npm run add [block name]` - To add dynamic block
-- `npm run add-static [block name]` - To add static block
+- `npm run create-dynamic-block [block name]` - To add dynamic block
+- `npm run create-static-block [block name]` - To add static block
 
 ## Lint
 
 - `npm run lint:js` - Lint Javascript
 - `npm run lint:css` - Lint CSS
-- `npm run lint:php` - PHP lint
+- `npm run lint:php` - PHP lint and will generate `phpcs-report.txt` file.
 
-- `composer run analyze [filename.php]` - statically analyzes PHP for bugs
-- `composer run lint` - checks PHP for syntax errors
-- `composer run standards:check` - checks PHP for standards errors according to WordPress coding standards
-- `composer run standards:fix` - Attemps to automatically fix errors
+## Format
+
+- `npm run format:js` - Format Javascript
+- `npm run format:css` - Format SCSS
+- `npm run format:php` - Format PHP
+- `npm run format` - Format PHP, SCSS, JS
 
 ## Release:
 
