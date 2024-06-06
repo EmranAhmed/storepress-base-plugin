@@ -46,3 +46,8 @@
 
 - `npm run package` - make package directory
 - `npm run zip` - make zip
+
+## Provide your own translations
+- `npm run language` - Make POT File
+- Then follow this link to test
+- https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations
