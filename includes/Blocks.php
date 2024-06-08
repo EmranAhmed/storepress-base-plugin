@@ -86,6 +86,8 @@ class Blocks {
 	 * Block Editor Script
 	 *
 	 * @since      1.0.0
+	 * @see https://developer.wordpress.org/reference/functions/wp_set_script_translations/
+	 * @see https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file
 	 */
 	public function block_editor_scripts() {
 
@@ -95,9 +97,6 @@ class Blocks {
 		$editor_script_asset      = require $editor_script_asset_file;
 
 		wp_enqueue_script( 'storepress-base-plugin-editor-scripts', $editor_script_src_url, $editor_script_asset['dependencies'], $editor_script_asset['version'], array( 'strategy' => 'defer' ) );
-
-		// See: https://developer.wordpress.org/reference/functions/wp_set_script_translations/.
-		// See: https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file.
 		wp_set_script_translations( 'storepress-base-plugin-editor-scripts', 'storepress-base-plugin', storepress_base_plugin()->plugin_path() . '/languages' );
 	}
 
@@ -152,7 +151,7 @@ class Blocks {
 		$defaults = wp_kses_allowed_html( 'post' );
 
 		$tags = array(
-			'svg'   => array( 'class', 'data-*', 'aria-hidden', 'aria-labelledby', 'role', 'xmlns', 'width', 'height', 'viewbox', 'height' ),
+			'svg'   => array( 'class', 'aria-hidden', 'aria-labelledby', 'role', 'xmlns', 'width', 'height', 'viewbox', 'height' ),
 			'g'     => array( 'fill' ),
 			'title' => array( 'title' ),
 			'path'  => array( 'd', 'fill' ),

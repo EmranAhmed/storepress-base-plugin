@@ -22,7 +22,7 @@
 		"build": "wp-scripts build --webpack-copy-php --experimental-modules",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
-		"format": "npm run format:js && npm run format:css && npm run lint:format:php",
+		"format": "npm run format:js && npm run format:css && npm run format:php",
 		"format:js": "wp-scripts format './src/**/*.js'",
 		"format:css": "wp-scripts format './src/**/*.scss'",
 		"lint:css": "wp-scripts lint-style './src/**/*.scss'",

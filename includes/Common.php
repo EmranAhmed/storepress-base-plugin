@@ -42,14 +42,14 @@ trait Common {
 
 				// Exclude attribute.
 				if ( in_array( $key, $exclude, true ) ) {
-							return '';
+					return '';
 				}
 
 				$value = $attributes[ $key ];
 
 				// If attribute value is null.
 				if ( is_null( $value ) ) {
-						return '';
+					return '';
 				}
 
 				// If attribute value is boolean.
@@ -77,7 +77,7 @@ trait Common {
 	 * @param array $inline_styles_array Inline style as array.
 	 *
 	 * @return string
-	 * @since      1.0.0
+	 * @since  1.0.0
 	 */
 	public function get_inline_styles( array $inline_styles_array = array() ): string {
 
@@ -99,21 +99,25 @@ trait Common {
 	 * @param array $classes_array css classes array.
 	 *
 	 * @return string
-	 * @since      1.0.0
+	 * @since  1.0.0
 	 */
 	public function get_css_classes( array $classes_array = array() ): string {
 
 		$classes = array();
-
 		foreach ( $classes_array as $class_name => $should_include ) {
 
-			if ( empty( $should_include ) ) {
+			// Is class assign by numeric array. Like: ['class-a', 'class-b'].
+			if ( is_numeric( $class_name ) && ! is_string( $class_name ) ) {
+				$classes[] = esc_attr( $should_include );
 				continue;
 			}
 
-			$classes[] = esc_attr( $class_name );
+			// Is class assign by associative array.
+			// Like: ['class-a'=>true, 'class-b'=>false, class-c'=>'', 'class-d'=>'hello'].
+			if ( ! empty( $should_include ) ) {
+				$classes[] = esc_attr( $class_name );
+			}
 		}
-
 		return implode( ' ', array_unique( $classes ) );
 	}
 

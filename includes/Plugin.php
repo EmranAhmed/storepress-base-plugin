@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Main Plugin Class.
+	 * Main Plugin Class File.
 	 *
 	 * @since 1.0.0
 	 */
@@ -104,6 +104,7 @@ class Plugin {
 	/**
 	 * Initialize Classes.
 	 *
+	 * @return void
 	 * @since 1.0.0
 	 */
 	public function init() {
