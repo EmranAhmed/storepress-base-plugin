@@ -63,7 +63,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function get_plugin_file(): string {
-		return constant( 'STOREPRESS_BASE_PLUGIN_FILE' );
+		return constant( 'StorePress\Base\__FILE__' );
 	}
 
 	/**
