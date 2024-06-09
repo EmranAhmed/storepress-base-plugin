@@ -1,6 +1,10 @@
 <?php
 	/**
 	 * Dynamic Block Template.
+	 *
+	 * @package    StorePress/Base
+	 * @since 1.0.0
+	 * @version 1.0.0
 	 */
 
 	namespace StorePress\Base;

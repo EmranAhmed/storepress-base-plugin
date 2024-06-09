@@ -29,8 +29,8 @@
 	use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
 
-if ( ! defined( 'StorePress\Base\__FILE__' ) ) {
-	define( 'StorePress\Base\__FILE__', __FILE__ );
+if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
+	define( 'STOREPRESS_BASE_PLUGIN_FILE', __FILE__ );
 }
 
 	// Include the Plugin class.
