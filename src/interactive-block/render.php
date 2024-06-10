@@ -24,24 +24,35 @@
 	 */
 
 // Generate unique id for aria-controls.
-$storepress_unique_id = wp_unique_id( 'p-' );
+$storepress_unique_id = uniqid( 'p-' );
+
+
+$storepress_classes = array(
+	'class-01' => true,
+);
+
+$storepress_styles = array(
+	'--css-variable' => $attributes['x'] . '%',
+);
+
+$storepress_context = $block->context;
+
+$storepress_wrapper_attributes = get_block_wrapper_attributes(
+	array(
+		'class' => esc_attr( storepress_base_plugin()->get_blocks()->get_css_classes( $storepress_classes ) ),
+		'style' => esc_attr( storepress_base_plugin()->get_blocks()->get_inline_styles( $storepress_styles ) ),
+	)
+);
+$storepress_allowed_html = storepress_base_plugin()->get_blocks()->get_kses_allowed_html();
 ?>
 
-<div
-	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-	data-wp-interactive="storepress"
-	<?php echo wp_kses_data( wp_interactivity_data_wp_context( array( 'isOpen' => false ) ) ); ?>
-	data-wp-watch="callbacks.logIsOpen">
-	<button
-		data-wp-on--click="actions.toggle"
-		data-wp-bind--aria-expanded="context.isOpen"
-		aria-controls="<?php echo esc_attr( $storepress_unique_id ); ?>">
+<div <?php echo wp_kses_data( $storepress_wrapper_attributes ); ?> data-wp-interactive="storepress" <?php echo wp_kses_data( wp_interactivity_data_wp_context( array( 'isOpen' => false ) ) ); ?> data-wp-watch="callbacks.logIsOpen">
+	<h1>Z Name – hello from render.php</h1>
+	<button data-wp-on--click="actions.toggle" data-wp-bind--aria-expanded="context.isOpen" aria-controls="<?php echo esc_attr( $storepress_unique_id ); ?>">
 		<?php esc_html_e( 'Toggle', 'storepress-base-plugin' ); ?>
 	</button>
 
-	<p id="<?php echo esc_attr( $storepress_unique_id ); ?>" data-wp-bind--hidden="!context.isOpen">
-		<?php
-			esc_html_e( 'Example Interactive - hello from an interactive block!', 'storepress-base-plugin' );
-		?>
-	</p>
+	<div id="<?php echo esc_attr( $storepress_unique_id ); ?>" data-wp-bind--hidden="!context.isOpen">
+		<?php echo wp_kses( $content, $storepress_allowed_html ); ?>
+	</div>
 </div>
