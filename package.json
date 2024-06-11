@@ -9,9 +9,6 @@
 		"type": "git",
 		"url": "https://github.com/EmranAhmed/storepress-base-plugin"
 	},
-	"bin": {
-		"package": "./bin/package.js"
-	},
 	"scripts": {
 		"postinstall": "rm -rf ./vendor && rm -rf ./composer.lock && composer install",
 		"clean": "rm -rf ./vendor && rm -rf ./composer.lock && rm -rf ./build",
@@ -33,14 +30,9 @@
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
-		"plugin-zip:native": "wp-scripts plugin-zip",
-		"plugin-zip": "npm run zip",
-		"prepackage": "rm -rf ./languages && npm run language && npm run ready",
-		"package": "./bin/package.js",
-		"postpackage": "composer install",
-		"prezip": "rm -rf ./languages && npm run language && npm run ready",
-		"zip": "./bin/package.js --zip",
-		"postzip": "composer install",
+		"preplugin-zip": "rm -rf ./languages && npm run language && npm run ready",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"postplugin-zip": "composer install",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",
 		"start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
@@ -73,5 +65,22 @@
 		"fs-extra": "^11.2.0",
 		"webpack-remove-empty-scripts": "^1.0.4",
 		"eslint-plugin-prettier" : "^5.1.3"
-	}
+	},
+	"files": [
+		"vendor/**",
+		"admin/**",
+		"build/**",
+		"assets/**",
+		"images/**",
+		"includes/**",
+		"templates/**",
+		"languages/**",
+		"public/**",
+		"*.php",
+		"block.json",
+		"changelog.*",
+		"LICENSE.*",
+		"README.txt",
+		"wpml-config.xml"
+	]
 }
