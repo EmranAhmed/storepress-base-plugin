@@ -19,7 +19,7 @@
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`
 - Open `bin/package.js` and change `files = glob(...` for package files.
 
-## Develop:
+## Develop
 
 - `npm start`
 
@@ -41,13 +41,12 @@
 - `npm run format:php` - Format PHP
 - `npm run format` - Format PHP, SCSS, JS
 
-## Release:
+## Release
 
-- `npm run package` - make package directory based on `./bin/package.js` list.
-- `npm run plugin-zip` - make zip based on `./bin/package.js` list.
+- `npm run plugin-zip` - make zip based on `package.json`, `files` list.
 
 ## Provide your own translations
 
 - `npm run language` - Make POT File
 - Then follow this link to test
-- https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations
+- [See docs](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations)
