@@ -3,7 +3,6 @@
 ## First
 
 - `git clone https://github.com/EmranAhmed/storepress-base-plugin.git`
-- Install https://wp-cli.org/ if not available
 - `npm install`
 - `npm run packages-update` - Update WordPress packages
 
@@ -44,10 +43,11 @@
 
 ## Release:
 
-- `npm run package` - make package directory
-- `npm run zip` - make zip
+- `npm run package` - make package directory based on `./bin/package.js` list.
+- `npm run plugin-zip` - make zip based on `./bin/package.js` list.
 
 ## Provide your own translations
+
 - `npm run language` - Make POT File
 - Then follow this link to test
 - https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations
