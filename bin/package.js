@@ -49,8 +49,9 @@ if ( hasPackageProp( 'files' ) ) {
 			'uninstall.php',
 			'block.json',
 			'changelog.*',
-			'license.*',
-			'readme.txt',
+			'LICENSE.*',
+			'README.txt',
+			'wpml-config.xml',
 		],
 		{
 			caseSensitiveMatch: false,
