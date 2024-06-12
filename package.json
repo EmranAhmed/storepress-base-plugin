@@ -20,7 +20,8 @@
 			"npm run lint:css"
 		],
 		"*.{js,ts,tsx}": [
-
+			"npm run lint:js:fix",
+			"npm run lint:js"
 		],
 		"*.php": [
 			"npm run format:php",
