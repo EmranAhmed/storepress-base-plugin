@@ -43,7 +43,7 @@ $storepress_wrapper_attributes = get_block_wrapper_attributes(
 		'style' => esc_attr( storepress_base_plugin()->get_blocks()->get_inline_styles( $storepress_styles ) ),
 	)
 );
-$storepress_allowed_html = storepress_base_plugin()->get_blocks()->get_kses_allowed_html();
+$storepress_allowed_html       = storepress_base_plugin()->get_blocks()->get_kses_allowed_html();
 ?>
 
 <div <?php echo wp_kses_data( $storepress_wrapper_attributes ); ?> data-wp-interactive="storepress" <?php echo wp_kses_data( wp_interactivity_data_wp_context( array( 'isOpen' => false ) ) ); ?> data-wp-watch="callbacks.logIsOpen">
