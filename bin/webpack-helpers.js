@@ -2,11 +2,8 @@
 /**
  * External dependencies
  */
-const {
-	getWordPressSrcDirectory,
-} = require( '@wordpress/scripts/utils/config' );
+const { getWordPressSrcDirectory } = require( '@wordpress/scripts/utils/config' );
 const { fromProjectRoot } = require( '@wordpress/scripts/utils/file' );
-
 const { sep } = require( 'path' );
 
 // jquery --> window.jQuery

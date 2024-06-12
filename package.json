@@ -16,12 +16,11 @@
 	},
 	"lint-staged": {
 		"*.scss": [
-			"npm run lint:css-fix",
+			"npm run lint:css:fix",
 			"npm run lint:css"
 		],
 		"*.{js,ts,tsx}": [
-			"npm run lint:js-fix",
-			"npm run lint:js"
+
 		],
 		"*.php": [
 			"npm run format:php",
@@ -112,7 +111,7 @@
 		"start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
 
 		"language": "npm run language:make-pot && npm run language:make-json",
-		"language:make-pot": "./vendor/bin/wp i18n make-pot . languages/storepress-base-plugin.pot --exclude=build,assets,bin,node_modules,vendor,languages --package-name=\"StorePress Base Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
+		"language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=bin,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
 		"language:make-json": "./vendor/bin/wp i18n make-json languages --no-purge --pretty-print",
 
 		"create-dynamic-block": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",

@@ -15,7 +15,7 @@
 - Rename `storepress-base-plugin.php` to your plugin file name.
 - Open `.eslintrc.js` and change `allowedTextDomain: ['storepress-base-plugin'],`
 - Open `composer.json` and change `name`, `description`, `autoload`
-- Open `package.json` and change `name` as plugin file name, `description`, `repository`, `languages/storepress-base-plugin.pot`
+- Open `package.json` and change `name` as plugin file name, `description`, `repository`.
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`
 - Open `bin/package.js` and change `files = glob(...` for package files.
 
@@ -31,22 +31,29 @@
 ## Lint
 
 - `npm run lint:js` - Lint Javascript
+- `npm run lint:js:report` - Lint Javascript and will generate `lint-report.html`. From terminal `open lint-report.html`
 - `npm run lint:css` - Lint CSS
+- `npm run lint:css:report` - Lint CSS and will generate `scss-report.txt` file.
 - `npm run lint:php` - PHP lint and will generate `phpcs-report.txt` file.
+
+## Fix
+
+- `npm run lint:js:fix` - Fix Javascript Lint Issue.
+- `npm run lint:css:fix` - Fix SCSS Lint Issue.
 
 ## Format
 
 - `npm run format:js` - Format Javascript
 - `npm run format:css` - Format SCSS
 - `npm run format:php` - Format PHP
-- `npm run format` - Format PHP, SCSS, JS
+- `npm run format` - Format `./src`
 
 ## Release
 
-- `npm run plugin-zip` - make zip based on `package.json`, `files` list.
+- `npm run plugin-zip` - make zip based on `package.json` `files` list.
 
 ## Provide your own translations
 
 - `npm run language` - Make POT File
 - Then follow this link to test
-- [See docs](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations)
+- [Check translation guide](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#provide-your-own-translations)
