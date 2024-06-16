@@ -102,9 +102,13 @@
 
 		"packages-update": "wp-scripts packages-update",
 
-		"preplugin-zip": "rm -rf ./languages && npm run language && npm run build",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"postplugin-zip": "composer install",
+		"preplugin-zip" : "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
+		"plugin-zip" : "wp-scripts plugin-zip",
+		"postplugin-zip" : "composer install",
+		
+		"prepackage" : "rm -rf ./${npm_package_name} && npm run plugin-zip",
+		"package" : "unzip ${npm_package_name}.zip -d ${npm_package_name}",
+		"postpackage" : "rm -rf ./${npm_package_name}.zip",
 
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",

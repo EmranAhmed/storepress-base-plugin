@@ -51,6 +51,7 @@
 ## Release
 
 - `npm run plugin-zip` - make zip based on `package.json` `files` list.
+- `npm run package` - make directory based on `package.json` `files` list.
 
 ## Provide your own translations
 
