@@ -8,6 +8,8 @@
 
 ## Where to change
 
+- Create test for wp only `bash bin/install-wp-tests.sh storepress_base_plugin_test root 'PASSWORD' localhost latest`
+- Create test for with wc `bash bin/install-wp-tests-with-wc.sh storepress_base_plugin_test root 'PASSWORD' localhost latest`
 - Open all files from `includes` directory and change namespace from `namespace StorePress\Base;` to `namespace Your_Company\Your_Plugin;`.
 - Open `storepress-base-plugin.php` and change plugin header, text-domain, namespace, defined Constant `STOREPRESS_BASE_PLUGIN_FILE`, function name.
 - Open `includes/Plugin.php` and change `STOREPRESS_BASE_PLUGIN_FILE` on `function get_plugin_file()` function.
