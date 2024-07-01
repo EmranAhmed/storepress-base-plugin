@@ -57,7 +57,8 @@ package-lock.json
 
 # Unit tests
 tmp/
-
+*.cache
+.circleci
 # Composer
 bin/composer/**/vendor/
 lib/vendor/

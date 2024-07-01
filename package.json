@@ -24,11 +24,9 @@
 			"npm run lint:js"
 		],
 		"*.php": [
+			"npm run stan:php",
 			"npm run format:php",
 			"npm run lint:php"
-		],
-		"*.md": [
-			"npm run lint:md:docs"
 		]
 	},
 	"files": [
@@ -75,7 +73,11 @@
 		"clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
 		"postinstall": "npm run clean-composer && composer install",
 
+		"test:php": "composer run phpunit",
+		"stan:php": "composer run phpstan",
+		"stan:php:report": "composer run phpstan-report",
 		"lint:php": "composer run lint",
+		"lint:php:fix": "composer run format",
 		"format:php": "composer run format",
 
 		"prebuild": "npm run clean-composer && composer install --no-dev --optimize-autoloader",

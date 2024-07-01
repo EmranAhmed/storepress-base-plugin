@@ -1,12 +1,14 @@
 <?php
-	/**
-	 * Utility Functions.
-	 *
-	 * @package    StorePress/Base
-	 * @since      1.0.0
-	 * @version      1.0.0
-	 */
+/**
+ * Utility Functions.
+ *
+ * @package      StorePress/Base
+ * @since        1.0.0
+ * @version      1.0.0
+ */
 
-	namespace StorePress\Base;
+declare( strict_types=1 );
 
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
+namespace StorePress\Base;
+
+defined( 'ABSPATH' ) || die( 'Keep Silent' );

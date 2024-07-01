@@ -1,21 +1,23 @@
 <?php
-	/**
-	 * Main Plugin Class File.
-	 *
-	 * @package    StorePress/Base
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 */
+/**
+ * Main Plugin Class File.
+ *
+ * @package    StorePress/Base
+ * @since      1.0.0
+ * @version    1.0.0
+ */
 
-	namespace StorePress\Base;
+declare( strict_types=1 );
 
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
+namespace StorePress\Base;
 
-	use Exception;
+defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-	/**
-	 * Class Plugin.
-	 */
+use Exception;
+
+/**
+ * Class Plugin.
+ */
 class Plugin {
 
 	/**
@@ -51,7 +53,7 @@ class Plugin {
 		/**
 		 * Action to signal that Plugin has finished loading.
 		 *
-		 * @param Plugin $this Plugin Object.
+		 * @param Plugin $instance Plugin Instance.
 		 *
 		 * @since 1.0.0
 		 */
@@ -78,7 +80,10 @@ class Plugin {
 		static $versions;
 
 		if ( is_null( $versions ) ) {
-			$versions = get_file_data( $this->get_plugin_file(), array( 'Version' ) );
+			$versions = get_file_data(
+				$this->get_plugin_file(),
+				array( 'Version' ) 
+			);
 		}
 
 		return esc_attr( $versions[0] );
@@ -92,7 +97,6 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function includes(): bool {
-
 		if ( file_exists( $this->vendor_path() . '/autoload_packages.php' ) ) {
 			require_once $this->vendor_path() . '/autoload_packages.php';
 			require_once __DIR__ . '/functions.php';
@@ -110,7 +114,6 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-
 		// Setup BLocks.
 		$this->get_blocks();
 
@@ -191,7 +194,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function images_url(): string {
-		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'images' );
+		return untrailingslashit(
+			plugin_dir_url( $this->get_plugin_file() )
+									. 'images' 
+		);
 	}
 
 	/**
@@ -201,7 +207,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function assets_url(): string {
-		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'assets' );
+		return untrailingslashit(
+			plugin_dir_url( $this->get_plugin_file() )
+									. 'assets' 
+		);
 	}
 
 	/**
@@ -231,7 +240,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function vendor_url(): string {
-		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'vendor' );
+		return untrailingslashit(
+			plugin_dir_url( $this->get_plugin_file() )
+									. 'vendor' 
+		);
 	}
 
 	/**
@@ -241,7 +253,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function build_url(): string {
-		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) . 'build' );
+		return untrailingslashit(
+			plugin_dir_url( $this->get_plugin_file() )
+									. 'build' 
+		);
 	}
 
 	/**
@@ -263,7 +278,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function assets_version( string $file ): int {
-		return filemtime( $this->assets_path() . $file );
+		return absint( filemtime( $this->assets_path() . $file ) );
 	}
 
 	/**
@@ -273,7 +288,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function include_path(): string {
-		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'includes' );
+		return untrailingslashit(
+			plugin_dir_path( $this->get_plugin_file() )
+									. 'includes' 
+		);
 	}
 
 	/**
@@ -283,7 +301,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function template_path(): string {
-		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) . 'templates' );
+		return untrailingslashit(
+			plugin_dir_path( $this->get_plugin_file() )
+									. 'templates' 
+		);
 	}
 
 	/**

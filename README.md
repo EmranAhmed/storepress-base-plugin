@@ -18,6 +18,8 @@
 - Open `package.json` and change `name` as plugin file name, `description`, `repository`.
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`
 - Open `bin/package.js` and change `files = glob(...` for package files.
+- [Test example](https://core.trac.wordpress.org/browser/trunk/tests/phpunit)
+- [Gutenberg test example](https://github.com/WordPress/gutenberg/tree/trunk/phpunit)
 
 ## Develop
 
