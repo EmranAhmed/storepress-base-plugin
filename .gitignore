@@ -44,6 +44,8 @@ node_modules/
 vendor/
 languages/
 storepress-base-plugin/
+artifacts/
+tests/e2e/test*
 
 # TypeScript files
 tsconfig.tsbuildinfo
@@ -65,3 +67,7 @@ lib/vendor/
 contributors.md
 contributors.html
 *-report*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

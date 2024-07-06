@@ -52,6 +52,13 @@
 - `npm run format:php` - Format PHP
 - `npm run format` - Format `./src`
 
+## Test
+
+- `npm run test:unit` - JS Unit test
+- `npm run test:e2e` - E2E test
+- `npm run test:php` - PHP Unit test
+- `npm run stan:php` - PHP Stan test
+
 ## Release
 
 - `npm run plugin-zip` - make zip based on `package.json` `files` list.

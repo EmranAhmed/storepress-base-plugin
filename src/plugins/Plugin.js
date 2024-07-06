@@ -49,7 +49,7 @@ function Plugin(element, options) {
 		removeEvents,
 	});
 
-	return (() => init())();
+	return init();
 }
 
 export { Plugin };
