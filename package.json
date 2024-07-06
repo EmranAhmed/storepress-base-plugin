@@ -26,18 +26,15 @@
       "npm run lint:css:fix",
       "npm run lint:css"
     ],
-		"*.{js,ts,tsx}": [
-			"npm run lint:js:fix",
-			"npm run lint:js"
-		],
+
     "*.php": [
       "npm run stan:php",
       "npm run format:php",
       "npm run lint:php"
     ],
-		"*.md": [
-			"npm run lint:md:docs"
-		]
+    "*.md": [
+      "npm run lint:md:docs"
+    ]
   },
   "files": [
     "vendor/**",
@@ -66,6 +63,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.45.1",
+    "@testing-library/react": "^16.0.0",
     "@types/node": "^20.14.9",
     "@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
     "@woocommerce/e2e-utils": "^0.2.0",
@@ -123,6 +121,7 @@
     "test:e2e:debug": "wp-scripts test-playwright --config playwright.config.js --debug",
     "test:unit": "wp-scripts test-unit-js --config jest.config.js",
     "test:unit:help": "wp-scripts test-unit-js --config jest.config.js --help",
+    "test:unit:debug": "wp-scripts test-unit-js --config jest.config.js --debug",
     "start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
     "language": "npm run language:make-pot && npm run language:make-json",
     "language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=bin,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",

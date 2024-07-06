@@ -3,7 +3,9 @@
  */
 import {describe, expect, it} from '@jest/globals'
 import { getOptionsFromAttribute } from '@storepress/utils';
-// import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
+
+// @example: https://developer.wordpress.org/block-editor/contributors/code/testing-overview/
 
 describe( 'frontend scripts', () => {
 
