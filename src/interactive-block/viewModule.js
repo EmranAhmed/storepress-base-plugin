@@ -1,5 +1,10 @@
+'use strict';
+/* eslint no-console: 0 */
+/* eslint import/named: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
+
 /**
- * WordPress dependencies
+ * External dependencies
  */
 import { store, getContext } from '@wordpress/interactivity';
 

@@ -1,3 +1,4 @@
+'use strict';
 /**
  * External dependencies
  */
@@ -58,6 +59,7 @@ domReady(function () {
 		Slider.init(settings);
 	});
 
+	/*
 	const slider_init_with_options = new CustomEvent(
 		'slider_init_with_options',
 		{
@@ -68,16 +70,17 @@ domReady(function () {
 			},
 		}
 	);
+	*/
 
 	// document.dispatchEvent(slider_init_with_options)
 
-	document.addEventListener('slider_init', (event) => {
+	document.addEventListener('slider_init', () => {
 		Slider.init();
 	});
 
 	document.dispatchEvent(new Event('slider_init'));
 
-	document.addEventListener('slider_destroy', (event) => {
+	document.addEventListener('slider_destroy', () => {
 		Slider.destroy();
 	});
 

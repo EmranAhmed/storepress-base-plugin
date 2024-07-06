@@ -12,7 +12,7 @@ import apiFetch from '@wordpress/api-fetch';
  * @param {string=}                    request.search    Search string.
  * @param {(Record<string, unknown>)=} request.queryArgs Query args to pass in.
  */
-const getProductsRequests = ({
+export const getProductsRequests = ({
 	selected = [],
 	search = '',
 	queryArgs = {},

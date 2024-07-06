@@ -12,21 +12,6 @@ function Plugin(element, options) {
 	// Collecting settings from html attribute
 	const ATTRIBUTE = 'slider-settings';
 
-	// Do what you need and return expose fn.
-	const init = () => {
-		this.element = element;
-		this.settings = Object.assign(
-			{},
-			DEFAULTS,
-			options,
-			getOptionsFromAttribute(this.element, ATTRIBUTE)
-		);
-		//  console.log('init')
-		addEvents();
-
-		return expose();
-	};
-
 	const addPointer = (event) => {
 		window.console.log(event.target.value);
 	};
@@ -48,6 +33,21 @@ function Plugin(element, options) {
 		element: this.element,
 		removeEvents,
 	});
+
+	// Do what you need and return expose fn.
+	const init = () => {
+		this.element = element;
+		this.settings = Object.assign(
+			{},
+			DEFAULTS,
+			options,
+			getOptionsFromAttribute(this.element, ATTRIBUTE)
+		);
+
+		addEvents();
+
+		return expose();
+	};
 
 	return init();
 }

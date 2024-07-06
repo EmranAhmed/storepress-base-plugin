@@ -1,7 +1,14 @@
+'use strict';
+/* eslint @typescript-eslint/no-this-alias: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 /**
  * External dependencies
  */
 import domReady from '@wordpress/dom-ready';
+
+/**
+ * Internal dependencies
+ */
 import { getProductsRequests } from '../utils';
 
 domReady(function () {

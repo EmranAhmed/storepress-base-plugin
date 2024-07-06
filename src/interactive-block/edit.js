@@ -1,3 +1,6 @@
+'use strict';
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 /**
  * Retrieves the translation of text.
  *
