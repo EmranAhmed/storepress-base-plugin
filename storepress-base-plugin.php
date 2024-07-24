@@ -53,12 +53,21 @@ function storepress_base_plugin_missing_wc_notice() {
 }
 
 /**
- * The main function that returns the Plugin class
+ * The function that always returns the same instance to ensure only one instance exists in the global scope at any time.
  *
  * @return Plugin
  * @since 1.0.0
  */
 function storepress_base_plugin(): Plugin {
+	return Plugin::instance();
+}
+
+/**
+ * Init
+ *
+ * @return void
+ */
+function storepress_base_plugin_init() {
 	load_plugin_textdomain( 'storepress-base-plugin', false, plugin_dir_path( __FILE__ ) . 'languages' );
 	// Include the main class.
 
@@ -81,16 +90,11 @@ function storepress_base_plugin(): Plugin {
 	 * }
 	 */
 
-	return Plugin::instance();
+	storepress_base_plugin();
 }
 
 // Get the plugin running.
-add_action(
-	'plugins_loaded',
-	function () {
-		storepress_base_plugin();
-	} 
-);
+add_action( 'plugins_loaded', 'storepress_base_plugin_init' );
 
 /**
  * Declare compatibility with custom order tables for WooCommerce.
