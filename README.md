@@ -1,5 +1,11 @@
 # StorePress Base Plugin
 
+
+Download [latest release](https://github.com/EmranAhmed/storepress-base-plugin/releases/latest/download/storepress-base-plugin.zip) |
+Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamless&blueprint-url=https://raw.githubusercontent.com/EmranAhmed/storepress-base-plugin/main/.wp-playground/blueprint.json) using Playground.
+
+
+
 ## First
 
 - `git clone https://github.com/EmranAhmed/storepress-base-plugin.git`
