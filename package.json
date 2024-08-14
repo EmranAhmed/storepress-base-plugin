@@ -88,6 +88,7 @@
   },
   "scripts": {
     "clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
+    "preinstall": "git init -q && rm -rf ./.husky",
     "postinstall": "npm run clean-composer && composer install",
     "test:php": "composer run phpunit",
     "stan:php": "composer run phpstan",
@@ -114,7 +115,7 @@
     "packages-update": "wp-scripts packages-update",
     "preplugin-zip": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
     "plugin-zip": "wp-scripts plugin-zip",
-    "postplugin-zip": "composer install",
+    "postplugin-zip": "npm run clean-composer && composer install",
     "prepackage": "rm -rf ./${npm_package_name} && npm run plugin-zip",
     "package": "unzip ${npm_package_name}.zip -d ${npm_package_name}",
     "postpackage": "rm -rf ./${npm_package_name}.zip",
