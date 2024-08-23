@@ -13,9 +13,6 @@
     "woocommerce",
     "storepress"
   ],
-	"bin": {
-		"package": "./bin/package.js"
-	},
   "homepage": "https://github.com/EmranAhmed/storepress-base-plugin/",
   "repository": {
     "type": "git",
@@ -59,7 +56,10 @@
     "README.txt",
     "wpml-config.xml"
   ],
-  "dependencies": {
+	"bin": {
+		"package": "./bin/package.js"
+	},
+	"dependencies": {
     "@storepress/components": "^0.0.2",
     "@storepress/icons": "^2.0.0",
     "@storepress/utils": "^0.2.6",
