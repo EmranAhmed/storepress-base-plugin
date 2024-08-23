@@ -13,6 +13,9 @@
     "woocommerce",
     "storepress"
   ],
+	"bin": {
+		"package": "./bin/package.js"
+	},
   "homepage": "https://github.com/EmranAhmed/storepress-base-plugin/",
   "repository": {
     "type": "git",
@@ -22,11 +25,11 @@
     "url": "https://github.com/EmranAhmed/storepress-base-plugin/issues"
   },
   "lint-staged": {
-    "*.scss": [
+    "/src/**/*.scss": [
       "npm run lint:css:fix",
       "npm run lint:css"
     ],
-		"*.{js,ts,tsx}": [
+		"/src/**/*.{js,ts,tsx}": [
 			"npm run lint:js:fix",
 			"npm run lint:js"
 		],
@@ -35,23 +38,21 @@
       "npm run format:php",
       "npm run lint:php"
     ],
-    "*.md": [
+    "/*.md": [
       "npm run lint:md:docs"
     ]
   },
   "files": [
     "vendor/**",
     "admin/**",
+		"public/**",
     "build/**",
-    "src/**",
     "assets/**",
     "images/**",
     "includes/**",
     "templates/**",
     "languages/**",
-    "public/**",
     "*.php",
-    "block.json",
     "composer.json",
     "changelog.*",
     "LICENSE.*",
@@ -113,12 +114,10 @@
     "lint:md:docs": "wp-scripts lint-md-docs",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
     "packages-update": "wp-scripts packages-update",
-    "preplugin-zip": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
-    "plugin-zip": "wp-scripts plugin-zip",
-    "postplugin-zip": "npm run clean-composer && composer install",
-    "prepackage": "rm -rf ./${npm_package_name} && npm run plugin-zip",
-    "package": "unzip ${npm_package_name}.zip -d ${npm_package_name}",
-    "postpackage": "rm -rf ./${npm_package_name}.zip",
+		"prepackage": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
+		"package": "./bin/package.js",
+		"postpackage": "npm run clean-composer && composer install",
+		"plugin-zip": "npm run package -- --zip",
     "test:e2e:codegen": "npx playwright codegen http://localhost:8889",
     "test:e2e:help": "wp-scripts test-playwright --config playwright.config.js --help",
     "test:e2e:headed": "wp-scripts test-playwright --config playwright.config.js --headed",
