@@ -22,11 +22,11 @@
     "url": "https://github.com/EmranAhmed/storepress-base-plugin/issues"
   },
   "lint-staged": {
-    "/src/**/*.scss": [
+    "./src/**/*.scss": [
       "npm run lint:css:fix",
       "npm run lint:css"
     ],
-		"/src/**/*.{js,ts,tsx}": [
+		"./src/**/*.{js,ts,tsx}": [
 			"npm run lint:js:fix",
 			"npm run lint:js"
 		],
@@ -35,9 +35,12 @@
       "npm run format:php",
       "npm run lint:php"
     ],
-    "/*.md": [
+    "./*.md": [
       "npm run lint:md:docs"
-    ]
+    ],
+		"./package.json": [
+			"npm run lint:pkg-json"
+		]
   },
   "files": [
     "vendor/**",
@@ -129,7 +132,7 @@
     "test:unit:debug": "wp-scripts test-unit-js --config jest.config.js --debug",
     "start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
     "language": "npm run language:make-pot && npm run language:make-json",
-    "language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=bin,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
+    "language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=bin,src,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
     "language:make-json": "./vendor/bin/wp i18n make-json languages --no-purge --pretty-print",
     "create-dynamic-block": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
     "create-static-block": "npx @wordpress/create-block@latest --namespace storepress --no-plugin",
