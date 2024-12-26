@@ -1,141 +1,142 @@
 {
-  "name": "storepress-base-plugin",
-  "version": "1.0.0",
-  "description": "StorePress Base Plugin",
-  "author": "Emran Ahmed",
-  "private": true,
-  "license": "GPL-2.0-or-later",
-  "keywords": [
-    "wordpress",
-    "gutenberg",
-    "block",
-    "scaffold",
-    "woocommerce",
-    "storepress"
-  ],
-  "homepage": "https://github.com/EmranAhmed/storepress-base-plugin/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/EmranAhmed/storepress-base-plugin"
-  },
-  "bugs": {
-    "url": "https://github.com/EmranAhmed/storepress-base-plugin/issues"
-  },
-  "lint-staged": {
-    "./src/**/*.scss": [
-      "npm run lint:css:fix",
-      "npm run lint:css"
-    ],
+	"name": "storepress-base-plugin",
+	"version": "1.0.0",
+	"description": "StorePress Base Plugin",
+	"author": "Emran Ahmed",
+	"private": true,
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"gutenberg",
+		"block",
+		"scaffold",
+		"woocommerce",
+		"storepress"
+	],
+	"homepage": "https://github.com/EmranAhmed/storepress-base-plugin/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/EmranAhmed/storepress-base-plugin"
+	},
+	"bugs": {
+		"url": "https://github.com/EmranAhmed/storepress-base-plugin/issues"
+	},
+	"lint-staged": {
+		"./src/**/*.scss": [
+			"npm run lint:css:fix",
+			"npm run lint:css"
+		],
 		"./src/**/*.{js,ts,tsx}": [
 			"npm run lint:js:fix",
 			"npm run lint:js"
 		],
-    "*.php": [
-      "npm run format:php",
-      "npm run lint:php"
-    ],
-    "./*.md": [
-      "npm run lint:md:docs"
-    ],
+		"*.php": [
+			"npm run format:php",
+			"npm run lint:php"
+		],
+		"./*.md": [
+			"npm run lint:md:docs"
+		],
 		"./package.json": [
 			"npm run lint:pkg-json"
 		]
-  },
-  "files": [
-    "vendor/**",
-    "admin/**",
+	},
+	"files": [
+		"vendor/**",
+		"admin/**",
 		"public/**",
-    "build/**",
-    "assets/**",
-    "images/**",
-    "includes/**",
-    "templates/**",
-    "languages/**",
-    "*.php",
-    "composer.json",
-    "changelog.*",
-    "LICENSE.*",
-    "README.txt",
-    "wpml-config.xml"
-  ],
+		"build/**",
+		"assets/**",
+		"images/**",
+		"includes/**",
+		"templates/**",
+		"languages/**",
+		"*.php",
+		"composer.json",
+		"changelog.*",
+		"LICENSE.*",
+		"README.txt",
+		"wpml-config.xml"
+	],
 	"bin": {
 		"package": "./tools/package.js"
 	},
 	"dependencies": {
-    "@storepress/components": "^0.0.2",
-    "@storepress/icons": "^2.0.0",
-    "@storepress/utils": "^0.2.6",
-    "@wordpress/dom-ready": "^4.10.0",
-    "@wordpress/icons": "^10.10.0",
+		"@storepress/components": "^0.0.2",
+		"@storepress/icons": "^2.0.0",
+		"@storepress/utils": "^0.2.6",
+		"@wordpress/dom-ready": "^4.10.0",
+		"@wordpress/icons": "^10.10.0",
 		"clsx": "^2.1.1"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.48.1",
-    "@testing-library/react": "^16.0.1",
-    "@types/node": "^22.7.9",
-    "@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
-    "@woocommerce/e2e-utils": "^0.2.0",
-    "@woocommerce/eslint-plugin": "^2.3.0",
-    "@wordpress/base-styles": "^5.10.0",
-    "@wordpress/blocks": "^13.10.0",
-    "@wordpress/dependency-extraction-webpack-plugin": "^6.10.0",
-    "@wordpress/e2e-test-utils-playwright": "^1.10.0",
-    "@wordpress/i18n": "^5.10.0",
-    "@wordpress/scripts": "^30.3.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.48.1",
+		"@testing-library/react": "^16.0.1",
+		"@types/node": "^22.7.9",
+		"@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
+		"@woocommerce/e2e-utils": "^0.2.0",
+		"@woocommerce/eslint-plugin": "^2.3.0",
+		"@wordpress/base-styles": "^5.10.0",
+		"@wordpress/blocks": "^13.10.0",
+		"@wordpress/dependency-extraction-webpack-plugin": "^6.10.0",
+		"@wordpress/e2e-test-utils-playwright": "^1.10.0",
+		"@wordpress/i18n": "^5.10.0",
+		"@wordpress/scripts": "^30.3.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
 		"fs-extra": "^11.2.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.2.11",
-    "webpack-remove-empty-scripts": "^1.0.4"
-  },
-  "scripts": {
-    "clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.2.11",
+		"webpack-remove-empty-scripts": "^1.0.4"
+	},
+	"scripts": {
+		"clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
 		"postinstall": "git init -q && rm -rf ./.husky && npm run clean-composer && composer install && npx husky init && echo \"npx lint-staged\" > .husky/pre-commit",
-    "test:php": "composer run phpunit",
-    "stan:php": "composer run phpstan",
-    "stan:php:report": "composer run phpstan-report",
-    "lint:php": "composer run lint",
-    "lint:php:fix": "composer run format",
-    "format:php": "composer run format",
-    "prebuild": "rm -rf ./build && npm run clean-composer && composer install --no-dev --optimize-autoloader",
-    "build": "npm run start -- --no-watch && wp-scripts build --webpack-copy-php --experimental-modules",
-    "check-engines": "wp-scripts check-engines",
-    "check-licenses": "wp-scripts check-licenses",
-    "format": "wp-scripts format ./src",
-    "format:all": "npm run format:php && npm run format:css && npm run format:js",
-    "format:js": "wp-scripts format './src/**/*.js'",
-    "format:css": "wp-scripts format './src/**/*.scss'",
-    "lint:css": "wp-scripts lint-style './src/**/*.scss'",
-    "lint:css:report": "npm run lint:css -- --output-file scss-report.txt",
-    "lint:css:fix": "npm run lint:css -- --fix",
-    "lint:js": "wp-scripts lint-js './src/**/*.js'",
-    "lint:js:report": "npm run lint:js -- --format html --output-file lint-report.html",
-    "lint:js:fix": "npm run lint:js -- --fix",
-    "lint:md:docs": "wp-scripts lint-md-docs",
-    "lint:pkg-json": "wp-scripts lint-pkg-json",
-    "packages-update": "wp-scripts packages-update",
+		"test:php": "composer run phpunit",
+		"stan:php": "composer run phpstan",
+		"stan:php:report": "composer run phpstan-report",
+		"lint:php": "composer run lint",
+		"lint:php:fix": "composer run format",
+		"format:php": "composer run format",
+		"prebuild": "rm -rf ./build && npm run clean-composer && composer install --no-dev --optimize-autoloader",
+		"build": "npm run start -- --no-watch && wp-scripts build --webpack-copy-php --experimental-modules",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format ./src",
+		"format:all": "npm run format:php && npm run format:css && npm run format:js",
+		"format:js": "wp-scripts format './src/**/*.js'",
+		"format:css": "wp-scripts format './src/**/*.scss'",
+		"lint:css": "wp-scripts lint-style './src/**/*.scss'",
+		"lint:css:report": "npm run lint:css -- --output-file scss-report.txt",
+		"lint:css:fix": "npm run lint:css -- --fix",
+		"lint:js": "wp-scripts lint-js './src/**/*.js'",
+		"lint:js:report": "npm run lint:js -- --format html --output-file lint-report.html",
+		"lint:js:fix": "npm run lint:js -- --fix",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
 		"prepackage": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
 		"package": "./tools/package.js",
 		"postpackage": "npm run clean-composer && composer install",
 		"plugin-zip": "npm run package -- --zip",
-    "test:e2e:codegen": "npx playwright codegen http://localhost:8889",
-    "test:e2e:help": "wp-scripts test-playwright --config playwright.config.js --help",
-    "test:e2e:headed": "wp-scripts test-playwright --config playwright.config.js --headed",
-    "test:e2e": "wp-scripts test-playwright --config playwright.config.js",
-    "test:e2e:ui": "wp-scripts test-playwright --config playwright.config.js --ui",
-    "test:e2e:debug": "wp-scripts test-playwright --config playwright.config.js --debug",
-    "test:unit": "wp-scripts test-unit-js --config jest.config.js",
-    "test:unit:help": "wp-scripts test-unit-js --config jest.config.js --help",
-    "test:unit:debug": "wp-scripts test-unit-js --config jest.config.js --debug",
-    "start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
-    "language": "npm run language:make-pot && npm run language:make-json",
-    "language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=tools,src,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
-    "language:make-json": "./vendor/bin/wp i18n make-json languages --no-purge --pretty-print",
-    "create-dynamic-block": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
-    "create-static-block": "npx @wordpress/create-block@latest --namespace storepress --no-plugin",
-    "create-interactive-block": "npx @wordpress/create-block@latest --template @wordpress/create-block-interactive-template --namespace storepress --no-plugin",
-    "create-woo-extension": "npx @wordpress/create-block@latest --template @woocommerce/create-woo-extension --namespace storepress",
-    "create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress"
-  }
+		"test:e2e:codegen": "npx playwright codegen http://localhost:8889",
+		"test:e2e:help": "wp-scripts test-playwright --config playwright.config.js --help",
+		"test:e2e:headed": "wp-scripts test-playwright --config playwright.config.js --headed",
+		"test:e2e": "wp-scripts test-playwright --config playwright.config.js",
+		"test:e2e:ui": "wp-scripts test-playwright --config playwright.config.js --ui",
+		"test:e2e:debug": "wp-scripts test-playwright --config playwright.config.js --debug",
+		"test:unit": "wp-scripts test-unit-js --config jest.config.js",
+		"test:unit:help": "wp-scripts test-unit-js --config jest.config.js --help",
+		"test:unit:debug": "wp-scripts test-unit-js --config jest.config.js --debug",
+		"start": "rm -rf ./build && wp-scripts start --webpack-copy-php --experimental-modules",
+		"language": "npm run language:make-pot && npm run language:make-json",
+		"language:make-pot": "./vendor/bin/wp i18n make-pot . languages/${npm_package_name}.pot --exclude=tools,src,node_modules,vendor,languages --package-name=\"StorePress Plugin\" --headers='{\"Report-Msgid-Bugs-To\":\"https://storepress.com/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
+		"language:make-json": "./vendor/bin/wp i18n make-json languages --no-purge --pretty-print",
+		"create-dynamic-block": "npx @wordpress/create-block@latest --namespace storepress --variant dynamic --no-plugin",
+		"create-static-block": "npx @wordpress/create-block@latest --namespace storepress --no-plugin",
+		"create-interactive-block": "npx @wordpress/create-block@latest --template @wordpress/create-block-interactive-template --namespace storepress --no-plugin",
+		"create-woo-extension": "npx @wordpress/create-block@latest --template @woocommerce/create-woo-extension --namespace storepress",
+		"create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress",
+		"prepare": "husky"
+	}
 }
