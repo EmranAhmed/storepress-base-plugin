@@ -159,11 +159,9 @@ module.exports = {
 			'@woocommerce/blocks-test-utils',
 			'@woocommerce/e2e-utils',
 			'lodash',
+			'jquery',
 		],
-		'import/resolver': {
-			node: {},
-			webpack: {}
-		},
+		'import/resolver': require.resolve( './tools/import-resolver' ),
 	},
 	env: {
 		browser: true,
@@ -176,6 +174,7 @@ module.exports = {
 		wpApiSettings: true,
 		wcSettings: true,
 		es6: true,
+		StorePress: true,
 	},
 	rules: {
 		'@woocommerce/dependency-group': 'off',

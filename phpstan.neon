@@ -3,11 +3,17 @@ parameters:
 	editorUrlTitle: '%%relFile%%:%%line%%'
 	inferPrivatePropertyTypeFromConstructor: true
 	treatPhpDocTypesAsCertain: false
+	phpVersion: 70400
 	level: 6
 	paths:
 		- .
 	excludePaths:
-		- test
+		- test?
 		- vendor
 		- node_modules
-		- languages
+		- languages?
+		- build?
+	scanFiles:
+		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		# - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+		# - vendor/php-stubs/woocommerce-stubs/woocommerce-packages-stubs.php

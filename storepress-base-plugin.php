@@ -30,7 +30,6 @@ defined( 'ABSPATH' ) || die( 'Keep Silent' );
 use StorePress\Base\Plugin;
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
-
 if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_FILE', __FILE__ );
 }
@@ -44,12 +43,31 @@ if ( ! class_exists( '\StorePress\Base\Plugin' ) ) {
  * WooCommerce fallback notice.
  *
  * @return void
+ *
  * @since 1.0.0
  */
 function storepress_base_plugin_missing_wc_notice() {
-	/* translators: %s WC download URL link. */
-	$link = sprintf( esc_html__( 'StorePress Base Plugin requires WooCommerce to be installed and active. You can download %s here.', 'storepress-base-plugin' ), '<a href="https://woocommerce.com/" target="_blank">WooCommerce</a>' );
-	printf( '<div class="error"><p><strong>%s</strong></p></div>', wp_kses_post( $link ) );
+	$text = esc_html__( 'WooCommerce', 'storepress-base-plugin' );
+	if ( current_user_can( 'install_plugins' ) ) {
+		$plugin_args = array(
+			'tab'       => 'plugin-information',
+			'plugin'    => 'woocommerce',
+			'TB_iframe' => 'true',
+			'width'     => '640',
+			'height'    => '500',
+		);
+
+		$link = add_query_arg( $plugin_args, admin_url( 'plugin-install.php' ) );
+
+		$message = __( '<strong>StorePress Base Plugin</strong> is an add-on of ', 'storepress-base-plugin' );
+
+		printf( '<div class="%1$s"><p>%2$s <a class="thickbox open-plugin-details-modal" href="%3$s"><strong>%4$s</strong></a></p></div>', 'notice notice-error', wp_kses_post( $message ), esc_url( $link ), esc_html( $text ) );
+	} else {
+		/* translators: %1$s WooCommerce, %2$s WooCommerce download URL link. */
+		$message = sprintf( esc_html__( 'StorePress Base Plugin requires %1$s to be installed and active. You can download %2$s here.', 'storepress-base-plugin' ), esc_html( $text ), '<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>' );
+
+		printf( '<div class="error"><p><strong>%s</strong></p></div>', wp_kses_post( $message ) );
+	}
 }
 
 /**

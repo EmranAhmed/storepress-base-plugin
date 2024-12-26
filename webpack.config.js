@@ -8,7 +8,7 @@ const {
 	requestToExternalModule,
 	getFile,
 	getWebPackAlias,
-} = require( './bin/webpack-helpers' );
+} = require( './tools/webpack-helpers' );
 const WoocommerceDependencyExtractionWebpackPlugin = require( '@woocommerce/dependency-extraction-webpack-plugin' );
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );

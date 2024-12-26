@@ -86,7 +86,7 @@ function getFile( fileName ) {
 
 function getWebPackAlias() {
 	return {
-		//'@storepress/icons': getFile('packages/icons'),
+		'@utils': getFile('utils/index'),
 		//'@storepress/utils': getFile('packages/utils'),
 		//'@storepress/components': getFile('packages/components'),
 	};
