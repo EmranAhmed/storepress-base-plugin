@@ -22,7 +22,7 @@
 		}
 	],
 	"require" : {
-		"storepress/admin-utils" : "^1.8.9",
+		"storepress/admin-utils" : "^1.8.10",
 		"automattic/jetpack-autoloader" : "^v5.0.0"
 	},
 	"require-dev" : {
@@ -30,9 +30,9 @@
 		"php-stubs/woocommerce-stubs": "^v9.5.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.5",
 		"phpstan/extension-installer": "^1.4.3",
-		"phpstan/phpstan-strict-rules": "^2.0.1",
+		"phpstan/phpstan-strict-rules" : "^1.6.1",
 		"phpunit/phpunit": "^9.6",
-		"szepeviktor/phpstan-wordpress": "^v2.0.1",
+		"szepeviktor/phpstan-wordpress" : "^v1.3.5",
 		"woocommerce/woocommerce-sniffs": "^1.0.0",
 		"wp-cli/i18n-command": "^v2.6.4",
 		"wp-coding-standards/wpcs": "^3.1.0",
