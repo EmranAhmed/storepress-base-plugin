@@ -12,7 +12,7 @@
 			"step": "installPlugin",
 			"pluginZipFile": {
 				"resource": "url",
-				"url": "https://github-proxy.com/proxy/?repo=EmranAhmed/storepress-base-plugin&release=v1.0.0&asset=storepress-base-plugin.zip"
+				"url": "https://github-proxy.com/proxy/?repo=EmranAhmed/storepress-base-plugin&release=latest&asset=storepress-base-plugin.zip"
 			},
 			"options": {
 				"activate": true

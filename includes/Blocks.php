@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || die( 'Keep Silent' );
  */
 class Blocks {
 
+	use Instance;
 	use Common;
 
 	/**

@@ -97,6 +97,7 @@
 		"stan:php:report": "composer run phpstan-report",
 		"lint:php": "composer run lint",
 		"lint:php:fix": "composer run format",
+		"lint:php:report": "composer run lint-report",
 		"format:php": "composer run format",
 		"prebuild": "rm -rf ./build && npm run clean-composer && composer install --no-dev --optimize-autoloader",
 		"build": "npm run start -- --no-watch && wp-scripts build --webpack-copy-php --experimental-modules",
@@ -136,7 +137,6 @@
 		"create-static-block": "npx @wordpress/create-block@latest --namespace storepress --no-plugin",
 		"create-interactive-block": "npx @wordpress/create-block@latest --template @wordpress/create-block-interactive-template --namespace storepress --no-plugin",
 		"create-woo-extension": "npx @wordpress/create-block@latest --template @woocommerce/create-woo-extension --namespace storepress",
-		"create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress",
-		"prepare": "husky"
+		"create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress"
 	}
 }

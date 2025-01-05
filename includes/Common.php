@@ -14,20 +14,67 @@ namespace StorePress\Base;
 defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 trait Common {
+
 	/**
-	 * Return singleton instance of Class.
-	 * The instance will be created if it does not exist yet.
+	 * Prints human-readable information about a variable.
 	 *
-	 * @return self The main instance.
+	 * Some server environments block some debugging functions. This function provides a safe way to
+	 * turn an expression into a printable, readable form without calling blocked functions.
+	 *
+	 * @param mixed $expression   The expression to be printed.
+	 * @param bool  $return_value Optional. Default false. Set to true to return the human-readable string.
+	 *
+	 * @return string|bool False if expression could not be printed. True if the expression was printed.
+	 *     If $return is true, a string representation will be returned.
 	 * @since 1.0.0
 	 */
-	public static function instance(): self {
-		static $instance = null;
-		if ( is_null( $instance ) ) {
-			$instance = new self();
+	public function print_r( $expression, bool $return_value = false ) {
+		$alternatives = array(
+			array(
+				'func' => 'print_r',
+				'args' => array( $expression, true ),
+			),
+			array(
+				'func' => 'var_export',
+				'args' => array( $expression, true ),
+			),
+			array(
+				'func' => 'json_encode',
+				'args' => array( $expression ),
+			),
+			array(
+				'func' => 'serialize',
+				'args' => array( $expression ),
+			),
+		);
+
+		foreach ( $alternatives as $alternative ) {
+			if ( function_exists( $alternative['func'] ) ) {
+				$res = $alternative['func']( ...$alternative['args'] );
+				if ( $return_value ) {
+					return $res; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
+
+				echo $res; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+				return true;
+			}
 		}
 
-		return $instance;
+		return false;
+	}
+
+	/**
+	 * Get data if set, otherwise return a default value or null. Prevents notices when data is not set.
+	 *
+	 * @param mixed       $variable      Variable.
+	 * @param string|null $default_value Default value.
+	 *
+	 * @return mixed
+	 * @since  1.0.0
+	 */
+	public function get_var( $variable, string $default_value = null ) {
+		return true === isset( $variable ) ? $variable : $default_value;
 	}
 
 	/**
@@ -37,11 +84,9 @@ trait Common {
 	 * @param string[]             $exclude    Exclude attribute. Default array.
 	 *
 	 * @return string
+	 * @since  1.0.0
 	 */
-	public function get_html_attributes(
-		array $attributes,
-		array $exclude = array()
-	): string {
+	public function get_html_attributes( array $attributes, array $exclude = array() ): string {
 		$attrs = array();
 
 		foreach ( $attributes as $attribute_name => $attribute_value ) {
@@ -51,9 +96,7 @@ trait Common {
 			}
 
 			// Skip if attribute value is blank.
-			if ( is_string( $attribute_value )
-				&& $this->is_empty_string( $attribute_value )
-			) {
+			if ( is_string( $attribute_value ) && $this->is_empty_string( $attribute_value ) ) {
 				continue;
 			}
 
@@ -70,8 +113,7 @@ trait Common {
 			// If attribute is class and value is array.
 			if ( is_array( $attribute_value ) ) {
 				if ( 'class' === $attribute_name ) {
-					$attribute_value
-						= $this->get_css_classes( $attribute_value );
+					$attribute_value = $this->get_css_classes( $attribute_value );
 				} else {
 					$attribute_value = wp_json_encode( $attribute_value );
 				}
@@ -83,11 +125,7 @@ trait Common {
 				continue;
 			}
 
-			$attrs[] = sprintf(
-				'%s="%s"',
-				esc_attr( $attribute_name ),
-				esc_attr( $attribute_value )
-			);
+			$attrs[] = sprintf( '%s="%s"', esc_attr( $attribute_name ), esc_attr( $attribute_value ) );
 		}
 
 		return implode( ' ', array_unique( $attrs ) );
@@ -121,11 +159,7 @@ trait Common {
 				continue;
 			}
 
-			$styles[] = sprintf(
-				'%s: %s;',
-				esc_attr( $property ),
-				esc_attr( $value )
-			);
+			$styles[] = sprintf( '%s: %s;', esc_attr( $property ), esc_attr( $value ) );
 		}
 
 		return implode( ' ', array_unique( $styles ) );
@@ -166,9 +200,7 @@ trait Common {
 				continue;
 			}
 
-			if ( is_string( $should_include )
-				&& $this->is_empty_string( $should_include )
-			) {
+			if ( is_string( $should_include ) && $this->is_empty_string( $should_include ) ) {
 				continue;
 			}
 
@@ -176,9 +208,7 @@ trait Common {
 				continue;
 			}
 
-			if ( is_array( $should_include )
-				&& $this->is_empty_array( $should_include )
-			) {
+			if ( is_array( $should_include ) && $this->is_empty_array( $should_include ) ) {
 				continue;
 			}
 
@@ -212,9 +242,9 @@ trait Common {
 		$checked = array_map(
 			function ( $value ) {
 				if ( is_array( $value )
-				&& ! $this->is_array_each_empty_value( $value )
+					&& ! $this->is_array_each_empty_value( $value )
 				) {
-						return true;
+					return true;
 				}
 
 				if ( is_string( $value ) && ! $this->is_empty_string( $value ) ) {
@@ -265,8 +295,8 @@ trait Common {
 	 *
 	 * @param mixed $check_value String to convert. If a bool is passed it will be returned as-is.
 	 *
-	 * @return boolean
-	 * @since      1.0.0
+	 * @return bool
+	 * @since 1.0.0
 	 */
 	public function string_to_boolean( $check_value ): bool {
 		return filter_var( $check_value, FILTER_VALIDATE_BOOLEAN );
