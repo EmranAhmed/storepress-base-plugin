@@ -26,10 +26,6 @@
 			"npm run lint:css:fix",
 			"npm run lint:css"
 		],
-		"./src/**/*.{js,ts,tsx}": [
-			"npm run lint:js:fix",
-			"npm run lint:js"
-		],
 		"*.php": [
 			"npm run format:php",
 			"npm run lint:php"
@@ -62,36 +58,36 @@
 		"package": "./tools/package.js"
 	},
 	"dependencies": {
-		"@storepress/components": "^0.0.2",
+		"@storepress/components": "^0.0.3",
 		"@storepress/icons": "^2.0.0",
-		"@storepress/utils": "^0.2.6",
-		"@wordpress/dom-ready": "^4.10.0",
-		"@wordpress/icons": "^10.10.0",
+		"@storepress/utils": "^0.2.7",
+		"@wordpress/dom-ready": "^4.15.0",
+		"@wordpress/icons": "^10.15.1",
 		"clsx": "^2.1.1"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.48.1",
-		"@testing-library/react": "^16.0.1",
-		"@types/node": "^22.7.9",
-		"@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
+		"@playwright/test": "^1.49.1",
+		"@testing-library/react": "^16.1.0",
+		"@types/node": "^22.10.6",
+		"@woocommerce/dependency-extraction-webpack-plugin": "^3.1.0",
 		"@woocommerce/e2e-utils": "^0.2.0",
 		"@woocommerce/eslint-plugin": "^2.3.0",
-		"@wordpress/base-styles": "^5.10.0",
-		"@wordpress/blocks": "^13.10.0",
-		"@wordpress/dependency-extraction-webpack-plugin": "^6.10.0",
-		"@wordpress/e2e-test-utils-playwright": "^1.10.0",
-		"@wordpress/i18n": "^5.10.0",
-		"@wordpress/scripts": "^30.3.0",
+		"@wordpress/base-styles": "^5.15.0",
+		"@wordpress/blocks": "^14.4.1",
+		"@wordpress/dependency-extraction-webpack-plugin": "^6.15.0",
+		"@wordpress/e2e-test-utils-playwright": "^1.15.0",
+		"@wordpress/i18n": "^5.15.1",
+		"@wordpress/scripts": "^30.8.1",
 		"eslint-plugin-prettier": "^5.2.1",
 		"eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
 		"fs-extra": "^11.2.0",
 		"husky": "^9.1.7",
-		"lint-staged": "^15.2.11",
+		"lint-staged": "^15.3.0",
 		"webpack-remove-empty-scripts": "^1.0.4"
 	},
 	"scripts": {
 		"clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
-		"postinstall": "git init -q && rm -rf ./.husky && npm run clean-composer && composer install && npx husky init && echo \"npx lint-staged\" > .husky/pre-commit",
+		"postinstall": "git init -q && rm -rf ./.husky && npx husky init && echo \"npx lint-staged\" > .husky/pre-commit && npm run clean-composer && composer install",
 		"test:php": "composer run phpunit",
 		"stan:php": "composer run phpstan",
 		"stan:php:report": "composer run phpstan-report",
@@ -137,6 +133,7 @@
 		"create-static-block": "npx @wordpress/create-block@latest --namespace storepress --no-plugin",
 		"create-interactive-block": "npx @wordpress/create-block@latest --template @wordpress/create-block-interactive-template --namespace storepress --no-plugin",
 		"create-woo-extension": "npx @wordpress/create-block@latest --template @woocommerce/create-woo-extension --namespace storepress",
-		"create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress"
+		"create-product-editor-block": "npx @wordpress/create-block@latest --template @woocommerce/create-product-editor-block --namespace storepress",
+		"prepare": "husky"
 	}
 }

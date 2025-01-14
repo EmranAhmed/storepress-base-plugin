@@ -24,7 +24,7 @@ import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies
  */
-import { getProductsRequests } from '../utils';
+import { getProductsRequests } from '@utils';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {

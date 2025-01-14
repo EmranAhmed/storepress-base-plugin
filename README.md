@@ -25,7 +25,8 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 - Open `composer.json` and change `name`, `description`, `autoload`
 - Open `package.json` and change `name` as plugin file name, `description`, `repository`.
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`
-- Open `bin/package.js` and change `files = glob(...` for package files.
+- Open `package.json` and change `files` for package files.
+- Make package script executable `chmod +x ./tools/package.js`
 - [Test example](https://core.trac.wordpress.org/browser/trunk/tests/phpunit)
 - [Gutenberg test example](https://github.com/WordPress/gutenberg/tree/trunk/phpunit)
 
@@ -44,12 +45,16 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 - `npm run lint:js:report` - Lint Javascript and will generate `lint-report.html`. From terminal `open lint-report.html`
 - `npm run lint:css` - Lint CSS
 - `npm run lint:css:report` - Lint CSS and will generate `scss-report.txt` file.
-- `npm run lint:php` - PHP lint and will generate `phpcs-report.txt` file.
+- `npm run lint:php` - PHP Lint.
+- `npm run lint:php:report` - PHP Lint report generate on `phpcs-report.txt`.
+- `npm run stan:php` - PHP Stan.
+- `npm run stan:php:report` - PHP Stan report on `phpstan-report.txt` file.
 
 ## Fix
 
 - `npm run lint:js:fix` - Fix Javascript Lint Issue.
 - `npm run lint:css:fix` - Fix SCSS Lint Issue.
+- `npm run lint:php:fix` - Fix PHP Lint Issue.
 
 ## Format
 
@@ -63,7 +68,6 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 - `npm run test:unit` - JS Unit test
 - `npm run test:e2e` - E2E test
 - `npm run test:php` - PHP Unit test
-- `npm run stan:php` - PHP Stan test
 
 ## Release
 

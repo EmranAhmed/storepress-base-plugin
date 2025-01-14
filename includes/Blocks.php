@@ -82,7 +82,7 @@ class Blocks {
 		);
 
 		if ( ! in_array( 'storepress', $available_slugs, true ) ) {
-			array_unshift( $block_categories, $category );
+			$block_categories[] = $category;
 		}
 
 		return $block_categories;
@@ -164,11 +164,6 @@ class Blocks {
 		// Scanning block.json directory.
 		$block_json_files = glob( storepress_base_plugin()->build_path() . '/**/block.json' );
 
-		/**
-		 * Block JSON Files.
-		 *
-		 * @var string[] $block_json_files
-		 */
 		foreach ( $block_json_files as $filename ) {
 			$block_type = dirname( $filename );
 			register_block_type( $block_type );

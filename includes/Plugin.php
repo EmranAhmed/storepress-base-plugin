@@ -47,7 +47,14 @@ class Plugin {
 			$this->hooks();
 			$this->init();
 		} catch ( Exception $e ) {
-			wp_trigger_error( __METHOD__, $e->getMessage() );
+			$message = sprintf( '<strong>%s:</strong> %s', $this->name(), $e->getMessage() );
+			add_action(
+				'admin_notices',
+				function () use ( $message ) {
+					printf( '<div class="notice notice-error"><p>%s</p></div>', wp_kses_data( $message ) );
+				},
+				50
+			);
 		}
 
 		/**
@@ -82,11 +89,27 @@ class Plugin {
 		if ( is_null( $versions ) ) {
 			$versions = get_file_data(
 				$this->get_plugin_file(),
-				array( 'Version' ) 
+				array( 'Version' )
 			);
 		}
 
 		return esc_attr( $versions[0] );
+	}
+
+	/**
+	 * Get Plugin Name.
+	 *
+	 * @return string
+	 * @since 0.1.0
+	 */
+	public function name(): string {
+		static $names;
+
+		if ( is_null( $names ) ) {
+			$names = get_file_data( $this->get_plugin_file(), array( 'Plugin Name' ) );
+		}
+
+		return esc_attr( $names[0] );
 	}
 
 	/**
@@ -104,7 +127,7 @@ class Plugin {
 			return true;
 		}
 
-		throw new Exception( '"vendor/autoload_packages.php" file missing. Please run `composer install`' );
+		throw new Exception( '<em>vendor/autoload_packages.php</em> file missing. Please run <code>composer install</code>' );
 	}
 
 	/**
@@ -196,7 +219,7 @@ class Plugin {
 	public function images_url(): string {
 		return untrailingslashit(
 			plugin_dir_url( $this->get_plugin_file() )
-									. 'images' 
+			. 'images'
 		);
 	}
 
@@ -209,7 +232,7 @@ class Plugin {
 	public function assets_url(): string {
 		return untrailingslashit(
 			plugin_dir_url( $this->get_plugin_file() )
-									. 'assets' 
+			. 'assets'
 		);
 	}
 
@@ -242,7 +265,7 @@ class Plugin {
 	public function vendor_url(): string {
 		return untrailingslashit(
 			plugin_dir_url( $this->get_plugin_file() )
-									. 'vendor' 
+			. 'vendor'
 		);
 	}
 
@@ -255,7 +278,7 @@ class Plugin {
 	public function build_url(): string {
 		return untrailingslashit(
 			plugin_dir_url( $this->get_plugin_file() )
-									. 'build' 
+			. 'build'
 		);
 	}
 
@@ -290,7 +313,7 @@ class Plugin {
 	public function include_path(): string {
 		return untrailingslashit(
 			plugin_dir_path( $this->get_plugin_file() )
-									. 'includes' 
+			. 'includes'
 		);
 	}
 
@@ -303,7 +326,7 @@ class Plugin {
 	public function template_path(): string {
 		return untrailingslashit(
 			plugin_dir_path( $this->get_plugin_file() )
-									. 'templates' 
+			. 'templates'
 		);
 	}
 
@@ -315,5 +338,45 @@ class Plugin {
 	 */
 	public function get_blocks(): Blocks {
 		return Blocks::instance();
+	}
+
+	/** Log
+	 *
+	 * @param string                            $title   log title.
+	 * @param array<string|int, mixed>|string[] $message log message.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function log( string $title, array $message = array() ) {
+		// If WooCommerce Installed.
+		if ( ! function_exists( 'wc_get_logger' ) ) {
+			return;
+		}
+
+		if ( defined( 'WP_DEBUG' ) && true === constant( 'WP_DEBUG' ) ) {
+			$context = array(
+				'source' => $this->basename(),
+			);
+
+			wc_get_logger()->info( $title, array_merge( $message, $context ) );
+		}
+	}
+
+	/**
+	 * Get log file url.
+	 *
+	 * @return string
+	 * @since 1.0.0
+	 */
+	public function get_log_file_url(): string {
+		return add_query_arg(
+			array(
+				'page'     => 'wc-status',
+				'tab'      => 'logs',
+				'log_file' => sprintf( '%s-%s.log', $this->basename(), sanitize_file_name( wp_hash( $this->basename() ) ) ),
+			),
+			admin_url( 'admin.php' )
+		);
 	}
 }

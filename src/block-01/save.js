@@ -6,12 +6,12 @@ import { Icon, plus } from '@wordpress/icons';
 
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 
 function StaticBlock01({ attributes }) {
 	const { x } = attributes;
 
-	const classes = classNames({ 'class-01': true });
+	const classes = clsx({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
 		className: classes,
@@ -33,7 +33,7 @@ function StaticBlock01({ attributes }) {
 function StaticBlock02({ attributes }) {
 	const { x } = attributes;
 
-	const classes = classNames({ 'class-01': true });
+	const classes = clsx({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
 		className: classes,
@@ -50,7 +50,7 @@ function StaticBlock02({ attributes }) {
 function DynamicBlock({ attributes }) {
 	const { x } = attributes;
 
-	const classes = classNames({ 'class-01': true });
+	const classes = clsx({ 'class-01': true });
 
 	const blockProps = useBlockProps.save({
 		className: classes,

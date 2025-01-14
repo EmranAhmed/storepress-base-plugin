@@ -160,8 +160,12 @@ module.exports = {
 			'@woocommerce/e2e-utils',
 			'lodash',
 			'jquery',
+			'@utils', // See: getWebPackAlias() from tools/webpack-helpers.js
 		],
-		'import/resolver': require.resolve( './tools/import-resolver' ),
+		'import/resolver': {
+			node: {},
+			webpack: {},
+		},
 	},
 	env: {
 		browser: true,
