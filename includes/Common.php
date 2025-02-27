@@ -14,7 +14,6 @@ namespace StorePress\Base;
 defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 trait Common {
-
 	/**
 	 * Get data if set, otherwise return a default value or null. Prevents notices when data is not set.
 	 *
@@ -26,6 +25,40 @@ trait Common {
 	 */
 	public function get_var( $variable, $default_value = null ) {
 		return true === isset( $variable ) ? $variable : $default_value;
+	}
+
+	/**
+	 * Get $_GET data if set, otherwise return a default value or null. Prevents notices when data is not set.
+	 *
+	 * @param string $variable      Variable.
+	 * @param mixed  $default_value Default value.
+	 *
+	 * @return mixed
+	 * @since  1.0.0
+	 */
+	public function http_get_var( string $variable = '', $default_value = null ) {
+		$get_data = $_GET; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( $this->is_empty_string( $variable ) ) {
+			return $this->is_empty_array( $get_data ) ? false : $get_data;
+		}
+		return $this->get_var( $get_data[ $variable ], $default_value );
+	}
+
+	/**
+	 * Get $_POST data if set, otherwise return a default value or null. Prevents notices when data is not set.
+	 *
+	 * @param string $variable      Variable.
+	 * @param mixed  $default_value Default value.
+	 *
+	 * @return mixed
+	 * @since  1.0.0
+	 */
+	public function http_post_var( string $variable = '', $default_value = null ) {
+		$post_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( $this->is_empty_string( $variable ) ) {
+			return $this->is_empty_array( $post_data ) ? false : $post_data;
+		}
+		return $this->get_var( $post_data[ $variable ], $default_value );
 	}
 
 	/**
@@ -81,6 +114,7 @@ trait Common {
 
 		return implode( ' ', array_unique( $attrs ) );
 	}
+
 
 	/**
 	 * Generate Inline Style from array
@@ -191,9 +225,7 @@ trait Common {
 	public function is_array_each_empty_value( array $items = array() ): bool {
 		$checked = array_map(
 			function ( $value ) {
-				if ( is_array( $value )
-					&& ! $this->is_array_each_empty_value( $value )
-				) {
+				if ( is_array( $value ) && ! $this->is_array_each_empty_value( $value ) ) {
 					return true;
 				}
 
@@ -245,44 +277,10 @@ trait Common {
 	 *
 	 * @param mixed $check_value String to convert. If a bool is passed it will be returned as-is.
 	 *
-	 * @return bool
-	 * @since 1.0.0
+	 * @return boolean
+	 * @since      1.0.0
 	 */
 	public function string_to_boolean( $check_value ): bool {
 		return filter_var( $check_value, FILTER_VALIDATE_BOOLEAN );
-	}
-
-	/**
-	 * Checks whether a given array is a list.
-	 * An array is considered a list if its keys consist of consecutive numbers from `0 to count($array)-1`
-	 *
-	 * @param array<int|string, ?mixed> $items Check array.
-	 *
-	 * @return bool
-	 * @example
-	 *             <code>
-	 *             array_is_list([]); // true
-	 *             array_is_list(['apple', 2, 3]); // true
-	 *             array_is_list([0 => 'apple', 'orange']); // true
-	 *
-	 *             // The array does not start at 0
-	 *              array_is_list([1 => 'apple', 'orange']); // false
-	 *
-	 *              // The keys are not in the correct order
-	 *              array_is_list([1 => 'apple', 0 => 'orange']); // false
-	 *
-	 *              // Non-integer keys
-	 *              array_is_list([0 => 'apple', 'foo' => 'bar']); // false
-	 *
-	 *              // Non-consecutive keys
-	 *              array_is_list([0 => 'apple', 2 => 'bar']); // false
-	 *         </code>
-	 */
-	public function array_is_list( array $items ): bool {
-		if ( function_exists( 'array_is_list' ) ) {
-			return array_is_list( $items );
-		}
-
-		return array_values( $items ) === $items;
 	}
 }

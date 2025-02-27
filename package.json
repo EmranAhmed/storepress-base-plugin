@@ -23,11 +23,9 @@
 	},
 	"lint-staged": {
 		"./src/**/*.scss": [
-			"npm run lint:css:fix",
 			"npm run lint:css"
 		],
 		"*.php": [
-			"npm run format:php",
 			"npm run lint:php"
 		],
 		"./*.md": [
@@ -60,9 +58,9 @@
 	"dependencies": {
 		"@storepress/components": "^0.0.3",
 		"@storepress/icons": "^2.0.0",
-		"@storepress/utils": "^0.2.7",
-		"@wordpress/dom-ready": "^4.15.0",
-		"@wordpress/icons": "^10.15.1",
+		"@storepress/utils": "^0.3.0",
+		"@wordpress/dom-ready": "^4.18.0",
+		"@wordpress/icons": "^10.18.0",
 		"clsx": "^2.1.1"
 	},
 	"devDependencies": {
@@ -73,12 +71,11 @@
 		"@woocommerce/e2e-utils": "^0.2.0",
 		"@woocommerce/eslint-plugin": "^2.3.0",
 		"@wordpress/base-styles": "^5.15.0",
-		"@wordpress/blocks": "^14.4.1",
 		"@wordpress/dependency-extraction-webpack-plugin": "^6.15.0",
 		"@wordpress/e2e-test-utils-playwright": "^1.15.0",
 		"@wordpress/i18n": "^5.15.1",
 		"@wordpress/scripts": "^30.8.1",
-		"eslint-plugin-prettier": "^5.2.1",
+		"eslint-plugin-prettier": "5.2.1",
 		"eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
 		"fs-extra": "^11.2.0",
 		"husky": "^9.1.7",
@@ -87,7 +84,8 @@
 	},
 	"scripts": {
 		"clean-composer": "rm -rf ./vendor && rm -rf ./composer.lock",
-		"postinstall": "git init -q && rm -rf ./.husky && npx husky init && echo \"npx lint-staged\" > .husky/pre-commit && npm run clean-composer && composer install",
+		"install-plugin-check": "npx gitget WordPress/plugin-check/phpcs-sniffs wp-plugin-check",
+		"postinstall": "git init -q && rm -rf ./.husky && npm run install-plugin-check && npx husky init && echo \"npx lint-staged\" > .husky/pre-commit && npm run clean-composer && composer install",
 		"test:php": "composer run phpunit",
 		"stan:php": "composer run phpstan",
 		"stan:php:report": "composer run phpstan-report",
@@ -95,7 +93,7 @@
 		"lint:php:fix": "composer run format",
 		"lint:php:report": "composer run lint-report",
 		"format:php": "composer run format",
-		"prebuild": "rm -rf ./build && npm run clean-composer && composer install --no-dev --optimize-autoloader",
+		"prebuild": "rm -rf ./build",
 		"build": "npm run start -- --no-watch && wp-scripts build --webpack-copy-php --experimental-modules",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
@@ -112,7 +110,7 @@
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
-		"prepackage": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build",
+		"prepackage": "rm -rf ./languages && rm -rf ./${npm_package_name}.zip && npm run language && npm run build && npm run clean-composer && composer install --no-dev --optimize-autoloader",
 		"package": "./tools/package.js",
 		"postpackage": "npm run clean-composer && composer install",
 		"plugin-zip": "npm run package -- --zip",

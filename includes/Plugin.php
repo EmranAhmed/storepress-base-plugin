@@ -14,6 +14,7 @@ namespace StorePress\Base;
 defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 use Exception;
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
 /**
  * Class Plugin.
@@ -158,6 +159,28 @@ class Plugin {
 	 */
 	public function hooks() {
 		// Register with hook.
+		add_action( 'init', array( $this, 'load_translations' ) );
+		add_action( 'before_woocommerce_init', array( $this, 'custom_order_tables_compatibility' ) );
+	}
+
+	/**
+	 * Declare compatibility with custom order tables for WooCommerce.
+	 *
+	 * @return void
+	 */
+	public function custom_order_tables_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_plugin_file() );
+		}
+	}
+
+	/**
+	 * Load Plugin Translation Files.
+	 *
+	 * @return void
+	 */
+	public function load_translations() {
+		load_plugin_textdomain( 'storepress-base-plugin', false, $this->plugin_dirname() . '/languages' );
 	}
 
 	/**
@@ -187,7 +210,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function plugin_dirname(): string {
-		return dirname( plugin_basename( $this->get_plugin_file() ) );
+		return untrailingslashit( dirname( plugin_basename( $this->get_plugin_file() ) ) );
 	}
 
 	/**

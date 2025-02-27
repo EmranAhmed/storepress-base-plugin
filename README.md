@@ -9,8 +9,9 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 ## First
 
 - `git clone https://github.com/EmranAhmed/storepress-base-plugin.git`
-- `npm install`
+- `npm i`
 - `npm run packages-update` - Update WordPress packages
+- `composer update && composer dump-autoload` - Update WordPress packages
 
 ## Where to change
 
@@ -73,6 +74,11 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 
 - `npm run plugin-zip` - make zip based on `package.json` `files` list.
 - `npm run package` - make directory based on `package.json` `files` list.
+
+## Release to GitHub.com
+
+- `git tag 1.0.0 && git push origin "$_"` Publish Tag
+- `git tag -d 1.0.0 && git push origin --delete "$_"` - Delete Tag
 
 ## Provide your own translations
 

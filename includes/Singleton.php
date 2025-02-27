@@ -13,7 +13,7 @@ namespace StorePress\Base;
 
 defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-trait Instance {
+trait Singleton {
 	/**
 	 * Return singleton instance of Class.
 	 * The instance will be created if it does not exist yet.
