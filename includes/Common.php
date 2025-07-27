@@ -135,7 +135,6 @@ trait Common {
 		return implode( ' ', array_unique( $attrs ) );
 	}
 
-
 	/**
 	 * Generate Inline Style from array
 	 *
