@@ -117,9 +117,14 @@ const restrictedImports = [
 	{
 		name: 'classnames',
 		message:
-			"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
+			'Please use `clsx` instead. It\'s a lighter and faster drop-in replacement for `classnames`.',
 	},
-];
+	{
+		name: 'redux',
+		importNames: ['combineReducers'],
+		message: 'Please use `combineReducers` from `@wordpress/data` instead.',
+	},
+]
 
 module.exports = {
 	root: true,
@@ -181,6 +186,8 @@ module.exports = {
 		StorePress: true,
 	},
 	rules: {
+		'@wordpress/no-unsafe-wp-apis': 'off',
+		'@typescript-eslint/no-unused-vars': 'off', // REMOVE
 		'@woocommerce/dependency-group': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'no-restricted-imports': [
@@ -193,8 +200,8 @@ module.exports = {
 		'@wordpress/i18n-text-domain': [
 			'error',
 			{
-				allowedTextDomain: [ 'storepress-base-plugin' ],
+				allowedTextDomain: ['storepress-base-plugin'],
 			},
 		],
 	},
-};
+}

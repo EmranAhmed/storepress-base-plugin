@@ -1,7 +1,9 @@
 {
 	"name": "storepress/base-plugin",
 	"description": "StorePress Base Plugin",
-	"minimum-stability": "stable",
+	"version": "1.0.0",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"license": "GPL-2.0-or-later",
 	"type": "wordpress-plugin",
 	"keywords": [
@@ -22,27 +24,31 @@
 		}
 	],
 	"require": {
-		"storepress/admin-utils": "^1.8.10",
-		"automattic/jetpack-autoloader": "^v5.0.0"
+		"storepress/admin-utils": "^1.14.0",
+		"automattic/jetpack-autoloader": "^v5.0.13"
 	},
 	"require-dev": {
 		"automattic/vipwpcs": "^3.0.1",
-		"php-stubs/woocommerce-stubs": "^v9.5.0",
-		"phpcompatibility/phpcompatibility-wp": "^2.1.5",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"squizlabs/php_codesniffer": "^3.13.5",
+		"woocommerce/woocommerce-sniffs": "^1.0.1",
+		"phpcompatibility/php-compatibility": "10.x-dev as 9.99.99",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"php-stubs/woocommerce-stubs": "^v10.3.5",
 		"phpstan/extension-installer": "^1.4.3",
-		"phpstan/phpstan": "^2.1",
+		"phpstan/phpstan": "^2.1.32",
+		"phpstan/phpstan-deprecation-rules": "^2.0.3",
+		"szepeviktor/phpstan-wordpress": "^v2.0.3",
+		"wp-cli/i18n-command": "^v2.6.5",
+		"wp-coding-standards/wpcs": "^3.2.0",
 		"phpunit/phpunit": "^9.6",
-		"szepeviktor/phpstan-wordpress": "^v2.0.1",
-		"woocommerce/woocommerce-sniffs": "^1.0.0",
-		"wp-cli/i18n-command": "^v2.6.3",
-		"wp-coding-standards/wpcs": "^3.1.0",
 		"yoast/phpunit-polyfills": "^3.0.0",
 		"plugin-check/phpcs-sniffs": "@dev"
 	},
 	"repositories": [
 		{
 			"type": "path",
-			"url": "./wp-plugin-check",
+			"url": "./vendor/plugin-check/phpcs-sniffs",
 			"options": {
 				"symlink": true
 			}
@@ -61,6 +67,10 @@
 	"config": {
 		"optimize-autoloader": true,
 		"sort-packages": true,
+		"lock": false,
+		"platform": {
+			"php": "7.4"
+		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"automattic/jetpack-autoloader": true,
@@ -69,10 +79,16 @@
 	},
 	"scripts": {
 		"phpunit": "./vendor/bin/phpunit",
-		"phpstan": "./vendor/bin/phpstan --memory-limit=2G",
-		"phpstan-report": "./vendor/bin/phpstan --memory-limit=2G -vvv > phpstan-report.txt",
+		"phpstan": "./vendor/bin/phpstan --memory-limit=4G",
+		"phpstan-report": "./vendor/bin/phpstan --memory-limit=4G -vvv > phpstan-report.txt",
 		"format": "./vendor/bin/phpcbf --standard=phpcs.xml",
+		"lint-report": "./vendor/bin/phpcs --standard=phpcs.xml --report-summary --report-source --ignore-annotations --report-full=phpcs-report.txt",
 		"lint": "./vendor/bin/phpcs --standard=phpcs.xml --report-summary --report-source",
-		"lint-report": "./vendor/bin/phpcs --standard=phpcs.xml --report-summary --report-source --ignore-annotations --report-full=phpcs-report.txt"
+		"pre-install-cmd": [
+			"npx gitget WordPress/plugin-check/phpcs-sniffs vendor/plugin-check/phpcs-sniffs"
+		],
+		"pre-update-cmd": [
+			"npx gitget WordPress/plugin-check/phpcs-sniffs vendor/plugin-check/phpcs-sniffs"
+		]
 	}
 }

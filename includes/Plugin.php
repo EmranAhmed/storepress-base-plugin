@@ -90,11 +90,11 @@ class Plugin {
 		if ( is_null( $versions ) ) {
 			$versions = get_file_data(
 				$this->get_plugin_file(),
-				array( 'Version' )
+				array( 'version' => 'Version' )
 			);
 		}
 
-		return esc_attr( $versions[0] );
+		return $versions['version'] ?? '';
 	}
 
 	/**
@@ -159,7 +159,6 @@ class Plugin {
 	 */
 	public function hooks() {
 		// Register with hook.
-		add_action( 'init', array( $this, 'load_translations' ) );
 		add_action( 'before_woocommerce_init', array( $this, 'custom_order_tables_compatibility' ) );
 	}
 
@@ -172,15 +171,6 @@ class Plugin {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 			FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_plugin_file() );
 		}
-	}
-
-	/**
-	 * Load Plugin Translation Files.
-	 *
-	 * @return void
-	 */
-	public function load_translations() {
-		load_plugin_textdomain( 'storepress-base-plugin', false, $this->plugin_dirname() . '/languages' );
 	}
 
 	/**

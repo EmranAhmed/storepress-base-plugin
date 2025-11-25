@@ -60,6 +60,7 @@ function storepress_base_plugin(): Plugin {
  * Init
  *
  * @return void
+ * @since 1.0.0
  */
 function storepress_base_plugin_init() {
 	storepress_base_plugin();

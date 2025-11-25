@@ -3,7 +3,7 @@
  */
 import { getOptionsFromAttribute } from '@storepress/utils';
 
-function Plugin(element, options) {
+function Plugin( element, options ) {
 	// Default Settings
 	const DEFAULTS = {
 		pointerSize: 20,
@@ -12,27 +12,27 @@ function Plugin(element, options) {
 	// Collecting settings from html attribute
 	const ATTRIBUTE = 'slider-settings';
 
-	const addPointer = (event) => {
-		window.console.log(event.target.value);
+	const addPointer = ( event ) => {
+		window.console.log( event.target.value );
 	};
 
 	const addEvents = () => {
-		this.element.querySelectorAll('input').forEach((el) => {
-			el.addEventListener('input', addPointer);
-		});
+		this.element.querySelectorAll( 'input' ).forEach( ( el ) => {
+			el.addEventListener( 'input', addPointer );
+		} );
 	};
 
 	const removeEvents = () => {
-		this.element.querySelectorAll('input').forEach((el) => {
-			el.removeEventListener('input', addPointer);
-		});
+		this.element.querySelectorAll( 'input' ).forEach( ( el ) => {
+			el.removeEventListener( 'input', addPointer );
+		} );
 	};
 
 	// Expose to public.
-	const expose = () => ({
+	const expose = () => ( {
 		element: this.element,
 		removeEvents,
-	});
+	} );
 
 	// Do what you need and return expose fn.
 	const init = () => {
@@ -41,7 +41,7 @@ function Plugin(element, options) {
 			{},
 			DEFAULTS,
 			options,
-			getOptionsFromAttribute(this.element, ATTRIBUTE)
+			getOptionsFromAttribute( this.element, ATTRIBUTE )
 		);
 
 		addEvents();

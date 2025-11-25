@@ -2,16 +2,14 @@
 <ruleset name="Plugin">
 	<description>Rules for the Plugin</description>
 
-	<file>./</file>
+	<file>./src/</file>
+	<file>./includes/</file>
+	<file>./storepress-base-plugin.php</file>
 	<!-- Exclude paths -->
-	<exclude-pattern>*/node_modules/*</exclude-pattern>
-	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/wp-plugin-check/*</exclude-pattern>
-	<exclude-pattern>*/tests/*</exclude-pattern>
-	<exclude-pattern>*/languages/*</exclude-pattern>
-	<exclude-pattern>*/build/*</exclude-pattern>
-	<exclude-pattern>*/bin/*</exclude-pattern>
-	<exclude-pattern>*/\.*</exclude-pattern>
+	<exclude-pattern>**/build/**</exclude-pattern>
+	<exclude-pattern>**/node_modules/**</exclude-pattern>
+	<exclude-pattern>**/vendor/**</exclude-pattern>
+
 
 	<!-- Show progress, show the error codes for each message (source). -->
 	<arg value="ps"/>
@@ -25,9 +23,16 @@
 	<arg name="colors"/>
 
 	<!-- Check up to 8 files simultaneously. -->
-	<arg name="parallel" value="8"/>
+	<arg name="parallel" value="20"/>
 
 	<arg name="encoding" value="utf-8"/>
+
+	<!-- Set severity to 1 to see everything that isn't effectively turned off. -->
+	<!--	<arg name="severity" value="1" />-->
+
+	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next
+	scan. -->
+	<arg name="cache" value="phpcs-cache.json"/>
 
 	<!-- Set the memory limit to 256M.
 	 For most standard PHP configurations, this means the memory limit will temporarily be raised.
@@ -56,7 +61,10 @@
 	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
 	-->
 	<rule ref="WordPress-Core"/>
-	<rule ref="WordPress-VIP-Go"/>
+	<rule ref="WordPress-VIP-Go">
+		<!-- Deprecated: @todo remove in PHPCS 4.0 -->
+		<exclude name="WordPressVIPMinimum.JS"/>
+	</rule>
 	<rule ref="WordPress-Extra">
 		<exclude name="WordPress.Files.FileName"/>
 	</rule>

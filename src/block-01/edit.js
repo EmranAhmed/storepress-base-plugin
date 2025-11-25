@@ -27,30 +27,30 @@ import apiFetch from '@wordpress/api-fetch';
 import { getProductsRequests } from '@utils';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-	const [sugessionList, setSugessionList] = useState([]);
-	const [loading, setLoading] = useState(true);
+export default function Edit( { attributes, setAttributes, clientId } ) {
+	const [ sugessionList, setSugessionList ] = useState( [] );
+	const [ loading, setLoading ] = useState( true );
 
 	const blockProps = useBlockProps();
 
 	const innerBlockProps = useInnerBlocksProps();
 
 	// Fetch Attributes
-	useEffect(() => {
-		apiFetch({
+	useEffect( () => {
+		apiFetch( {
 			url: 'http://sites.local/woo-variation-swatches/wp-json/wc/store/v1/products/attributes',
 			// path : 'wc/store/v1/products/attributes',
-		}).then((result) => {
-			if (result && result.length > 0) {
-				setLoading(false);
-				setSugessionList(result);
+		} ).then( ( result ) => {
+			if ( result && result.length > 0 ) {
+				setLoading( false );
+				setSugessionList( result );
 			}
-		});
-	}, [clientId]);
+		} );
+	}, [ clientId ] );
 
 	return (
-		<div {...blockProps}>
-			{/*<SearchList
+		<div { ...blockProps }>
+			{ /*<SearchList
 				selected={['17', '23', '36']}
 				valueName='name'
 				isMultiSelect={true}
@@ -63,9 +63,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					console.log(item)
 				}}
 				suggestions={sugessionList}
-			/>*/}
+			/>*/ }
 			<h1>StorePress Base Block - edit.js</h1>
-			<div {...innerBlockProps} />
+			<div { ...innerBlockProps } />
 		</div>
 	);
 }
