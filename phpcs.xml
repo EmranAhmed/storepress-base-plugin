@@ -67,6 +67,8 @@
 	</rule>
 	<rule ref="WordPress-Extra">
 		<exclude name="WordPress.Files.FileName"/>
+		<!-- Allow internal variable names without prefixes -->
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound" />
 	</rule>
 	<rule ref="WooCommerce-Core"/>
 	<!-- Let's also check that everything is properly documented. -->

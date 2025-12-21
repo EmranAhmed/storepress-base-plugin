@@ -104,7 +104,7 @@ class Blocks {
 		if ( ! file_exists( $editor_script_asset_file ) ) {
 			return;
 		}
-		$editor_script_asset = include_once $editor_script_asset_file;
+		$editor_script_asset = include $editor_script_asset_file;
 
 		wp_enqueue_script(
 			'storepress-base-plugin-editor-scripts',
@@ -133,7 +133,7 @@ class Blocks {
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
-		$asset = include_once $asset_file;
+		$asset = include $asset_file;
 
 		wp_register_style(
 			'storepress-base-plugin-style',

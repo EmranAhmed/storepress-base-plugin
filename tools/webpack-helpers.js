@@ -84,6 +84,10 @@ function getFile (fileName) {
 	return fromProjectRoot(getProjectSourcePath() + sep + fileName)
 }
 
+function getRootFile (fileName) {
+	return fromProjectRoot(fileName)
+}
+
 function getWebPackAlias () {
 	return {
 		'@utils': getFile('utils/index'),
@@ -91,6 +95,7 @@ function getWebPackAlias () {
 }
 
 module.exports = {
+	getRootFile,
 	getFile,
 	getWebPackAlias,
 	requestToExternal,

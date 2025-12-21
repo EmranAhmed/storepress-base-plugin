@@ -11,19 +11,13 @@ const { stdout } = require('process')
  */
 
 const {
-  hasPackageProp,
-  getPackageProp,
-  hasArgInCLI,
+	getPackageProp,
+	fromProjectRoot,
 } = require('@wordpress/scripts/utils')
-
-const {
-  getChangelogFile,
-} = require('./webpack-helpers')
-
 
 const version = getPackageProp('version')
 
-const changelogFile = getChangelogFile()
+const changelogFile = fromProjectRoot('changelog.txt')
 
 // 2. Read and find the changelog entry for the current version.
 const changelogJs = fs.readFileSync(changelogFile, 'utf8')
@@ -34,20 +28,20 @@ const versionString = `version ${version}`
 const dateRegex = /^\d{4}-\d{2}-\d{2}/
 
 for (const line of lines) {
-  if (inSection) {
-    if (dateRegex.test(line) && !line.includes(versionString)) {
-      break
-    }
-    changelogEntry.push(line)
-  } else if (line.includes(versionString)) {
-    inSection = true
-    // continue
-    // changelogEntry.push(line)
-  }
+	if (inSection) {
+		if (dateRegex.test(line) && !line.includes(versionString)) {
+			break
+		}
+		changelogEntry.push(line)
+	} else if (line.includes(versionString)) {
+		inSection = true
+		// continue
+		// changelogEntry.push(line)
+	}
 }
 
 if (changelogEntry.length === 0) {
-  changelogEntry.push(`- No changelog entry for version ${version}.\n\n`)
+	changelogEntry.push(`- No changelog entry for version ${version}.\n\n`)
 }
 
 // 3. Prepare the final output string

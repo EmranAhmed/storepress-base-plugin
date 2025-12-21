@@ -43,7 +43,7 @@ dist/
 node_modules/
 vendor/
 languages/
-wp-plugin-check/
+wp-plugin-check
 storepress-base-plugin/
 artifacts/
 tests/e2e/test*
@@ -53,7 +53,7 @@ tsconfig.tsbuildinfo
 
 # Node Package Dependencies
 package-lock.json
-.husky/
+.husky/*
 phpcs-cache.json
 
 # wp-env config

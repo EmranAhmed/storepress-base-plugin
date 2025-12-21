@@ -20,3 +20,6 @@ parameters:
 		- includes/
 	scanDirectories:
 		# - ../woocommerce
+#	ignoreErrors:
+#		# https://phpstan.org/user-guide/ignoring-errors#ignoring-in-configuration-file
+#		- identifier: missingType.generics
