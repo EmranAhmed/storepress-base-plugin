@@ -150,7 +150,6 @@ class Settings extends AdminPage {
 						'default'     => 'no',
 						'tooltip'     => 'Textarea Help tooltip',
 						'required'    => true,
-						'options'     => array( 'X', 'Y', 'Z' ),
 					),
 
 					array(
