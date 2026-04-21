@@ -1,0 +1,24 @@
+{
+	"description": "Claude Code settings",
+	"hooks": {
+		"PostToolUse": [
+			{
+				"matcher": "Write|Edit",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "npm run format:all || true"
+					}
+				]
+			}
+		]
+	},
+	"permissions": {
+		"allow": [
+			"Bash(npm run *)",
+			"Bash(composer run *)"
+		],
+		"deny": [],
+		"ask": []
+	}
+}

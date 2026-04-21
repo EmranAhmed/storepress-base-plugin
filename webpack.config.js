@@ -67,11 +67,17 @@ const scriptConfig = {
 
 const moduleConfig = {
 	...defaultModuleConfig,
-	output: { ...defaultModuleConfig.output, module: true },
-	experiments: { outputModule: true },
+	// output: { ...defaultModuleConfig.output, module: true },
+	// experiments: { outputModule: true },
 	entry: {
 		...defaultModuleConfig.entry(),
 		// 'custom-module': getFile( 'custom-module.js' ),
+		/*'storepress-utils-module': {
+            import: '@storepress/utils/build-module/index.js',
+            library: {
+                type: 'module',
+            },
+        }*/
 	},
 
 	resolve: {

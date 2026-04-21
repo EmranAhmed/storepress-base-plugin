@@ -24,8 +24,8 @@
 		}
 	],
 	"require": {
-		"storepress/admin-utils": "^1.15.0",
-		"automattic/jetpack-autoloader": "^v5.0.15"
+		"storepress/admin-utils": "^3.3.1",
+		"automattic/jetpack-autoloader": "^v5.0.16"
 	},
 	"require-dev": {
 		"automattic/vipwpcs": "^3.0.1",
@@ -34,12 +34,11 @@
 		"woocommerce/woocommerce-sniffs": "^1.0.1",
 		"phpcompatibility/php-compatibility": "9.3.5",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
-		"php-stubs/woocommerce-stubs": "^v10.3.5",
+		"php-stubs/woocommerce-stubs": "^v10.7.0",
 		"phpstan/extension-installer": "^1.4.3",
-		"phpstan/phpstan": "^2.1.33",
-		"phpstan/phpstan-deprecation-rules": "^2.0.3",
+		"phpstan/phpstan": "^2.1.50",
 		"szepeviktor/phpstan-wordpress": "^v2.0.3",
-		"wp-cli/i18n-command": "^v2.6.6",
+		"wp-cli/i18n-command": "^v2.7.2",
 		"wp-coding-standards/wpcs": "^3.3.0",
 		"phpunit/phpunit": "^9.6",
 		"yoast/phpunit-polyfills": "^3.0.0",

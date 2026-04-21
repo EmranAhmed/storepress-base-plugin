@@ -1,75 +1,102 @@
 <?php
-/**
- * Main Plugin Class File.
- *
- * @package    StorePress/Base
- * @since      1.0.0
- * @version    1.0.0
- */
+	/**
+	 * Main Plugin Class File.
+	 *
+	 * @package    StorePress/Base
+	 * @since      1.0.0
+	 * @version    1.0.0
+	 */
 
-declare( strict_types=1 );
+	declare( strict_types=1 );
 
-namespace StorePress\Base;
+	namespace StorePress\Base;
 
-defined( 'ABSPATH' ) || die( 'Keep Silent' );
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-use Exception;
-use Automattic\WooCommerce\Utilities\FeaturesUtil;
-
-/**
- * Class Plugin.
- */
-class Plugin {
+	use Automattic\WooCommerce\Utilities\FeaturesUtil;
+	use StorePress\Base\ServiceProviders\BlocksServiceProvider;
+	use StorePress\Base\ServiceProviders\ProCompatibilityServiceProvider;
+	use StorePress\Base\ServiceProviders\ServiceProviders;
+	use StorePress\Base\ServiceProviders\SettingsServiceProvider;
+	use StorePress\Base\ServiceProviders\DeactivationServiceProvider;
+	use StorePress\Base\ServiceProviders\UpdaterServiceProvider;
 
 	/**
-	 * Return singleton instance of Plugin.
-	 * The instance will be created if it does not exist yet.
+	 * Class Plugin.
 	 *
-	 * @return self The main instance.
+	 * @name Plugin
+	 */
+class Plugin {
+
+	// =====================================================================
+	// Service Lifecycle Methods
+	// =====================================================================
+
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
 	 * @since 1.0.0
 	 */
 	public static function instance(): self {
 		static $instance = null;
-		if ( is_null( $instance ) ) {
-			$instance = new self();
-		}
 
-		return $instance;
+		return $instance ??= new self();
 	}
 
 	/**
-	 * Initialise the plugin.
+	 * Bootstraps includes, hooks, and init.
 	 *
 	 * @since 1.0.0
 	 */
-	protected function __construct() {
-		try {
-			$this->includes();
-			$this->hooks();
-			$this->init();
-		} catch ( Exception $e ) {
-			$message = sprintf( '<strong>%s:</strong> %s', $this->name(), $e->getMessage() );
-			add_action(
-				'admin_notices',
-				function () use ( $message ) {
-					printf( '<div class="notice notice-error"><p>%s</p></div>', wp_kses_data( $message ) );
-				},
-				50
-			);
-		}
+	public function __construct() {
 
-		/**
-		 * Action to signal that Plugin has finished loading.
-		 *
-		 * @param Plugin $instance Plugin Instance.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'storepress_base_plugin_loaded', $this );
+		$this->includes();
+
+		$this->hooks();
+
+		$this->init();
 	}
 
 	/**
-	 * Plugin Absolute File.
+	 * Loads vendor autoloader and utility functions.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function includes(): void {
+		$vendor_path = untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) ) . '/vendor';
+
+		if ( file_exists( $vendor_path . '/autoload_packages.php' ) ) {
+			require_once $vendor_path . '/autoload_packages.php';
+		}
+
+		require_once __DIR__ . '/functions.php';
+	}
+
+	/**
+	 * Registers WordPress hooks.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function hooks(): void {
+		// Declare HPOS compatibility before WooCommerce initializes.
+		add_action( 'before_woocommerce_init', array( $this, 'custom_order_tables_compatibility' ) );
+	}
+
+	/**
+	 * Initializes plugin service providers.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function init(): void {
+		$this->service_providers();
+	}
+
+	/**
+	 * Returns the absolute path to the plugin main file.
 	 *
 	 * @return string
 	 * @since 1.0.0
@@ -79,281 +106,54 @@ class Plugin {
 	}
 
 	/**
-	 * Get Plugin Version.
+	 * Returns registered service provider class names.
 	 *
-	 * @return string
+	 * @return array<class-string, class-string>
 	 * @since 1.0.0
 	 */
-	public function version(): string {
-		static $versions;
-
-		if ( is_null( $versions ) ) {
-			$versions = get_file_data(
-				$this->get_plugin_file(),
-				array( 'version' => 'Version' )
-			);
-		}
-
-		return $versions['version'] ?? '';
+	public function get_service_providers(): array {
+		return array(
+			UpdaterServiceProvider::class          => UpdaterServiceProvider::class,
+			DeactivationServiceProvider::class     => DeactivationServiceProvider::class,
+			SettingsServiceProvider::class         => SettingsServiceProvider::class,
+			ProCompatibilityServiceProvider::class => ProCompatibilityServiceProvider::class,
+			BlocksServiceProvider::class           => BlocksServiceProvider::class,
+		);
 	}
 
 	/**
-	 * Get Plugin Name.
+	 * Boots all registered service providers.
 	 *
-	 * @return string
-	 * @since 0.1.0
-	 */
-	public function name(): string {
-		static $names;
-
-		if ( is_null( $names ) ) {
-			$names = get_file_data( $this->get_plugin_file(), array( 'Plugin Name' ) );
-		}
-
-		return esc_attr( $names[0] );
-	}
-
-	/**
-	 * Includes.
-	 *
-	 * @return bool
-	 * @throws Exception When class files loading fails.
+	 * @return ServiceProviders
 	 * @since 1.0.0
+	 * @see   ServiceProviders::instance()
 	 */
-	public function includes(): bool {
-		if ( file_exists( $this->vendor_path() . '/autoload_packages.php' ) ) {
-			require_once $this->vendor_path() . '/autoload_packages.php';
-			require_once __DIR__ . '/functions.php';
-
-			return true;
-		}
-
-		throw new Exception( '<em>vendor/autoload_packages.php</em> file missing. Please run <code>composer install</code>' );
+	public function service_providers(): ServiceProviders {
+		return ServiceProviders::instance( $this->get_service_providers() );
 	}
 
-	/**
-	 * Initialize Classes.
-	 *
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public function init() {
-		// Setup BLocks.
-		$this->get_blocks();
-
-		// Set up cache management.
-		// new Extension_Cache();.
-
-		// Initialize REST API.
-		// new Extension_REST_API();.
-
-		// Set up email management.
-		// new Extension_Email_Manager();.
-	}
-
-	/**
-	 * Hooks.
-	 *
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public function hooks() {
-		// Register with hook.
-		add_action( 'before_woocommerce_init', array( $this, 'custom_order_tables_compatibility' ) );
-	}
+	// =====================================================================
+	// Hook Callbacks
+	// =====================================================================
 
 	/**
 	 * Declare compatibility with custom order tables for WooCommerce.
 	 *
 	 * @return void
+	 * @since 1.0.0
 	 */
-	public function custom_order_tables_compatibility() {
-		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+	public function custom_order_tables_compatibility(): void {
+		if ( class_exists( FeaturesUtil::class ) ) {
 			FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_plugin_file() );
 		}
 	}
 
-	/**
-	 * Get Plugin basename directory name
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function basename(): string {
-		return wp_basename( dirname( $this->get_plugin_file() ) );
-	}
+	// =====================================================================
+	// Logging
+	// =====================================================================
 
 	/**
-	 * Get Plugin basename
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function plugin_basename(): string {
-		return plugin_basename( $this->get_plugin_file() );
-	}
-
-	/**
-	 * Get Plugin directory name
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function plugin_dirname(): string {
-		return untrailingslashit( dirname( plugin_basename( $this->get_plugin_file() ) ) );
-	}
-
-	/**
-	 * Get Plugin directory path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function plugin_path(): string {
-		return untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) );
-	}
-
-	/**
-	 * Get Plugin directory url
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function plugin_url(): string {
-		return untrailingslashit( plugin_dir_url( $this->get_plugin_file() ) );
-	}
-
-	/**
-	 * Get Plugin image url
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function images_url(): string {
-		return untrailingslashit(
-			plugin_dir_url( $this->get_plugin_file() )
-			. 'images'
-		);
-	}
-
-	/**
-	 * Get Assets URL
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function assets_url(): string {
-		return untrailingslashit(
-			plugin_dir_url( $this->get_plugin_file() )
-			. 'assets'
-		);
-	}
-
-	/**
-	 * Get Asset Absolute Path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function assets_path(): string {
-		return $this->plugin_path() . '/assets';
-	}
-
-	/**
-	 * Get Vendor path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function vendor_path(): string {
-		return $this->plugin_path() . '/vendor';
-	}
-
-	/**
-	 * Get Vendor URL
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function vendor_url(): string {
-		return untrailingslashit(
-			plugin_dir_url( $this->get_plugin_file() )
-			. 'vendor'
-		);
-	}
-
-	/**
-	 * Get Node Modules build URL
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function build_url(): string {
-		return untrailingslashit(
-			plugin_dir_url( $this->get_plugin_file() )
-			. 'build'
-		);
-	}
-
-	/**
-	 * Get Node Modules build path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function build_path(): string {
-		return $this->plugin_path() . '/build';
-	}
-
-	/**
-	 * Get Asset file make time for versioning.
-	 *
-	 * @param string $file Asset file name.
-	 *
-	 * @return int asset file make time.
-	 * @since 1.0.0
-	 */
-	public function assets_version( string $file ): int {
-		return absint( filemtime( $this->assets_path() . $file ) );
-	}
-
-	/**
-	 * Get includes directory absolute path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function include_path(): string {
-		return untrailingslashit(
-			plugin_dir_path( $this->get_plugin_file() )
-			. 'includes'
-		);
-	}
-
-	/**
-	 * Get templates directory absolute path
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function template_path(): string {
-		return untrailingslashit(
-			plugin_dir_path( $this->get_plugin_file() )
-			. 'templates'
-		);
-	}
-
-	/**
-	 * Get Block Instance.
-	 *
-	 * @return Blocks
-	 * @since 1.0.0
-	 */
-	public function get_blocks(): Blocks {
-		return Blocks::instance();
-	}
-
-	/** Log
+	 * Writes a log entry via WooCommerce logger when WP_DEBUG is enabled.
 	 *
 	 * @param string                            $title   log title.
 	 * @param array<string|int, mixed>|string[] $message log message.
@@ -361,7 +161,7 @@ class Plugin {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function log( string $title, array $message = array() ) {
+	public function log( string $title, array $message = array() ): void {
 		// If WooCommerce Installed.
 		if ( ! function_exists( 'wc_get_logger' ) ) {
 			return;
@@ -369,7 +169,7 @@ class Plugin {
 
 		if ( defined( 'WP_DEBUG' ) && true === constant( 'WP_DEBUG' ) ) {
 			$context = array(
-				'source' => $this->basename(),
+				'source' => plugin_basename( $this->get_plugin_file() ),
 			);
 
 			wc_get_logger()->info( $title, array_merge( $message, $context ) );
@@ -377,19 +177,19 @@ class Plugin {
 	}
 
 	/**
-	 * Get log file url.
+	 * Returns the WooCommerce log file URL for this plugin.
 	 *
 	 * @return string
 	 * @since 1.0.0
 	 */
 	public function get_log_file_url(): string {
-		return add_query_arg(
-			array(
-				'page'     => 'wc-status',
-				'tab'      => 'logs',
-				'log_file' => sprintf( '%s-%s.log', $this->basename(), sanitize_file_name( wp_hash( $this->basename() ) ) ),
-			),
-			admin_url( 'admin.php' )
+
+		$query_args = array(
+			'page'     => 'wc-status',
+			'tab'      => 'logs',
+			'log_file' => sprintf( '%s-%s.log', plugin_basename( $this->get_plugin_file() ), sanitize_file_name( wp_hash( plugin_basename( $this->get_plugin_file() ) ) ) ),
 		);
+
+		return add_query_arg( $query_args, admin_url( 'admin.php' ) );
 	}
 }

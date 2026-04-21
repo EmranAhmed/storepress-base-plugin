@@ -1,0 +1,223 @@
+<?php
+	/**
+	 * Blocks API: Blocks class
+	 *
+	 * @package    StorePress/Base
+	 * @since      1.0.0
+	 * @version    1.0.0
+	 */
+
+	declare( strict_types=1 );
+
+	namespace StorePress\Base\Services;
+
+	use StorePress\AdminUtils\Traits\SingletonTrait;
+	use StorePress\AdminUtils\Traits\PluginCommonTrait;
+	use function StorePress\Base\get_plugin_file;
+
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );
+
+	/**
+	 * Blocks Class.
+	 *
+	 * @name  Blocks
+	 * @since 1.0.0
+	 */
+class Blocks {
+
+	use SingletonTrait;
+	use PluginCommonTrait;
+
+	// =====================================================================
+	// Service Lifecycle Methods
+	// =====================================================================
+
+	/**
+	 * Initialise class.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function __construct() {
+		$this->hooks();
+		$this->init();
+
+		/**
+		 * Action to signal that Plugin has finished loading.
+		 *
+		 * @param Blocks $instance Plugin Object.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'storepress_blocks_loaded', $this );
+	}
+
+	/**
+	 * Returns the main plugin file path.
+	 *
+	 * @return string
+	 * @since 1.0.0
+	 */
+	public function plugin_file(): string {
+		return get_plugin_file();
+	}
+
+	/**
+	 * Registers WordPress action and filter hooks.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function hooks() {
+		// Register all blocks on WordPress init.
+		add_action( 'init', array( $this, 'register_blocks' ) );
+		// Enqueue frontend assets.
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
+		// Enqueue block editor assets.
+		add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
+		// Add custom StorePress block category.
+		add_filter( 'block_categories_all', array( $this, 'add_block_category' ) );
+	}
+
+	/**
+	 * Initialize Blocks Included Classes
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function init() {
+	}
+
+	// =====================================================================
+	// Hook Callbacks
+	// =====================================================================
+
+	/**
+	 * Adds the StorePress block category if not already present.
+	 *
+	 * @param array<int, array<string, string|null>> $block_categories Available block category.
+	 *
+	 * @return array<int, array<string, string|null>>
+	 * @since 1.0.0
+	 */
+	public function add_block_category( array $block_categories ): array {
+		$available_slugs = wp_list_pluck( $block_categories, 'slug' );
+
+		$category = array(
+			'slug'  => 'storepress',
+			'title' => esc_html__( 'StorePress', 'storepress-base-plugin' ),
+			'icon'  => null,
+		);
+
+		if ( ! in_array( 'storepress', $available_slugs, true ) ) {
+			$block_categories[] = $category;
+		}
+
+		return $block_categories;
+	}
+
+	/**
+	 * Enqueues block editor scripts and translations.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 * @see   https://developer.wordpress.org/reference/functions/wp_set_script_translations/
+	 * @see   https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file
+	 */
+	public function block_editor_scripts() {
+		// Editor Scripts.
+		$editor_script_src_url    = $this->build_url() . '/editor-scripts.js';
+		$editor_script_asset_file = $this->build_path() . '/editor-scripts.asset.php';
+
+		if ( ! file_exists( $editor_script_asset_file ) ) {
+			return;
+		}
+		$editor_script_asset = include $editor_script_asset_file;
+
+		wp_enqueue_script( 'storepress-base-plugin-editor-scripts', $editor_script_src_url, $editor_script_asset['dependencies'], $editor_script_asset['version'], array( 'strategy' => 'defer' ) );
+		wp_set_script_translations( 'storepress-base-plugin-editor-scripts', 'storepress-base-plugin', $this->languages_path() );
+	}
+
+	/**
+	 * Registers frontend styles and scripts.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function frontend_scripts(): void {
+		$js_file_url  = $this->build_url() . '/frontend.js';
+		$css_file_url = $this->build_url() . '/frontend.css';
+		$asset_file   = $this->build_path() . '/frontend.asset.php';
+		if ( ! file_exists( $asset_file ) ) {
+			return;
+		}
+		$asset = include $asset_file;
+
+		wp_register_style( 'storepress-base-plugin-style', $css_file_url, array(), $asset['version'] );
+		wp_register_script( 'storepress-base-plugin-script', $js_file_url, $asset['dependencies'], $asset['version'], array( 'strategy' => 'defer' ) );
+	}
+
+	/**
+	 * Scans the build directory and registers all block.json blocks.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function register_blocks() {
+		if ( ! file_exists( $this->build_path() ) ) {
+			return;
+		}
+
+		// Scanning block.json directory.
+		$block_json_files = glob( $this->build_path() . '/**/block.json' );
+
+		foreach ( $block_json_files as $filename ) {
+			$block_type = dirname( $filename );
+			register_block_type( $block_type );
+		}
+	}
+
+	// =====================================================================
+	// Utility Methods
+	// =====================================================================
+
+	/**
+	 * Returns allowed HTML tags and attributes merged with post context defaults.
+	 *
+	 * @param array<string[]> $args extra argument.
+	 *
+	 * @return array<string[]>
+	 * @since 1.0.0
+	 */
+	public function get_kses_allowed_html( array $args = array() ): array {
+		$defaults = wp_kses_allowed_html( 'post' );
+
+		$tags = array(
+			'svg'   => array(
+				'class',
+				'aria-hidden',
+				'aria-labelledby',
+				'role',
+				'xmlns',
+				'width',
+				'height',
+				'viewbox',
+				'height',
+			),
+			'g'     => array( 'fill' ),
+			'title' => array( 'title' ),
+			'path'  => array( 'd', 'fill' ),
+		);
+
+		$allowed_args = array_reduce(
+			array_keys( $tags ),
+			static function ( array $carry, string $tag ) use ( $tags ) {
+					$carry[ $tag ] = array_fill_keys( $tags[ $tag ], true );
+
+					return $carry;
+			},
+			array()
+		);
+
+		return array_merge( $defaults, $allowed_args, $args );
+	}
+}
