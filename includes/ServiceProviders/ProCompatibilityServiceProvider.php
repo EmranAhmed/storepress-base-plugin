@@ -17,6 +17,7 @@
 	use StorePress\AdminUtils\Traits\SingletonTrait;
 	use StorePress\Base\Containers\Container;
 	use StorePress\Base\Integrations\ProPluginInCompatibility;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
 	 * Binds the ProPluginInCompatibility service into the container.
@@ -26,20 +27,11 @@
 class ProCompatibilityServiceProvider extends AbstractServiceProvider {
 
 	use SingletonTrait;
+	use PluginUtilityTrait;
 
 	// =====================================================================
 	// Service Lifecycle Methods
 	// =====================================================================
-
-	/**
-	 * Returns the plugin service container.
-	 *
-	 * @return Container
-	 * @since 1.0.0
-	 */
-	public function get_container(): Container {
-		return Container::instance();
-	}
 
 	/**
 	 * Binds the ProPluginInCompatibility service into the container.

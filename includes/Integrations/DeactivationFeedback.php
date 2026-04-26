@@ -14,9 +14,7 @@
 	use StorePress\AdminUtils\Abstracts\AbstractDeactivationFeedback;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
 	use StorePress\Base\Services\Settings;
-	use StorePress\Base\Traits\PluginFileTrait;
-	use function StorePress\Base\get_plugin_file;
-	use function StorePress\Base\get_container;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
 	 * Handles the deactivation feedback dialog for the plugin.
@@ -26,7 +24,7 @@
 class DeactivationFeedback extends AbstractDeactivationFeedback {
 
 	use SingletonTrait;
-	use PluginFileTrait;
+	use PluginUtilityTrait;
 
 	/**
 	 * Get deactivation title.
@@ -68,7 +66,7 @@ class DeactivationFeedback extends AbstractDeactivationFeedback {
 	 * @since 1.0.0
 	 */
 	public function options(): array {
-		return get_container()->get( Settings::class )->get_options();
+		return $this->get_container()->get( Settings::class )->get_options();
 	}
 
 	/**

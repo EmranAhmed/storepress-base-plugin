@@ -14,6 +14,7 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use StorePress\Base\Containers\Container;
+	use StorePress\Base\Services\Blocks;
 
 	/**
 	 * Returns the plugin service container instance.
@@ -23,6 +24,17 @@
 	 */
 function get_container(): Container {
 	return Container::instance();
+}
+
+	/**
+	 * Returns the Blocks service from the DI container.
+	 *
+	 * @return Blocks
+	 * @since  1.0.0
+	 * @see    get_container()
+	 */
+function get_blocks(): Blocks {
+	return get_container()->get( Blocks::class );
 }
 
 	/**

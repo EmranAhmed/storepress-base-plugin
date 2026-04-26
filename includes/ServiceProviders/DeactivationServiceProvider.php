@@ -17,6 +17,7 @@
 	use StorePress\AdminUtils\Traits\SingletonTrait;
 	use StorePress\Base\Containers\Container;
 	use StorePress\Base\Integrations\DeactivationFeedback;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
 	 * Binds and boots the DeactivationFeedback service.
@@ -26,20 +27,11 @@
 class DeactivationServiceProvider extends AbstractServiceProvider {
 
 	use SingletonTrait;
+	use PluginUtilityTrait;
 
 	// =====================================================================
 	// Service Lifecycle Methods
 	// =====================================================================
-
-	/**
-	 * Returns the plugin service container.
-	 *
-	 * @return Container
-	 * @since 1.0.0
-	 */
-	public function get_container(): Container {
-		return Container::instance();
-	}
 
 	/**
 	 * Binds the DeactivationFeedback service into the container.
@@ -53,7 +45,7 @@ class DeactivationServiceProvider extends AbstractServiceProvider {
 			DeactivationFeedback::class,
 			function () {
 				return DeactivationFeedback::instance();
-			}
+			} 
 		);
 	}
 

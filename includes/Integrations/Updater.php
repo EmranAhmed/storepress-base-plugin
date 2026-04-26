@@ -14,8 +14,7 @@
 	use StorePress\AdminUtils\Abstracts\AbstractUpdater;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
 	use StorePress\Base\Services\Settings;
-	use StorePress\Base\Traits\PluginFileTrait;
-	use function StorePress\Base\get_container;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
 	 * Handles plugin update checks and rollback via the StorePress update server.
@@ -25,7 +24,7 @@
 class Updater extends AbstractUpdater {
 
 	use SingletonTrait;
-	use PluginFileTrait;
+	use PluginUtilityTrait;
 
 	/**
 	 * Returns the plugin license key.
@@ -34,7 +33,7 @@ class Updater extends AbstractUpdater {
 	 * @since 1.0.0
 	 */
 	public function license_key(): string {
-		return get_container()->get( Settings::class )->get_option( 'license' );
+		return $this->get_container()->get( Settings::class )->get_option( 'license' );
 	}
 
 	/**

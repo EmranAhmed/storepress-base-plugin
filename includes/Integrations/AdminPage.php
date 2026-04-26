@@ -12,7 +12,7 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use StorePress\AdminUtils\Abstracts\AbstractSettings;
-	use StorePress\Base\Traits\PluginFileTrait;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
 	 * Registers and renders the plugin admin settings page.
@@ -21,7 +21,7 @@
 	 */
 class AdminPage extends AbstractSettings {
 
-	use PluginFileTrait;
+	use PluginUtilityTrait;
 
 	/**
 	 * Returns the top-level admin menu title.

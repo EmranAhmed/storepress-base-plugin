@@ -11,9 +11,9 @@
 
 	namespace StorePress\Base\Services;
 
+	use StorePress\AdminUtils\Traits\HelperMethodsTrait;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\AdminUtils\Traits\PluginCommonTrait;
-	use function StorePress\Base\get_plugin_file;
+	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
@@ -26,7 +26,8 @@
 class Blocks {
 
 	use SingletonTrait;
-	use PluginCommonTrait;
+	use PluginUtilityTrait;
+	use HelperMethodsTrait;
 
 	// =====================================================================
 	// Service Lifecycle Methods
@@ -52,22 +53,12 @@ class Blocks {
 	}
 
 	/**
-	 * Returns the main plugin file path.
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 */
-	public function plugin_file(): string {
-		return get_plugin_file();
-	}
-
-	/**
 	 * Registers WordPress action and filter hooks.
 	 *
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function hooks() {
+	public function hooks(): void {
 		// Register all blocks on WordPress init.
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		// Enqueue frontend assets.
@@ -84,7 +75,7 @@ class Blocks {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function init() {
+	public function init(): void {
 	}
 
 	// =====================================================================
