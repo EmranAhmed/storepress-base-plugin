@@ -34,18 +34,18 @@ if ( ! defined( 'STOREPRESS_BASE_PLUGIN_FILE' ) ) {
 	define( 'STOREPRESS_BASE_PLUGIN_FILE', __FILE__ );
 }
 
-	// Include the Plugin class.
-if ( ! class_exists( Plugin::class ) ) {
-	require_once __DIR__ . '/includes/Plugin.php';
-}
-
 	/**
 	 * Returns the main plugin instance.
 	 *
-	 * @since  1.0.0
 	 * @return Plugin
+	 * @since  1.0.0
 	 */
 function storepress_base_plugin(): Plugin {
+
+	// Include the Plugin class.
+	if ( ! class_exists( Plugin::class ) ) {
+		require_once __DIR__ . '/includes/Plugin.php';
+	}
 
 	/**
 	 * If plugin has extended version
@@ -61,8 +61,8 @@ function storepress_base_plugin(): Plugin {
 	/**
 	 * Initializes the plugin on `plugins_loaded`.
 	 *
-	 * @since  1.0.0
 	 * @return void
+	 * @since  1.0.0
 	 */
 function storepress_base_plugin_init(): void {
 	storepress_base_plugin();
