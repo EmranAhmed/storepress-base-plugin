@@ -1,5 +1,4 @@
 'use strict';
-/* eslint @typescript-eslint/no-unused-vars: 0 */
 
 /**
  * Retrieves the translation of text.
@@ -35,7 +34,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		<p { ...blockProps }>
 			{ __(
 				'Example Interactive – hello from the editor!',
-				'storepress-base-plugin'
+				'base-plugin'
 			) }
 		</p>
 	);

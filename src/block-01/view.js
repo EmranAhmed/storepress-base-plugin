@@ -1,6 +1,4 @@
 'use strict';
-/* eslint @typescript-eslint/no-this-alias: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
 /**
  * External dependencies
  */
