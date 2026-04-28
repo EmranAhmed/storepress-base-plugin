@@ -3,6 +3,9 @@
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
+/**
+ * WordPress dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
 
 /**
@@ -12,6 +15,9 @@ import { registerBlockType } from '@wordpress/blocks';
  * get applied to the editor only.
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+/**
+ * Internal dependencies
  */
 import './style.scss';
 import './editor.scss';

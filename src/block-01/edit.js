@@ -1,6 +1,9 @@
 /**
  * External dependencies
  */
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
 import { SearchListControl } from '@storepress/components';
 

@@ -1,12 +1,21 @@
-const { defineConfig, globalIgnores } = require( 'eslint/config' );
-const wordpress = require( '@wordpress/eslint-plugin' );
+/**
+ * External dependencies
+ */
 const woocommerce = require( '@woocommerce/eslint-plugin' );
+/**
+ * WordPress dependencies
+ */
+const wordpress = require( '@wordpress/eslint-plugin' );
 
+/**
+ * Internal dependencies
+ */
 const { getWebPackAlias } = require( './tools/webpack-helpers' );
 const aliases = Object.keys( getWebPackAlias() );
 
 // All @wordpress/* packages that get externalized to wp.* globals at build time.
 // These don't need to be in package.json — WordPress provides them at runtime.
+// https://developer.wordpress.org/block-editor/reference-guides/packages/packages-eslint-plugin/
 const wordPressPackages = [
 	'@wordpress/a11y',
 	'@wordpress/annotations',
@@ -91,25 +100,11 @@ const restrictedImports = [
 	},
 ];
 
-module.exports = defineConfig( [
-	globalIgnores( [
-		'.eslintrc.js',
-		'eslint.config.cjs',
-		'eslint.config.js',
-		'**/build/**',
-		'**/node_modules/**',
-		'**/vendor/**',
-		'**/dist/**',
-		'**/coverage/**',
-		'tools/**',
-		'**/*.min.js',
-		'**/.asset.php',
-		// add your own paths here
-	] ),
-
-	//...wordpress.configs['recommended-with-formatting'],
+module.exports = [
+	{
+		ignores: [ 'build/', 'vendor/', 'node_modules/' ],
+	},
 	...wordpress.configs.recommended,
-	//...woocommerce.configs.recommended,
 	{
 		languageOptions: {
 			globals: {
@@ -126,8 +121,9 @@ module.exports = defineConfig( [
 			},
 		},
 		rules: {
+			'@wordpress/dependency-group': 'warn',
 			'no-unused-vars': 'warn',
-			'@wordpress/no-unsafe-wp-apis': 'off',
+			'@wordpress/no-unsafe-wp-apis': 'warn',
 			'no-restricted-imports': [
 				'error',
 				{
@@ -137,9 +133,9 @@ module.exports = defineConfig( [
 			'@wordpress/i18n-text-domain': [
 				'error',
 				{
-					allowedTextDomain: [ 'base-plugin' ],
+					allowedTextDomain: [ 'storepress-base-plugin' ],
 				},
 			],
 		},
 	},
-] );
+];

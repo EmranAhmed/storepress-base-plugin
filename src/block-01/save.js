@@ -2,6 +2,9 @@
 /**
  * External dependencies
  */
+/**
+ * WordPress dependencies
+ */
 import { Icon, plus } from '@wordpress/icons';
 
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';

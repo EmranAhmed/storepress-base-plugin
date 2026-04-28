@@ -5,6 +5,9 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -34,7 +37,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		<p { ...blockProps }>
 			{ __(
 				'Example Interactive – hello from the editor!',
-				'base-plugin'
+				'storepress-base-plugin'
 			) }
 		</p>
 	);
