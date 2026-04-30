@@ -66,6 +66,7 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 
 ## Test
 
+- [How to add automated unit tests to your WordPress plugin](https://developer.wordpress.org/news/2025/12/how-to-add-automated-unit-tests-to-your-wordpress-plugin/)
 - `npm run test:unit` - JS Unit test
 - `npm run test:e2e` - E2E test
 - `npm run test:php` - PHP Unit test
