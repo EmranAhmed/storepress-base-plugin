@@ -5,7 +5,6 @@ Download [latest release](https://github.com/EmranAhmed/storepress-base-plugin/r
 Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamless&blueprint-url=https://raw.githubusercontent.com/EmranAhmed/storepress-base-plugin/main/.wp-playground/blueprint.json) using Playground.
 
 
-
 ## First
 
 - `git clone https://github.com/EmranAhmed/storepress-base-plugin.git`
@@ -27,7 +26,6 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 - Open `package.json` and change `name` as plugin file name, `description`, `repository`.
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`
 - Open `package.json` and change `files` for package files.
-- Make package script executable `chmod +x ./tools/package.js`
 - [Test example](https://core.trac.wordpress.org/browser/trunk/tests/phpunit)
 - [Gutenberg test example](https://github.com/WordPress/gutenberg/tree/trunk/phpunit)
 
@@ -78,8 +76,8 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 
 ## Release to GitHub.com
 
-- `git tag 1.0.0 && git push origin "$_"` Publish Tag
-- `git tag -d 1.0.0 && git push origin --delete "$_"` - Delete Tag
+- `git tag $(node -p "require('./package.json').version") && git push origin "$_"` Publish Tag
+- `git tag -d $(node -p "require('./package.json').version") && git push origin --delete "$_"` - Delete Tag
 
 ## Provide your own translations
 
