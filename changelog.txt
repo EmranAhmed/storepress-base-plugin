@@ -1,6 +1,7 @@
 *** StorePress Base Plugin ***
 
 2023-09-30 - version 1.0.0
+
 * Added - add msg
 * Update - update msg
 * Fixed - fix msg
@@ -8,5 +9,6 @@
 * Enhancement - add action / add filter
 * Performance - if any performance added
 
-2023-09-18 - version 1.0.0
+2023-09-18 - version 0.0.0
+
 * Initial release
