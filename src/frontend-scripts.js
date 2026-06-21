@@ -1,11 +1,12 @@
 'use strict';
 /**
- * External dependencies
- */
-/**
  * WordPress dependencies
  */
 import domReady from '@wordpress/dom-ready';
+
+/**
+ * External dependencies
+ */
 import { createPluginInstance } from '@storepress/utils';
 
 /**
@@ -13,6 +14,8 @@ import { createPluginInstance } from '@storepress/utils';
  */
 
 import { Plugin } from './plugins/Plugin';
+
+// Please check: https://emranahmed.github.io/storepress-packages/?path=/docs/utils-plugin-example--docs
 
 domReady( function () {
 	// Attach with window to access Slider globally.
