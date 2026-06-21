@@ -20,6 +20,7 @@
 	use StorePress\Base\ServiceProviders\SettingsServiceProvider;
 	use StorePress\Base\ServiceProviders\DeactivationServiceProvider;
 	use StorePress\Base\ServiceProviders\UpdaterServiceProvider;
+	use StorePress\Base\Containers\Container;
 
 	/**
 	 * Class Plugin.
@@ -102,7 +103,16 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function get_plugin_file(): string {
-		return constant( 'STOREPRESS_BASE_PLUGIN_FILE' );
+		return get_plugin_file();
+	}
+
+	/**
+	 * Get container.
+	 *
+	 * @return Container
+	 */
+	public function get_container(): Container {
+		return get_container();
 	}
 
 	/**
