@@ -19,7 +19,9 @@
 	use function StorePress\Base\get_container;
 
 	/**
-	 * Provides plugin file path accessor.
+	 * Provides plugin file path, DI container, settings, and logging utilities.
+	 *
+	 * @name PluginUtilityTrait
 	 */
 trait PluginUtilityTrait {
 
@@ -53,9 +55,11 @@ trait PluginUtilityTrait {
 	}
 
 	/**
-	 * Get settings.
+	 * Returns the plugin settings service.
 	 *
 	 * @return Settings
+	 * @since  1.0.0
+	 * @see    get_container()
 	 */
 	public function get_settings(): Settings {
 		return $this->get_container()->get( Settings::class );
@@ -64,10 +68,13 @@ trait PluginUtilityTrait {
 	// =====================================================================
 	// Logging
 	// =====================================================================
+
 	/**
-	 * Is log enable.
+	 * Whether logging is enabled via plugin settings.
 	 *
 	 * @return bool
+	 * @since  1.0.0
+	 * @see    get_settings()
 	 */
 	public function is_log_enabled(): bool {
 		return $this->string_to_boolean( $this->get_settings()->get_option( 'is_log_enabled', 'no' ) );

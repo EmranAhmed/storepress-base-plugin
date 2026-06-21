@@ -71,7 +71,7 @@ class AdminPage extends AbstractSettings {
 	 */
 	public function get_default_sidebar(): void {
 
-		include_once $this->templates_path() . '/settings-sidebar.php';
+		$this->load_template( 'settings-sidebar.php', array( 'instance' => $this ), true );
 	}
 
 	/**

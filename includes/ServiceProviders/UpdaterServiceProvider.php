@@ -28,7 +28,6 @@ class UpdaterServiceProvider extends AbstractServiceProvider {
 	use SingletonTrait;
 	use PluginUtilityTrait;
 
-
 	// =====================================================================
 	// Service Lifecycle Methods
 	// =====================================================================

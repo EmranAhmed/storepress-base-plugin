@@ -66,13 +66,14 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function includes(): void {
+			
+		require_once __DIR__ . '/functions.php';
+
 		$vendor_path = untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) ) . '/vendor';
 
 		if ( file_exists( $vendor_path . '/autoload_packages.php' ) ) {
 			require_once $vendor_path . '/autoload_packages.php';
 		}
-
-		require_once __DIR__ . '/functions.php';
 	}
 
 	/**

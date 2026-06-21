@@ -64,7 +64,7 @@
 		"@wordpress/prettier-config": "^4.48.1",
 		"@wordpress/scripts": "^32.4.1",
 		"browserslist": "^4.28.2",
-		"eslint-formatter-pretty": "^5.0.0",
+		"eslint-formatter-pretty": "^7.1.0",
 		"eslint-plugin-prettier": "^5.5.6",
 		"fs-extra": "^11.3.5",
 		"husky": "^9.1.7",
