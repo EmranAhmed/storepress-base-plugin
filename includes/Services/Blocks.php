@@ -114,7 +114,7 @@ class Blocks {
 	 * @see   https://developer.wordpress.org/reference/functions/wp_set_script_translations/
 	 * @see   https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file
 	 */
-	public function block_editor_scripts() {
+	public function block_editor_scripts(): void {
 		// Editor Scripts.
 		$editor_script_src_url    = $this->build_url() . '/editor-scripts.js';
 		$editor_script_asset_file = $this->build_path() . '/editor-scripts.asset.php';
@@ -153,7 +153,7 @@ class Blocks {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function register_blocks() {
+	public function register_blocks(): void {
 		if ( ! file_exists( $this->build_path() ) ) {
 			return;
 		}

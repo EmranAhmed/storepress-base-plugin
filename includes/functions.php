@@ -15,6 +15,7 @@
 
 	use StorePress\Base\Containers\Container;
 	use StorePress\Base\Services\Blocks;
+	use StorePress\Base\Services\Settings;
 
 	/**
 	 * Returns the plugin service container instance.
@@ -60,4 +61,13 @@ function get_pro_plugin_file(): string {
 	}
 
 	return 'storepress-base-plugin-pro/storepress-base-plugin-pro.php';
+}
+
+	/**
+	 * Get Settings.
+	 *
+	 * @return Settings
+	 */
+function get_settings(): Settings {
+	return get_container()->get( Settings::class );
 }

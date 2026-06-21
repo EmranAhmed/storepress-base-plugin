@@ -55,20 +55,10 @@ const scriptConfig = {
 			stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
 		}),
 	],
-	/*optimization: {
-		splitChunks: {
-			chunks: 'all',
-			minSize: 1,
-			name: 'common',
-		},
-		// runtimeChunk: { name: 'utils' },
-	},*/
 }
 
 const moduleConfig = {
 	...defaultModuleConfig,
-	// output: { ...defaultModuleConfig.output, module: true },
-	// experiments: { outputModule: true },
 	entry: {
 		...defaultModuleConfig.entry(),
 		// 'custom-module': getFile( 'custom-module.js' ),

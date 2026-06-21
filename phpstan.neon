@@ -12,11 +12,13 @@ parameters:
 	level: 6
 	phpVersion:
 		min: 70400
-		max: 80400
+		max: 80500
 	bootstrapFiles:
 		- storepress-base-plugin.php
 	paths:
 		- storepress-base-plugin.php
+		- src/
+		- templates/
 		- includes/
 	scanDirectories:
 		# - ../woocommerce

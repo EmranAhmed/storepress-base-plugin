@@ -53,7 +53,7 @@ class Updater extends AbstractUpdater {
 	 * @since 1.0.0
 	 */
 	public function update_server_path(): string {
-		return '/storepress-admin-utils/wp-json/plugin-updater/v1/check-update';
+		return '/wp-json/plugins/v1/check-update';
 	}
 
 	/**
@@ -85,15 +85,5 @@ class Updater extends AbstractUpdater {
 			'rollback_not_available'        => 'Rollback is not available for plugin: %s',
 			'rollback_no_target_version'    => 'Plugin version not selected.',
 		);
-	}
-
-	/**
-	 * Returns additional arguments sent to the update server.
-	 *
-	 * @return array<string, mixed>
-	 * @since 1.0.0
-	 */
-	public function additional_request_args(): array {
-		return array( 'domain' => $this->get_client_hostname() );
 	}
 }

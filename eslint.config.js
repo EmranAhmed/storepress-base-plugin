@@ -80,6 +80,8 @@ const wordPressPackages = [
 	'@wordpress/warning',
 	'@wordpress/widgets',
 	'@wordpress/wordcount',
+	'adm-zip',
+	'fast-glob',
 ];
 
 const restrictedImports = [

@@ -4,6 +4,7 @@
 
 	<file>./src/</file>
 	<file>./includes/</file>
+	<file>./templates/</file>
 	<file>./storepress-base-plugin.php</file>
 	<!-- Exclude paths -->
 	<exclude-pattern>**/build/**</exclude-pattern>

@@ -85,12 +85,12 @@ class AdminPage extends AbstractSettings {
 			'unsaved_warning_text'            => 'The changes you made will be lost if you navigate away from this page.',
 			'reset_warning_text'              => 'Are you sure to reset?',
 			'reset_button_text'               => 'Reset All',
-			'settings_nav_label_text'         => 'Secondary menu',
 			'settings_link_text'              => 'Settings',
 			'settings_error_message_text'     => 'Settings not saved',
 			'settings_updated_message_text'   => 'Settings Saved',
 			'settings_deleted_message_text'   => 'Settings Reset',
 			'settings_tab_not_available_text' => 'Settings Tab is not available.',
+			'method_called_before_init'       => 'This method should not be called before init.',
 		);
 	}
 }

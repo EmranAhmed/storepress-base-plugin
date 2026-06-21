@@ -24,8 +24,8 @@
 		}
 	],
 	"require": {
-		"storepress/admin-utils": "^3.3.2",
-		"automattic/jetpack-autoloader": "^v5.0.16"
+		"storepress/admin-utils": "^3.5.3",
+		"automattic/jetpack-autoloader": "^v5.0.20"
 	},
 	"require-dev": {
 		"automattic/vipwpcs": "^3.0.1",
@@ -34,13 +34,13 @@
 		"woocommerce/woocommerce-sniffs": "^1.0.1",
 		"phpcompatibility/php-compatibility": "^9.3.5",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
-		"php-stubs/woocommerce-stubs": "^v10.7.0",
+		"php-stubs/woocommerce-stubs": "^v10.8.0",
 		"phpstan/extension-installer": "^1.4.3",
-		"phpstan/phpstan": "^2.1.54",
+		"phpstan/phpstan": "^2.2.2",
 		"szepeviktor/phpstan-wordpress": "^v2.0.3",
-		"wp-cli/i18n-command": "^v2.7.2",
+		"wp-cli/i18n-command": "^v2.7.3",
 		"wp-coding-standards/wpcs": "^3.3.0",
-		"wp-phpunit/wp-phpunit": "^6.9.4",
+		"wp-phpunit/wp-phpunit": "^7.0.0",
 		"yoast/phpunit-polyfills": "1.1.5",
 		"plugin-check/phpcs-sniffs": "@dev"
 	},
@@ -82,6 +82,6 @@
 		"phpstan-report": "./vendor/bin/phpstan --memory-limit=4G -vvv > phpstan-report.txt",
 		"format": "./vendor/bin/phpcbf --standard=phpcs.xml",
 		"lint-report": "./vendor/bin/phpcs --standard=phpcs.xml --report-summary --report-source --ignore-annotations --report-full=phpcs-report.txt",
-		"lint": "./vendor/bin/phpcs --standard=phpcs.xml --report-summary --report-source"
+		"lint": "./vendor/bin/phpcs --standard=phpcs.xml --report=full"
 	}
 }
