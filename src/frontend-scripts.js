@@ -13,11 +13,17 @@ import { createPluginInstance } from '@storepress/utils';
  * Internal dependencies
  */
 
-import { Plugin } from './plugins/Plugin';
+import { Plugin } from '@plugins';
+
+import { getDemoAttribute } from '@utils';
+import { demo } from '@utils/demo';
 
 // Please check: https://emranahmed.github.io/storepress-packages/?path=/docs/utils-plugin-example--docs
 
 domReady( function () {
+	getDemoAttribute();
+	demo();
+
 	// Attach with window to access Slider globally.
 	const Slider = {
 		getInstance( element, options ) {

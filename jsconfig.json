@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@plugins": [ "src/plugins/Plugin" ],
+			"@utils": [ "src/utils" ],
+			"@utils/demo": [ "src/utils/demo" ]
+		}
+	},
+	"exclude": [ "node_modules", "build", "vendor" ]
+}

@@ -1,50 +1,51 @@
 // @see: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-dependency-extraction-webpack-plugin/
 /**
+ * WordPress dependencies
+ */
+const { getProjectSourcePath } = require( '@wordpress/scripts/utils/config' );
+const { fromProjectRoot } = require( '@wordpress/scripts/utils/file' );
+/**
  * External dependencies
  */
-const {getProjectSourcePath} = require('@wordpress/scripts/utils/config')
-const {fromProjectRoot}      = require('@wordpress/scripts/utils/file')
-const {sep}                  = require('path')
+const { sep } = require( 'path' );
 
 // jquery --> window.jQuery
 // react-dom --> window.ReactDOM
 const externalScriptsMap = {
 	//'slick-carousel' : ['Slick'],
-}
+};
 
 // @babel/runtime/regenerator --> wp-polyfill
 const scriptHandleMap = {
 	//'slick-carousel' : 'slick-carousel',
-}
+};
 
 const externalModulesMap = {
 	// static import.
 	//'@wordpress/interactivity': 'module @wordpress/interactivity',
 	/**
-	```html
-    <script type="importmap">
-        {
-          "imports":
-              {
-                  "@wordpress/interactivity":"http://example.com/wp-includes/js/dist/script-modules/interactivity/index.min.js"
-              }
-        }
-    </script>
+	  ```html
+	  <script type="importmap">
+	  {
+	  "imports":
+	  {
+	  "@wordpress/interactivity":"http://example.com/wp-includes/js/dist/script-modules/interactivity/index.min.js"
+	  }
+	  }
+	  </script>
 
-    <link rel="modulepreload" href="http://example.com/wp-includes/js/dist/script-modules/interactivity/index.min.js" fetchpriority="low" />
-    ```
+	  <link rel="modulepreload" href="http://example.com/wp-includes/js/dist/script-modules/interactivity/index.min.js" fetchpriority="low" />
+	  ```
 	 */
-
-
 	// dynamic import.
 	// @see: https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/query/view.js#L40
 	/**
-	```js
-    import('@wordpress/interactivity-router').then({});
-    ```
+	  ```js
+	  import('@wordpress/interactivity-router').then({});
+	  ```
 	 */
 	// '@wordpress/interactivity-router': 'import @wordpress/interactivity-router',
-}
+};
 
 /**
  * Default request to global transformation
@@ -53,13 +54,13 @@ const externalModulesMap = {
  * - request `@wordpress/api-fetch` becomes `[ 'wp', 'apiFetch' ]`
  * - request `@wordpress/i18n` becomes `[ 'wp', 'i18n' ]`
  *
- * @param  {string} request Module request (the module name in `import from`) to be transformed
+ * @param {string} request Module request (the module name in `import from`) to be transformed
  * @return {string|string[]|undefined} The resulting external definition. Return `undefined`
  *   to ignore the request. Return `string|string[]` to map the request to an external.
  */
-function requestToExternal(request) {
-	if (externalScriptsMap[request]) {
-		return externalScriptsMap[request]
+function requestToExternal( request ) {
+	if ( externalScriptsMap[ request ] ) {
+		return externalScriptsMap[ request ];
 	}
 }
 
@@ -70,13 +71,13 @@ function requestToExternal(request) {
  * - request `@wordpress/i18n` becomes `wp-i18n`
  * - request `@wordpress/escape-html` becomes `wp-escape-html`
  *
- * @param  {string} request Module request (the module name in `import from`) to be transformed
+ * @param {string} request Module request (the module name in `import from`) to be transformed
  * @return {string|undefined} WordPress script handle to map the request to. Return `undefined`
  *   to use the same name as the module.
  */
-function requestToHandle(request) {
-	if (scriptHandleMap[request]) {
-		return scriptHandleMap[request]
+function requestToHandle( request ) {
+	if ( scriptHandleMap[ request ] ) {
+		return scriptHandleMap[ request ];
 	}
 }
 
@@ -96,24 +97,26 @@ function requestToHandle(request) {
  *   - Return `string` to map the request to an external.
  *   - Return `Error` to emit an error.
  */
-function requestToExternalModule(request) {
-	if (externalModulesMap[request]) {
-		return externalModulesMap[request]
+function requestToExternalModule( request ) {
+	if ( externalModulesMap[ request ] ) {
+		return externalModulesMap[ request ];
 	}
 }
 
-function getFile(fileName) {
-	return fromProjectRoot(getProjectSourcePath() + sep + fileName)
+function getFile( fileName ) {
+	return fromProjectRoot( getProjectSourcePath() + sep + fileName );
 }
 
-function getRootFile(fileName) {
-	return fromProjectRoot(fileName)
+function getRootFile( fileName ) {
+	return fromProjectRoot( fileName );
 }
 
 function getWebPackAlias() {
 	return {
-		'@utils' : getFile('utils/index'),
-	}
+		'@plugins': getFile( 'plugins/Plugin' ), // Add "@plugins": [ "src/plugins/Plugin" ] in jsconfig.json
+		'@utils': getFile( 'utils' ), // Add "@utils": [ "src/utils" ] in jsconfig.json
+		'@utils/demo': getFile( 'utils/demo' ), // Add "@utils": [ "src/utils" ] in jsconfig.json
+	};
 }
 
 module.exports = {
@@ -123,4 +126,4 @@ module.exports = {
 	requestToExternal,
 	requestToHandle,
 	requestToExternalModule,
-}
+};

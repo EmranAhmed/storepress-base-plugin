@@ -1,7 +1,4 @@
 /**
- * External dependencies
- */
-/**
  * WordPress dependencies
  */
 import { addQueryArgs } from '@wordpress/url';
@@ -122,3 +119,5 @@ export const getTerms = ( attribute ) => {
 		path: `wc/store/v1/products/attributes/${ attribute }/terms`,
 	} );
 };
+
+export const getDemoAttribute = () => {};

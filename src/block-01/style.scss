@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "~@wordpress/base-styles/colors";
+@use "~@wordpress/base-styles/colors" as colors;
 
 .storepress-block-01 {
 	background-color: transparent;
