@@ -24,8 +24,8 @@
 		}
 	],
 	"require": {
-		"storepress/admin-utils": "^3.5.3",
-		"automattic/jetpack-autoloader": "^v5.0.20"
+		"automattic/jetpack-autoloader": "^v5.0.20",
+		"storepress/admin-utils": "^3.5.3"
 	},
 	"require-dev": {
 		"automattic/vipwpcs": "^3.0.1",
