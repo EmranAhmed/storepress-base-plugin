@@ -7,6 +7,8 @@
 	 * @version    1.0.0
 	 */
 
+	declare( strict_types=1 );
+
 	namespace StorePress\Base\Integrations;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
@@ -42,7 +44,7 @@ class ProPluginInCompatibility extends AbstractProPluginInCompatibility {
 	 */
 	public function localize_notice_format(): string {
 		/* translators: 1: Extended Plugin Name. 2: Extended Plugin Version. 3: Extended Plugin Compatible Version. */
-		return __( 'You are using an incompatible version of <strong>%1$s - (%2$s)</strong>. Please upgrade to version <strong>%3$s</strong> or upper.', 'storepress-base-plugin' );
+		return wp_kses_post( __( 'You are using an incompatible version of <strong>%1$s - (%2$s)</strong>. Please upgrade to version <strong>%3$s</strong> or upper.', 'storepress-base-plugin' ) );
 	}
 
 	/**

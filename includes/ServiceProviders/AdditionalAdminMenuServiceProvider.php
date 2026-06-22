@@ -7,6 +7,8 @@
 	 * @version 1.0.0
 	 */
 
+	declare( strict_types=1 );
+
 	namespace StorePress\Base\ServiceProviders;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
@@ -44,7 +46,7 @@ class AdditionalAdminMenuServiceProvider extends AbstractServiceProvider {
 			AdditionalAdminMenu::class,
 			function () {
 				return AdditionalAdminMenu::instance();
-			} 
+			}
 		);
 	}
 
