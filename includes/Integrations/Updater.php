@@ -67,23 +67,29 @@ class Updater extends AbstractUpdater {
 		$name = $this->get_plugin_name();
 
 		return array(
-			'license_key_empty_message'     => 'License key is not available.',
-			'check_update_link_text'        => 'Check Update',
-			'rollback_changelog_title'      => 'Changelog',
-			'rollback_action_running'       => 'Rolling back',
-			'rollback_action_button'        => sprintf( 'Rollback %s', $name ),
-			'rollback_cancel_button'        => 'Cancel',
-			'rollback_current_version'      => 'Current version',
-			'rollback_last_updated'         => 'Last updated %s ago.',
-			'rollback_view_changelog'       => sprintf( 'View Changelog for %s', $name ),
-			'rollback_page_title'           => sprintf( 'Rollback Plugin %s', $name ),
-			'rollback_link_text'            => 'Rollback',
-			'rollback_failed'               => 'Rollback failed.',
-			'rollback_success'              => 'Rollback success: %s rolled back to version %s.',
-			'rollback_plugin_not_available' => 'Plugin is not available.',
-			'rollback_no_access'            => 'Sorry, you are not allowed to rollback plugins for this site.',
-			'rollback_not_available'        => 'Rollback is not available for plugin: %s',
-			'rollback_no_target_version'    => 'Plugin version not selected.',
+			'license_key_empty_message'     => esc_html__( 'License key is not available.', 'storepress-base-plugin' ),
+			'check_update_link_text'        => esc_html__( 'Check Update', 'storepress-base-plugin' ),
+			'rollback_changelog_title'      => esc_html__( 'Changelog', 'storepress-base-plugin' ),
+			'rollback_action_running'       => esc_html__( 'Rolling back', 'storepress-base-plugin' ),
+			/* translators: %s: Plugin name. */
+			'rollback_action_button'        => sprintf( esc_html__( 'Rollback %s', 'storepress-base-plugin' ), $name ),
+			'rollback_cancel_button'        => esc_html__( 'Cancel', 'storepress-base-plugin' ),
+			'rollback_current_version'      => esc_html__( 'Current version', 'storepress-base-plugin' ),
+			/* translators: %s: Time elapsed (e.g. "2 hours"). */
+			'rollback_last_updated'         => esc_html__( 'Last updated %s ago.', 'storepress-base-plugin' ),
+			/* translators: %s: Plugin name. */
+			'rollback_view_changelog'       => sprintf( esc_html__( 'View Changelog for %s', 'storepress-base-plugin' ), $name ),
+			/* translators: %s: Plugin name. */
+			'rollback_page_title'           => sprintf( esc_html__( 'Rollback Plugin %s', 'storepress-base-plugin' ), $name ),
+			'rollback_link_text'            => esc_html__( 'Rollback', 'storepress-base-plugin' ),
+			'rollback_failed'               => esc_html__( 'Rollback failed.', 'storepress-base-plugin' ),
+			/* translators: 1: Plugin name, 2: Version number. */
+			'rollback_success'              => esc_html__( 'Rollback success: %1$s rolled back to version %2$s.', 'storepress-base-plugin' ),
+			'rollback_plugin_not_available' => esc_html__( 'Plugin is not available.', 'storepress-base-plugin' ),
+			'rollback_no_access'            => esc_html__( 'Sorry, you are not allowed to rollback plugins for this site.', 'storepress-base-plugin' ),
+			/* translators: %s: Plugin name. */
+			'rollback_not_available'        => esc_html__( 'Rollback is not available for plugin: %s', 'storepress-base-plugin' ),
+			'rollback_no_target_version'    => esc_html__( 'Plugin version not selected.', 'storepress-base-plugin' ),
 		);
 	}
 }

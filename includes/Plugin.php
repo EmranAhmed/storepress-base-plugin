@@ -14,6 +14,7 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use Automattic\WooCommerce\Utilities\FeaturesUtil;
+	use StorePress\Base\ServiceProviders\AdditionalAdminMenuServiceProvider;
 	use StorePress\Base\ServiceProviders\BlocksServiceProvider;
 	use StorePress\Base\ServiceProviders\ProCompatibilityServiceProvider;
 	use StorePress\Base\ServiceProviders\ServiceProviders;
@@ -66,7 +67,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function includes(): void {
-			
+
 		require_once __DIR__ . '/functions.php';
 
 		$vendor_path = untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) ) . '/vendor';
@@ -124,11 +125,12 @@ class Plugin {
 	 */
 	public function get_service_providers(): array {
 		return array(
-			UpdaterServiceProvider::class          => UpdaterServiceProvider::class,
-			DeactivationServiceProvider::class     => DeactivationServiceProvider::class,
-			SettingsServiceProvider::class         => SettingsServiceProvider::class,
-			ProCompatibilityServiceProvider::class => ProCompatibilityServiceProvider::class,
-			BlocksServiceProvider::class           => BlocksServiceProvider::class,
+			UpdaterServiceProvider::class             => UpdaterServiceProvider::class,
+			DeactivationServiceProvider::class        => DeactivationServiceProvider::class,
+			SettingsServiceProvider::class            => SettingsServiceProvider::class,
+			ProCompatibilityServiceProvider::class    => ProCompatibilityServiceProvider::class,
+			BlocksServiceProvider::class              => BlocksServiceProvider::class,
+			AdditionalAdminMenuServiceProvider::class => AdditionalAdminMenuServiceProvider::class,
 		);
 	}
 

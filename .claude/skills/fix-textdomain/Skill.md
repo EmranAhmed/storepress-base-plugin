@@ -1,6 +1,6 @@
 ---
 name: fix textdomain
-description: Convert hardcoded English strings in PHP files to WordPress i18n functions. Read text domain from CLAUDE.md before starting.
+description: Convert hardcoded English strings in PHP files to WordPress i18n functions.
 ---
 
 ## Setup

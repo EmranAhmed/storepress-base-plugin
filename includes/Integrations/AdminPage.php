@@ -30,7 +30,7 @@ class AdminPage extends AbstractSettings {
 	 * @since 1.0.0
 	 */
 	public function get_menu_title(): string {
-		return 'StorePress';
+		return esc_html__( 'StorePress', 'storepress-base-plugin' );
 	}
 
 	/**
@@ -40,7 +40,11 @@ class AdminPage extends AbstractSettings {
 	 * @since 1.0.0
 	 */
 	public function get_page_title(): string {
-		return sprintf( '%s - Settings', $this->get_plugin_name() );
+		return sprintf(
+			/* translators: %s: Plugin name. */
+			esc_html__( '%s - Settings', 'storepress-base-plugin' ),
+			$this->get_plugin_name()
+		);
 	}
 
 	/**
@@ -60,7 +64,7 @@ class AdminPage extends AbstractSettings {
 	 * @since 1.0.0
 	 */
 	public function settings_id(): string {
-		return 'plugin-b-settings';
+		return sprintf( '%s_settings', str_ireplace( '-', '_', $this->get_plugin_slug() ) );
 	}
 
 	/**
@@ -82,15 +86,15 @@ class AdminPage extends AbstractSettings {
 	 */
 	public function localize_strings(): array {
 		return array(
-			'unsaved_warning_text'            => 'The changes you made will be lost if you navigate away from this page.',
-			'reset_warning_text'              => 'Are you sure to reset?',
-			'reset_button_text'               => 'Reset All',
-			'settings_link_text'              => 'Settings',
-			'settings_error_message_text'     => 'Settings not saved',
-			'settings_updated_message_text'   => 'Settings Saved',
-			'settings_deleted_message_text'   => 'Settings Reset',
-			'settings_tab_not_available_text' => 'Settings Tab is not available.',
-			'method_called_before_init'       => 'This method should not be called before init.',
+			'unsaved_warning_text'            => esc_html__( 'The changes you made will be lost if you navigate away from this page.', 'storepress-base-plugin' ),
+			'reset_warning_text'              => esc_html__( 'Are you sure to reset?', 'storepress-base-plugin' ),
+			'reset_button_text'               => esc_html__( 'Reset All', 'storepress-base-plugin' ),
+			'settings_link_text'              => esc_html__( 'Settings', 'storepress-base-plugin' ),
+			'settings_error_message_text'     => esc_html__( 'Settings not saved', 'storepress-base-plugin' ),
+			'settings_updated_message_text'   => esc_html__( 'Settings Saved', 'storepress-base-plugin' ),
+			'settings_deleted_message_text'   => esc_html__( 'Settings Reset', 'storepress-base-plugin' ),
+			'settings_tab_not_available_text' => esc_html__( 'Settings Tab is not available.', 'storepress-base-plugin' ),
+			'method_called_before_init'       => esc_html__( 'This method should not be called before init.', 'storepress-base-plugin' ),
 		);
 	}
 }
