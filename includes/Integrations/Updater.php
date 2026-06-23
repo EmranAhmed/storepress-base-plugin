@@ -35,7 +35,7 @@ class Updater extends AbstractUpdater {
 	 * @since 1.0.0
 	 */
 	public function license_key(): string {
-		return $this->get_container()->get( Settings::class )->get_option( 'license' );
+		return $this->get_container()->get( Settings::class )->get_option( 'license', '' );
 	}
 
 	/**
