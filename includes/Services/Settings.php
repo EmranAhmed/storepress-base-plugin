@@ -83,9 +83,9 @@ class Settings extends AdminPage {
 
 
 			array(
-				'id'       => 'grps',
+				'id'       => 'multi_grps',
 				'type'     => 'toggle',
-				'title'    => 'Show Grpups',
+				'title'    => 'Show Grpups Multi Groups',
 				'default'  => 'no',
 				'tooltip'  => 'Textarea Help tooltip',
 				'required' => true,
@@ -95,8 +95,16 @@ class Settings extends AdminPage {
 					'key2' => 'value2',
 				),
 			),
-
-
+			array(
+				'id'       => 'grps',
+				'type'     => 'toggle',
+				'title'    => 'Show Grpups',
+				'default'  => 'no',
+				'tooltip'  => 'Textarea Help tooltip',
+				'required' => true,
+				'add_tag'  => array( 'NEW', '#d63639' ),
+			),
+			
 			array(
 				'condition'    => array( 'selector' => $this->get_field_selector( 'grps' ) ),
 				'id'           => 'input_group',
