@@ -2,10 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-/**
- * External dependencies
- */
-import { SearchListControl } from '@storepress/components';
 
 import {
 	useBlockProps,
@@ -21,6 +17,11 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 
+/**
+ * External dependencies
+ */
+import { SearchListControl } from '@storepress/components';
+
 import { useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -28,6 +29,7 @@ import apiFetch from '@wordpress/api-fetch';
  * Internal dependencies
  */
 import { getProductsRequests } from '@utils';
+import { getBlockSupportStyles } from '@block-support';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {

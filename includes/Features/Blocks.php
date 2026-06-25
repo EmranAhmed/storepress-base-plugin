@@ -9,13 +9,13 @@
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\Services;
+	namespace StorePress\Base\Features;
+
+	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use StorePress\AdminUtils\Traits\HelperMethodsTrait;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
 	use StorePress\Base\Traits\PluginUtilityTrait;
-
-	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	/**
 	 * Blocks Class.
@@ -27,7 +27,6 @@ class Blocks {
 
 	use SingletonTrait;
 	use PluginUtilityTrait;
-	use HelperMethodsTrait;
 
 	// =====================================================================
 	// Service Lifecycle Methods
@@ -49,7 +48,7 @@ class Blocks {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'storepress_blocks_loaded', $this );
+		do_action( 'storepress_base_blocks_loaded', $this );
 	}
 
 	/**
@@ -60,13 +59,13 @@ class Blocks {
 	 */
 	public function hooks(): void {
 		// Register all blocks on WordPress init.
-		add_action( 'init', array( $this, 'register_blocks' ) );
+		add_action( 'init', array( $this, 'handle_register_blocks' ) );
 		// Enqueue frontend assets.
-		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'handle_frontend_scripts' ) );
 		// Enqueue block editor assets.
-		add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_scripts' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'handle_block_editor_scripts' ) );
 		// Add custom StorePress block category.
-		add_filter( 'block_categories_all', array( $this, 'add_block_category' ) );
+		add_filter( 'block_categories_all', array( $this, 'handle_add_block_category' ) );
 	}
 
 	/**
@@ -90,7 +89,7 @@ class Blocks {
 	 * @return array<int, array<string, string|null>>
 	 * @since 1.0.0
 	 */
-	public function add_block_category( array $block_categories ): array {
+	public function handle_add_block_category( array $block_categories ): array {
 		$available_slugs = wp_list_pluck( $block_categories, 'slug' );
 
 		$category = array(
@@ -114,7 +113,7 @@ class Blocks {
 	 * @see   https://developer.wordpress.org/reference/functions/wp_set_script_translations/
 	 * @see   https://developer.wordpress.org/block-editor/how-to-guides/internationalization/#load-translation-file
 	 */
-	public function block_editor_scripts(): void {
+	public function handle_block_editor_scripts(): void {
 		// Editor Scripts.
 		$editor_script_src_url    = $this->build_url() . '/editor-scripts.js';
 		$editor_script_asset_file = $this->build_path() . '/editor-scripts.asset.php';
@@ -134,7 +133,7 @@ class Blocks {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function frontend_scripts(): void {
+	public function handle_frontend_scripts(): void {
 		$js_file_url  = $this->build_url() . '/frontend.js';
 		$css_file_url = $this->build_url() . '/frontend.css';
 		$asset_file   = $this->build_path() . '/frontend.asset.php';
@@ -153,7 +152,7 @@ class Blocks {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public function register_blocks(): void {
+	public function handle_register_blocks(): void {
 		if ( ! file_exists( $this->build_path() ) ) {
 			return;
 		}

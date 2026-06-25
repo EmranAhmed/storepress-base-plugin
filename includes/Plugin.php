@@ -14,14 +14,14 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use Automattic\WooCommerce\Utilities\FeaturesUtil;
+	use StorePress\Base\Core\Bootstrap;
 	use StorePress\Base\ServiceProviders\AdditionalAdminMenuServiceProvider;
 	use StorePress\Base\ServiceProviders\BlocksServiceProvider;
 	use StorePress\Base\ServiceProviders\ProCompatibilityServiceProvider;
-	use StorePress\Base\ServiceProviders\ServiceProviders;
 	use StorePress\Base\ServiceProviders\SettingsServiceProvider;
 	use StorePress\Base\ServiceProviders\DeactivationServiceProvider;
 	use StorePress\Base\ServiceProviders\UpdaterServiceProvider;
-	use StorePress\Base\Containers\Container;
+	use StorePress\Base\Integrations\Container;
 
 	/**
 	 * Class Plugin.
@@ -124,6 +124,10 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function get_service_providers(): array {
+
+		// We can override RegisterServiceProviders::get_providers() methods.
+		// to load all ServiceProvider to make Plugin.php file clean.
+
 		return array(
 			UpdaterServiceProvider::class             => UpdaterServiceProvider::class,
 			DeactivationServiceProvider::class        => DeactivationServiceProvider::class,
@@ -137,12 +141,12 @@ class Plugin {
 	/**
 	 * Boots all registered service providers.
 	 *
-	 * @return ServiceProviders
+	 * @return Bootstrap
 	 * @since 1.0.0
-	 * @see   ServiceProviders::instance()
+	 * @see   Bootstrap::instance()
 	 */
-	public function service_providers(): ServiceProviders {
-		return ServiceProviders::instance( $this->get_service_providers() );
+	public function service_providers(): Bootstrap {
+		return Bootstrap::instance( $this->get_service_providers() );
 	}
 
 	// =====================================================================

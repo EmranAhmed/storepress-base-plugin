@@ -15,7 +15,7 @@
 
 	use StorePress\AdminUtils\Abstracts\AbstractServiceProvider;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Integrations\AdditionalAdminMenu;
+	use StorePress\Base\Adapters\AdditionalAdminMenu;
 	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**

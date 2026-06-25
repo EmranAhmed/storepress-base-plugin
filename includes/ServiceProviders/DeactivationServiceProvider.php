@@ -15,8 +15,7 @@
 
 	use StorePress\AdminUtils\Abstracts\AbstractServiceProvider;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Containers\Container;
-	use StorePress\Base\Integrations\DeactivationFeedback;
+	use StorePress\Base\Adapters\DeactivationFeedback;
 	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**
@@ -45,7 +44,7 @@ class DeactivationServiceProvider extends AbstractServiceProvider {
 			DeactivationFeedback::class,
 			function () {
 				return DeactivationFeedback::instance();
-			} 
+			}
 		);
 	}
 

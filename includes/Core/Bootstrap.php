@@ -9,7 +9,7 @@
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\ServiceProviders;
+	namespace StorePress\Base\Core;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
@@ -19,9 +19,9 @@
 	/**
 	 * Registers and boots all plugin service providers.
 	 *
-	 * @name ServiceProviders
+	 * @name Bootstrap
 	 */
-class ServiceProviders extends ServiceProviderLoader {
+class Bootstrap extends ServiceProviderLoader {
 
 	use SingletonTrait;
 }

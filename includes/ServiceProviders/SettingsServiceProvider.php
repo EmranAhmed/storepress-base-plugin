@@ -15,7 +15,6 @@
 
 	use StorePress\AdminUtils\Abstracts\AbstractServiceProvider;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Containers\Container;
 	use StorePress\Base\Services\Settings;
 	use StorePress\Base\Traits\PluginUtilityTrait;
 

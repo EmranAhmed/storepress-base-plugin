@@ -17,7 +17,7 @@
 	 * License:           GPL v3 or later
 	 * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 	 * Domain Path:       /languages
-	 * Update URI:       https://storepress.com/
+	 * Update URI:       https://update.storepress.com/
 	 */
 
 	declare( strict_types=1 );

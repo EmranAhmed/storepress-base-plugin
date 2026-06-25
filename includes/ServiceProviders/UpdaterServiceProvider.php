@@ -15,7 +15,7 @@
 
 	use StorePress\AdminUtils\Abstracts\AbstractServiceProvider;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Integrations\Updater;
+	use StorePress\Base\Adapters\Updater;
 	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**

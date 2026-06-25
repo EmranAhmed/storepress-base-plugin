@@ -4,7 +4,8 @@
 		"paths": {
 			"@plugins": [ "src/plugins/Plugin" ],
 			"@utils": [ "src/utils" ],
-			"@utils/demo": [ "src/utils/demo" ]
+			"@utils/demo": [ "src/utils/demo" ],
+			"@block-support": [ "src/utils/BlockSupport" ]
 		},
 		"jsx": "react"
 	},

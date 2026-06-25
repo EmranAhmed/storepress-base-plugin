@@ -1,8 +1,27 @@
 # StorePress Base Plugin
 
-
 Download [latest release](https://github.com/EmranAhmed/storepress-base-plugin/releases/latest/download/storepress-base-plugin.zip) |
 Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamless&blueprint-url=https://raw.githubusercontent.com/EmranAhmed/storepress-base-plugin/main/.wp-playground/blueprint.json) using Playground.
+
+
+## Summary table
+
+| Question                                                           | Yes → Directory     | ServiceProvider behaviour |
+|--------------------------------------------------------------------|---------------------|---|
+| Extends an external package (functional)?                          | `Adapters/`         | — no own provider |
+| Extends an external package (core infra like implement interface)? | `Integrations/`     | — no own provider |
+| Has WordPress hooks that must fire on boot?                        | `Features/`         | `register()` **+** `boot()` |
+| No hooks — resolved on demand?                                     | `Services/`         | `register()` only |
+| Is an individual service provider?                                 | `ServiceProviders/` | — is the provider |
+| Orchestrates all service providers?                                | `Core/`             | — boots `ServiceProviders/` |
+| Shared utility across classes?                                     | `Traits/`           | — no provider |
+
+
+**Why the difference matters:**
+
+- `boot()` is what triggers hook registration — it resolves the class from the container, which runs its constructor and fires `add_action`/`add_filter`. A Feature *must* be booted eagerly so its hooks are live before WordPress needs them.
+- A Service has no hooks. It does not need to be resolved at boot time — the container holds the binding and resolves it lazily the first time something calls `get_settings()` or `$container->get(Settings::class)`. Calling `boot()` on a hookless class is unnecessary work.
+
 
 
 ## First
@@ -21,7 +40,7 @@ Test the plugin [in your browser](https://playground.wordpress.net/?mode=seamles
 - Open `includes/Plugin.php` and change `STOREPRESS_BASE_PLUGIN_FILE` on `function get_plugin_file()` function.
 - Open `storepress-base-plugin.php` to your plugin file name.
 - Rename `storepress-base-plugin.php` to your plugin file name.
-- Open `.eslintrc.js` and change `allowedTextDomain: ['storepress-base-plugin'],`
+- Open `eslint.config.js` and change `allowedTextDomain: ['storepress-base-plugin'],`
 - Open `composer.json` and change `name`, `description`, `autoload`
 - Open `package.json` and change `name` as plugin file name, `description`, `repository`.
 - Open `phpcs.xml` and change `<rule ref="WordPress.NamingConventions.PrefixAllGlobals">`, `<property name="text_domain" value="storepress-base-plugin"/>`

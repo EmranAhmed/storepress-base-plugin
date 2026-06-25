@@ -113,6 +113,7 @@ function getRootFile( fileName ) {
 
 function getWebPackAlias() {
 	return {
+		'@block-support': getFile( 'utils/BlockSupport' ), // Add "@block-support": [ "src/utils/BlockSupport" ] in jsconfig.json
 		'@plugins': getFile( 'plugins/Plugin' ), // Add "@plugins": [ "src/plugins/Plugin" ] in jsconfig.json
 		'@utils': getFile( 'utils' ), // Add "@utils": [ "src/utils" ] in jsconfig.json
 		'@utils/demo': getFile( 'utils/demo' ), // Add "@utils": [ "src/utils" ] in jsconfig.json

@@ -13,8 +13,8 @@
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-	use StorePress\Base\Containers\Container;
-	use StorePress\Base\Services\Blocks;
+	use StorePress\Base\Integrations\Container;
+	use StorePress\Base\Features\Blocks;
 	use StorePress\Base\Services\Settings;
 
 	/**

@@ -14,7 +14,7 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Integrations\AdminPage;
+	use StorePress\Base\Adapters\AdminPage;
 
 	/**
 	 * Defines all plugin settings tabs and their field configurations.
@@ -49,6 +49,8 @@ class Settings extends AdminPage {
 			),
 
 			'rest'    => 'Rest',
+
+			'license' => 'License',
 		);
 	}
 
@@ -58,7 +60,7 @@ class Settings extends AdminPage {
 	 * @return array<int, array<string, mixed>>
 	 * @since 1.0.0
 	 */
-	public function add_general_settings_fields() {
+	public function add_general_settings_fields(): array {
 		return array(
 			array(
 				'type'        => 'section',
@@ -91,8 +93,8 @@ class Settings extends AdminPage {
 				'required' => true,
 				'add_tag'  => array( 'NEW', '#d63639' ),
 				'options'  => array(
-					'key'  => 'value',
-					'key2' => 'value2',
+					'key1' => 'Value 1',
+					'key2' => 'Value 2',
 				),
 			),
 			array(
@@ -104,7 +106,7 @@ class Settings extends AdminPage {
 				'required' => true,
 				'add_tag'  => array( 'NEW', '#d63639' ),
 			),
-			
+
 			array(
 				'condition'    => array( 'selector' => $this->get_field_selector( 'grps' ) ),
 				'id'           => 'input_group',
@@ -337,16 +339,6 @@ class Settings extends AdminPage {
 			),
 
 			array(
-				'id'           => 'license',
-				'type'         => 'code',
-				'title'        => 'License',
-				'private'      => true,
-				'show_in_rest' => false,
-				'description'  => 'Input for license',
-				'placeholder'  => 'xxxx-xxxx-xxxx',
-			),
-
-			array(
 				'id'          => 'input-single-check',
 				'type'        => 'checkbox',
 				'title'       => 'Single Checkbox Full',
@@ -495,7 +487,7 @@ class Settings extends AdminPage {
 	 * @return array<int, array<string, mixed>>
 	 * @since 1.0.0
 	 */
-	public function add_rest_settings_fields() {
+	public function add_rest_settings_fields(): array {
 		return array(
 			array(
 				'type'        => 'section',
@@ -598,6 +590,32 @@ class Settings extends AdminPage {
 					),
 				),
 
+			),
+		);
+	}
+
+	/**
+	 * Returns field definitions for the License settings tab.
+	 *
+	 * @return array<int, array<string, mixed>>
+	 * @since 1.0.0
+	 */
+	public function add_license_settings_fields(): array {
+		return array(
+			array(
+				'type'        => 'section',
+				'title'       => 'Section rest',
+				'description' => 'Section description',
+			),
+
+			array(
+				'id'           => 'license',
+				'type'         => 'code',
+				'title'        => 'License',
+				'private'      => true,
+				'show_in_rest' => false,
+				'description'  => 'Input for license',
+				'placeholder'  => 'xxxx-xxxx-xxxx',
 			),
 		);
 	}
