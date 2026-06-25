@@ -68,7 +68,7 @@ class BlockSupportServiceProvider extends AbstractServiceProvider {
 
 	/**
 	 * Booting.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function boot(): void {}
