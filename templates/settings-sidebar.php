@@ -13,7 +13,7 @@
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
-	use StorePress\Base\Integrations\AdminPage;
+	use StorePress\Base\Adapters\AdminPage;
 
 	/**
 	 * Dynamic Template.
