@@ -2,6 +2,7 @@
  * External dependencies
  */
 const woocommerce = require( '@woocommerce/eslint-plugin' );
+
 /**
  * WordPress dependencies
  */
@@ -80,6 +81,7 @@ const wordPressPackages = [
 	'@wordpress/warning',
 	'@wordpress/widgets',
 	'@wordpress/wordcount',
+	'jquery',
 	'adm-zip',
 	'fast-glob',
 ];

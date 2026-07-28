@@ -1,3 +1,5 @@
+name: Github Release
+
 on:
     push:
         # Sequence of patterns matched against refs/tags
@@ -12,10 +14,7 @@ permissions: write-all
 env:
     REPOSITORY_NAME: ${{ github.event.repository.name }}
 
-name: Release
-
 jobs:
-
 
     # Build distribution release.
     #
@@ -26,6 +25,7 @@ jobs:
     # - Setup and Install Node.js.
     # - Make Zip.
     # - Upload Release.
+    # On - `git tag $(node -p "require('./package.json').version") && git push origin "$_"`
 
 
     build:
@@ -33,7 +33,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checks out the repository"
-                uses: actions/checkout@v4
+                uses: actions/checkout@v6
 
             -   name: "Set up PHP"
                 uses: shivammathur/setup-php@v2
@@ -42,23 +42,18 @@ jobs:
                     php-version: "8.3"
 
             -   name: "Setup and Install Node.js"
-                uses: actions/setup-node@v4
+                uses: actions/setup-node@v6
                 with:
-                    node-version: '22.x'
+                    node-version: '24.x'
 
-            -   name: "NPM Install"
-                run: npm install
-
-            -   name: "Make Zip"
-                run: npm run plugin-zip --if-present
+            -   name: "NPM Install and Make Zip"
+                run: npm install && npm run plugin-zip --if-present
 
             -   name: "Get release version."
-                run: |
-                    echo "RELEASE_TAG=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
+                run: echo "RELEASE_TAG=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
 
             -   name: "Get release file base name."
-                run: |
-                    echo "RELEASE_NAME=$(node -p -e "require('./package.json').name")" >> $GITHUB_ENV
+                run: echo "RELEASE_NAME=$(node -p -e "require('./package.json').name.replace(/^@/, '').replace('/', '-').toLowerCase()")" >> $GITHUB_ENV
 
             -   name: "Get Changelog"
                 id: changelog
@@ -68,11 +63,13 @@ jobs:
                     echo "EOF" >> $GITHUB_OUTPUT
 
             -   name: "Upload Release"
-                uses: softprops/action-gh-release@v2
+                uses: softprops/action-gh-release@v3
                 with:
-                    files: ./${{ env.RELEASE_NAME }}.zip
-                    make_latest: true
                     name: Release - v${{ env.RELEASE_TAG }}
+                    tag_name: ${{ env.RELEASE_TAG }}
+                    files: ./${{ env.RELEASE_NAME }}-v${{ env.RELEASE_TAG }}.zip
+                    make_latest: true
+                    overwrite_files: true
                     body: ${{ steps.changelog.outputs.changelog }}
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
