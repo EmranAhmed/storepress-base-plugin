@@ -5,7 +5,7 @@
 	 * @package    StorePress/Base
 	 *
 	 * @wordpress-plugin
-	 * Plugin Name:       StorePress Base Plugin
+	 * Plugin Name:       StorePress Base Plugin.
 	 * Plugin URI:        https://storepress.com/storepress-base-plugin/
 	 * Description:       A starter WordPress plugin scaffold which comes pre-configured for block development, admin dashboard with settings and standard plugin code.
 	 * Version:           1.0.0
