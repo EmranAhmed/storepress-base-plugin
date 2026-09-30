@@ -15,7 +15,7 @@
 
 	use StorePress\AdminUtils\Abstracts\AbstractServiceProvider;
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Adapters\DeactivationFeedback;
+	use StorePress\Base\Integrations\DeactivationFeedback;
 	use StorePress\Base\Traits\PluginUtilityTrait;
 
 	/**

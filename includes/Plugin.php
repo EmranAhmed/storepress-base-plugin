@@ -14,14 +14,14 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use Automattic\WooCommerce\Utilities\FeaturesUtil;
-	use StorePress\Base\Core\Bootstrap;
+	use StorePress\Base\ServiceProviders\ServiceProviders;
 	use StorePress\Base\ServiceProviders\AdditionalAdminMenuServiceProvider;
 	use StorePress\Base\ServiceProviders\BlocksServiceProvider;
 	use StorePress\Base\ServiceProviders\ProCompatibilityServiceProvider;
 	use StorePress\Base\ServiceProviders\SettingsServiceProvider;
 	use StorePress\Base\ServiceProviders\DeactivationServiceProvider;
 	use StorePress\Base\ServiceProviders\UpdaterServiceProvider;
-	use StorePress\Base\Integrations\Container;
+	use StorePress\Base\Containers\Container;
 
 	/**
 	 * Class Plugin.
@@ -38,12 +38,21 @@ class Plugin {
 	 * Returns the singleton instance.
 	 *
 	 * @return self
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 */
 	public static function instance(): self {
+		/**
+		 * Instance.
+		 *
+		 * @var self|null $instance
+		 */
 		static $instance = null;
 
-		return $instance ??= new self();
+		if ( null === $instance ) {
+			$instance = new self();
+		}
+
+		return $instance;
 	}
 
 	/**
@@ -68,9 +77,9 @@ class Plugin {
 	 */
 	public function includes(): void {
 
-		require_once __DIR__ . '/functions.php';
+		require_once untrailingslashit( plugin_dir_path( __DIR__ ) ) . '/includes/functions.php';
 
-		$vendor_path = untrailingslashit( plugin_dir_path( $this->get_plugin_file() ) ) . '/vendor';
+		$vendor_path = untrailingslashit( plugin_dir_path( __DIR__ ) ) . '/vendor';
 
 		if ( file_exists( $vendor_path . '/autoload_packages.php' ) ) {
 			require_once $vendor_path . '/autoload_packages.php';
@@ -141,12 +150,12 @@ class Plugin {
 	/**
 	 * Boots all registered service providers.
 	 *
-	 * @return Bootstrap
-	 * @since 1.0.0
-	 * @see   Bootstrap::instance()
+	 * @return ServiceProviders
+	 * @since 0.0.1
+	 * @see   ServiceProviders::instance()
 	 */
-	public function service_providers(): Bootstrap {
-		return Bootstrap::instance( $this->get_service_providers() );
+	public function service_providers(): ServiceProviders {
+		return ServiceProviders::instance( $this->get_service_providers() );
 	}
 
 	// =====================================================================

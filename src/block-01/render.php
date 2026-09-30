@@ -17,7 +17,7 @@
 	/**
 	 * The following variables are exposed to the file:
 	 *
-	 * @var array    $attributes -  A clean associative array of block attributes.
+	 * @var array{x:int, y:int, id: int, parent: 'popup'|'slider'}    $attributes -  A clean associative array of block attributes.
 	 * @var WP_Block $block      - The block instance. All the block settings and attributes.
 	 * @var string   $content    - The block inner HTML (usually empty unless using inner blocks).
 	 *
@@ -42,7 +42,7 @@
 		array(
 			'class' => esc_attr( get_blocks()->get_css_classes( $storepress_classes ) ),
 			'style' => esc_attr( get_blocks()->get_inline_styles( $storepress_styles ) ),
-		) 
+		)
 	);
 
 	$storepress_allowed_html = get_blocks()->get_kses_allowed_html();

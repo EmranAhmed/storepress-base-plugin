@@ -3,5 +3,5 @@ module.exports = {
 	'./*.md': [ 'npm run lint:md:docs' ],
 	'./src/**/*.scss': [ 'npm run lint:css' ],
 	'./src/**/*.{js,ts,tsx}': [ 'npm run lint:js' ],
-	'*.php': [ 'npm run lint:php' ],
+	'{*.php,includes/**/*.php,src/**/*.php,templates/**/*.php}': [ 'npm run lint:php' ],
 };

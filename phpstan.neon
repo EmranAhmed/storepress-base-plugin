@@ -4,12 +4,14 @@ parameters:
 	editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 	editorUrlTitle: '%%relFile%%:%%line%%'
 
+	tmpDir: .phpstan-cache
+
 	# Rules
 	inferPrivatePropertyTypeFromConstructor: true
 	treatPhpDocTypesAsCertain: false
 
 	# Configuration
-	level: 6
+	level: max
 	phpVersion:
 		min: 70400
 		max: 80500
@@ -20,8 +22,8 @@ parameters:
 		- src/
 		- templates/
 		- includes/
-	scanDirectories:
-		# - ../woocommerce
-#	ignoreErrors:
-#		# https://phpstan.org/user-guide/ignoring-errors#ignoring-in-configuration-file
-#		- identifier: missingType.generics
+	scanFiles:
+		- ../../../wp-includes/compat.php
+#	scanDirectories:
+#		- ../woocommerce
+		# - ../woocommerce-subscriptions

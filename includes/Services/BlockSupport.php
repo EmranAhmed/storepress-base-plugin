@@ -43,7 +43,7 @@ class BlockSupport {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var array<string, mixed>
+	 * @var array<array-key, mixed>
 	 */
 	private array $attributes;
 
@@ -54,7 +54,7 @@ class BlockSupport {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array<string, mixed> $attributes Block attributes containing style data.
+	 * @param array<array-key, mixed> $attributes Block attributes containing style data.
 	 *
 	 * @example
 	 * <code>
@@ -88,7 +88,7 @@ class BlockSupport {
 	 *                           'border', 'shadow', 'dimensions'.
 	 *
 	 * @return array{
-	 *     classes: array<string, bool>,
+	 *     classes: non-empty-array<string, bool>,
 	 *     classnames: string,
 	 *     css: string,
 	 *     declarations: array<string, string>
@@ -137,11 +137,18 @@ class BlockSupport {
 
 		$uniq_classnames = array_unique( $class_names );
 
+		/**
+		 * Core documents declarations as `array( "$property" => "$value" )` but types them as a plain `string[]`.
+		 *
+		 * @var array<string, string> $declarations
+		 */
+		$declarations = $styles['declarations'] ?? array();
+
 		return array(
 			'classes'      => array_fill_keys( $uniq_classnames, true ),
 			'classnames'   => implode( ' ', $uniq_classnames ),
 			'css'          => $styles['css'] ?? '',
-			'declarations' => $styles['declarations'] ?? array(),
+			'declarations' => $declarations,
 		);
 	}
 
@@ -253,11 +260,11 @@ class BlockSupport {
 		 */
 
 		$styles                         = array();
-		$styles['backgroundImage']      = $this->attributes['style']['background']['backgroundImage'] ?? null;
-		$styles['backgroundSize']       = $this->attributes['style']['background']['backgroundSize'] ?? null;
-		$styles['backgroundPosition']   = $this->attributes['style']['background']['backgroundPosition'] ?? null;
-		$styles['backgroundRepeat']     = $this->attributes['style']['background']['backgroundRepeat'] ?? null;
-		$styles['backgroundAttachment'] = $this->attributes['style']['background']['backgroundAttachment'] ?? null;
+		$styles['backgroundImage']      = $this->get_style_attribute( 'background', 'backgroundImage' );
+		$styles['backgroundSize']       = $this->get_style_attribute( 'background', 'backgroundSize' );
+		$styles['backgroundPosition']   = $this->get_style_attribute( 'background', 'backgroundPosition' );
+		$styles['backgroundRepeat']     = $this->get_style_attribute( 'background', 'backgroundRepeat' );
+		$styles['backgroundAttachment'] = $this->get_style_attribute( 'background', 'backgroundAttachment' );
 
 		if ( ! is_null( $styles['backgroundImage'] ) ) {
 			$styles['backgroundSize'] = $styles['backgroundSize'] ?? 'cover';
@@ -343,14 +350,14 @@ class BlockSupport {
 
 		$styles = array();
 
-		$preset_background_color = array_key_exists( 'backgroundColor', $this->attributes ) ? "var:preset|color|{$this->attributes['backgroundColor']}" : null;
-		$custom_background_color = $this->attributes['style']['color']['background'] ?? null;
+		$preset_background_color = $this->get_preset_attribute( 'backgroundColor', 'color' );
+		$custom_background_color = $this->get_style_attribute( 'color', 'background' );
 
-		$preset_gradient_color = array_key_exists( 'gradient', $this->attributes ) ? "var:preset|gradient|{$this->attributes['gradient']}" : null;
-		$custom_gradient_color = $this->attributes['style']['color']['gradient'] ?? null;
+		$preset_gradient_color = $this->get_preset_attribute( 'gradient', 'gradient' );
+		$custom_gradient_color = $this->get_style_attribute( 'color', 'gradient' );
 
-		$preset_text_color = array_key_exists( 'textColor', $this->attributes ) ? "var:preset|color|{$this->attributes['textColor']}" : null;
-		$custom_text_color = $this->attributes['style']['color']['text'] ?? null;
+		$preset_text_color = $this->get_preset_attribute( 'textColor', 'color' );
+		$custom_text_color = $this->get_style_attribute( 'color', 'text' );
 
 		$styles['background'] = $preset_background_color ?? $custom_background_color;
 		$styles['gradient']   = $preset_gradient_color ?? $custom_gradient_color;
@@ -431,9 +438,9 @@ class BlockSupport {
 		 * }
 		 */
 		return array(
-			'padding'  => $this->attributes['style']['spacing']['padding'] ?? null,
-			'margin'   => $this->attributes['style']['spacing']['margin'] ?? null,
-			'blockGap' => $this->attributes['style']['spacing']['blockGap'] ?? null,
+			'padding'  => $this->get_style_attribute( 'spacing', 'padding' ),
+			'margin'   => $this->get_style_attribute( 'spacing', 'margin' ),
+			'blockGap' => $this->get_style_attribute( 'spacing', 'blockGap' ),
 		);
 	}
 
@@ -520,22 +527,21 @@ class BlockSupport {
 		 * }
 		 */
 
-		$preset_border_color = array_key_exists( 'borderColor', $this->attributes ) ? "var:preset|color|{$this->attributes['borderColor']}" : null;
-		$custom_border_color = $this->attributes['style']['border']['color'] ?? null;
+		$preset_border_color = $this->get_preset_attribute( 'borderColor', 'color' );
+		$custom_border_color = $this->get_style_attribute( 'border', 'color' );
 
 		$styles = array(
-			'radius' => $this->attributes['style']['border']['radius'] ?? null,
-			'style'  => $this->attributes['style']['border']['style'] ?? null,
-			'width'  => $this->attributes['style']['border']['width'] ?? null,
+			'radius' => $this->get_style_attribute( 'border', 'radius' ),
+			'style'  => $this->get_style_attribute( 'border', 'style' ),
+			'width'  => $this->get_style_attribute( 'border', 'width' ),
 			'color'  => $preset_border_color ?? $custom_border_color,
 		);
 
 		foreach ( array( 'top', 'right', 'bottom', 'left' ) as $side ) {
-			$border             = $this->attributes['style']['border'][ $side ] ?? null;
 			$border_side_values = array(
-				'width' => isset( $border['width'] ) ? $border['width'] : null,
-				'color' => isset( $border['color'] ) ? $border['color'] : null,
-				'style' => isset( $border['style'] ) ? $border['style'] : null,
+				'width' => $this->get_style_attribute( 'border', $side, 'width' ),
+				'color' => $this->get_style_attribute( 'border', $side, 'color' ),
+				'style' => $this->get_style_attribute( 'border', $side, 'style' ),
 			);
 			$styles[ $side ]    = $border_side_values;
 		}
@@ -601,7 +607,9 @@ class BlockSupport {
 		 *     }
 		 * }
 		 */
-		return $this->attributes['style']['shadow'] ?? null;
+		$shadow = $this->get_style_attribute( 'shadow' );
+
+		return is_string( $shadow ) ? $shadow : null;
 	}
 
 	/**
@@ -674,19 +682,57 @@ class BlockSupport {
 		 */
 
 		$styles                = array();
-		$styles['minHeight']   = ( $this->attributes['minHeight'] ?? null ) || ( $this->attributes['style']['dimensions']['minHeight'] ?? null );
-		$styles['aspectRatio'] = $this->attributes['style']['dimensions']['minHeight'] ?? null;
+		$styles['minHeight']   = $this->attributes['minHeight'] ?? $this->get_style_attribute( 'dimensions', 'minHeight' );
+		$styles['aspectRatio'] = $this->get_style_attribute( 'dimensions', 'aspectRatio' );
 
 		// To ensure the aspect ratio does not get overridden by `minHeight` unset any existing rule.
-		if ( isset( $this->attributes['style']['dimensions']['aspectRatio'] ) ) {
+		if ( null !== $styles['aspectRatio'] ) {
 			$styles['minHeight'] = 'unset';
-		} elseif (
-			isset( $this->attributes['style']['dimensions']['minHeight'] ) ||
-			isset( $this->attributes['minHeight'] )
-		) {
+		} elseif ( null !== $styles['minHeight'] ) {
 			$styles['aspectRatio'] = 'unset';
 		}
 
 		return $styles;
+	}
+
+	/**
+	 * Get a nested value from the block `style` attribute.
+	 *
+	 * Block attributes are parsed from post content, so any level of the path
+	 * may be missing or may not be an array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string ...$keys Path below `style`, e.g. 'spacing', 'padding'.
+	 *
+	 * @return mixed Value at the path, or null when any segment is missing.
+	 */
+	private function get_style_attribute( string ...$keys ) {
+		$value = $this->attributes['style'] ?? null;
+
+		foreach ( $keys as $key ) {
+			if ( ! is_array( $value ) || ! isset( $value[ $key ] ) ) {
+				return null;
+			}
+			$value = $value[ $key ];
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Get a preset reference for a top-level slug attribute.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key  Attribute name, e.g. 'backgroundColor'.
+	 * @param string $type Preset type, e.g. 'color' or 'gradient'.
+	 *
+	 * @return string|null Preset reference like `var:preset|color|primary`, or null when the slug is not a string.
+	 */
+	private function get_preset_attribute( string $key, string $type ): ?string {
+		$slug = $this->attributes[ $key ] ?? null;
+
+		return is_string( $slug ) ? "var:preset|{$type}|{$slug}" : null;
 	}
 }

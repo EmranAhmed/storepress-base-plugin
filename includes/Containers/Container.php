@@ -9,7 +9,7 @@
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\Integrations;
+	namespace StorePress\Base\Containers;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 

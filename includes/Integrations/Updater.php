@@ -9,7 +9,7 @@
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\Adapters;
+	namespace StorePress\Base\Integrations;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
@@ -34,7 +34,8 @@ class Updater extends AbstractUpdater {
 	 * @since 1.0.0
 	 */
 	public function license_key(): string {
-		return $this->get_settings()->get_option( 'license' );
+		$license_key = $this->get_settings()->get_option( 'license' );
+		return is_string( $license_key ) ? $license_key : '';
 	}
 
 	/**

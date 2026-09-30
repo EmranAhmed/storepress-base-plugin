@@ -13,6 +13,7 @@ project.properties
 *.sublime-project
 *.sublime-workspace
 .sublimelinterrc
+.phpstan-cache
 
 # Sass
 .sass-cache/
@@ -52,7 +53,6 @@ tests/e2e/test*
 tsconfig.tsbuildinfo
 
 # Node Package Dependencies
-package-lock.json
 .husky/*
 phpcs-cache.json
 

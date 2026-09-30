@@ -9,7 +9,7 @@
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\Adapters;
+	namespace StorePress\Base\Integrations;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
@@ -64,7 +64,7 @@ class DeactivationFeedback extends AbstractDeactivationFeedback {
 	/**
 	 * Get saved settings data.
 	 *
-	 * @return array<string, mixed>
+	 * @return array<array-key, array<array-key, array<array-key, mixed>|bool|float|int|string|null>|bool|float|int|string|null>
 	 * @since 1.0.0
 	 */
 	public function options(): array {
@@ -74,7 +74,7 @@ class DeactivationFeedback extends AbstractDeactivationFeedback {
 	/**
 	 * Returns the dialog action buttons configuration.
 	 *
-	 * @return array<int, array<string, mixed>>
+	 * @return array<array-key, array<string, mixed>>
 	 * @since 1.0.0
 	 */
 	public function get_buttons(): array {
@@ -107,7 +107,7 @@ class DeactivationFeedback extends AbstractDeactivationFeedback {
 	/**
 	 * Returns the deactivation reason options shown in the dialog.
 	 *
-	 * @return array<string, array<string, mixed>>
+	 * @return array<array-key, array<array-key, mixed>>
 	 * @since 1.0.0
 	 */
 	public function get_reasons(): array {

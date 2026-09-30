@@ -24,7 +24,7 @@
 	<arg name="colors"/>
 
 	<!-- Check up to 8 files simultaneously. -->
-	<arg name="parallel" value="20"/>
+	<arg name="parallel" value="8"/>
 
 	<arg name="encoding" value="utf-8"/>
 

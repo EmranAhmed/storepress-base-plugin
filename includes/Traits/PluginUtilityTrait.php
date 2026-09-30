@@ -15,7 +15,7 @@
 
 	use StorePress\AdminUtils\Traits\HelperMethodsTrait;
 	use StorePress\AdminUtils\Traits\PluginCommonTrait;
-	use StorePress\Base\Integrations\Container;
+	use StorePress\Base\Containers\Container;
 	use StorePress\Base\Services\BlockSupport;
 	use StorePress\Base\Services\Settings;
 	use function StorePress\Base\get_plugin_file;
@@ -71,13 +71,21 @@ trait PluginUtilityTrait {
 	/**
 	 * Returns Block Support.
 	 *
-	 * @param array<string, mixed> $attributes Block attributes array.
+	 * @param array<array-key, mixed> $attributes Block attributes array.
 	 *
 	 * @return BlockSupport
 	 * @since  1.0.0
 	 */
 	public function get_block_support( array $attributes ): BlockSupport {
-		return $this->get_container()->get( BlockSupport::class )( $attributes );
+		/**
+		 * BlockSupportServiceProvider registers a factory closure under this ID, not an instance;
+		 * the container's generic `class-string<T>` return type cannot express that.
+		 *
+		 * @var \Closure( array<array-key, mixed> ): BlockSupport $factory
+		 */
+		$factory = $this->get_container()->get( BlockSupport::class );
+
+		return $factory( $attributes );
 	}
 
 	// =====================================================================
@@ -92,6 +100,9 @@ trait PluginUtilityTrait {
 	 * @see    get_settings()
 	 */
 	public function is_log_enabled(): bool {
-		return $this->string_to_boolean( $this->get_settings()->get_option( 'is_log_enabled', 'no' ) );
+		$enable_log    = $this->get_settings()->get_option( 'enable_log', 'no' );
+		$is_enable_log = is_string( $enable_log ) ? sanitize_key( $enable_log ) : 'no';
+
+		return $this->string_to_boolean( $is_enable_log );
 	}
 }

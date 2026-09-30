@@ -3,13 +3,13 @@
 	 * Service Providers Bootstrap.
 	 *
 	 * @package    StorePress/Base
-	 * @since      1.0.0
-	 * @version    1.0.0
+	 * @since      0.0.1
+	 * @version    0.0.1
 	 */
 
 	declare( strict_types=1 );
 
-	namespace StorePress\Base\Core;
+	namespace StorePress\Base\ServiceProviders;
 
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
@@ -19,9 +19,9 @@
 	/**
 	 * Registers and boots all plugin service providers.
 	 *
-	 * @name Bootstrap
+	 * @name ServiceProviders
 	 */
-class Bootstrap extends ServiceProviderLoader {
+class ServiceProviders extends ServiceProviderLoader {
 
 	use SingletonTrait;
 }

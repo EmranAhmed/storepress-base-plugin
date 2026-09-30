@@ -14,7 +14,7 @@
 	defined( 'ABSPATH' ) || die( 'Keep Silent' );
 
 	use StorePress\AdminUtils\Traits\SingletonTrait;
-	use StorePress\Base\Adapters\AdminPage;
+	use StorePress\Base\Integrations\AdminPage;
 
 	/**
 	 * Defines all plugin settings tabs and their field configurations.
