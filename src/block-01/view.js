@@ -10,7 +10,7 @@ import domReady from '@wordpress/dom-ready';
 /**
  * Internal dependencies
  */
-import { getProductsRequests } from '../utils';
+import { getProductsRequests } from '@/utils';
 
 domReady( function () {
 	const points = document.querySelectorAll(
