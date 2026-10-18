@@ -20,6 +20,8 @@
 	 * Plugin service container.
 	 *
 	 * @name Container
+	 *
+	 * @phpstan-consistent-constructor
 	 */
 class Container extends ServiceContainer {
 	use SingletonTrait;

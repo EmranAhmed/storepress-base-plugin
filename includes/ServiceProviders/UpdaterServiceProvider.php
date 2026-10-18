@@ -22,6 +22,7 @@
 	 * Binds and boots the Updater service.
 	 *
 	 * @name UpdaterServiceProvider
+	 * @phpstan-consistent-constructor
 	 */
 class UpdaterServiceProvider extends AbstractServiceProvider {
 

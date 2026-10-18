@@ -27,6 +27,8 @@
 	 * Class Plugin.
 	 *
 	 * @name Plugin
+	 *
+	 * @phpstan-consistent-constructor
 	 */
 class Plugin {
 
@@ -42,17 +44,17 @@ class Plugin {
 	 */
 	public static function instance(): self {
 		/**
-		 * Instance.
+		 * Static instances.
 		 *
-		 * @var self|null $instance
+		 * @var array<string, static> $instances
 		 */
-		static $instance = null;
+		static $instances = array();
 
-		if ( null === $instance ) {
-			$instance = new self();
+		if ( ! isset( $instances[ static::class ] ) ) {
+			$instances[ static::class ] = new static();
 		}
 
-		return $instance;
+		return $instances[ static::class ];
 	}
 
 	/**

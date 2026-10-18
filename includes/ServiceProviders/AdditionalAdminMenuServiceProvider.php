@@ -22,7 +22,7 @@
 	 * Registers and boots the AdditionalAdminMenu service.
 	 *
 	 * @name AdditionalAdminMenuServiceProvider
-	 * @method static AdditionalAdminMenuServiceProvider instance()
+	 * @phpstan-consistent-constructor
 	 */
 class AdditionalAdminMenuServiceProvider extends AbstractServiceProvider {
 

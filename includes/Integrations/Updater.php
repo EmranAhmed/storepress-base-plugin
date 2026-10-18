@@ -21,6 +21,7 @@
 	 * Handles plugin update checks and rollback via the StorePress update server.
 	 *
 	 * @name Updater
+	 * @phpstan-consistent-constructor
 	 */
 class Updater extends AbstractUpdater {
 

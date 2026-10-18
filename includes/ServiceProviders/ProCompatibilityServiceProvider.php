@@ -22,6 +22,7 @@
 	 * Binds the ProPluginInCompatibility service into the container.
 	 *
 	 * @name ProCompatibilityServiceProvider
+	 * @phpstan-consistent-constructor
 	 */
 class ProCompatibilityServiceProvider extends AbstractServiceProvider {
 

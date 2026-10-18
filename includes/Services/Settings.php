@@ -20,6 +20,8 @@
 	 * Defines all plugin settings tabs and their field configurations.
 	 *
 	 * @name Settings
+	 *
+	 * @phpstan-consistent-constructor
 	 */
 class Settings extends AdminPage {
 

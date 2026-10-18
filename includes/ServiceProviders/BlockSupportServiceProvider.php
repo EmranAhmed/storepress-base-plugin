@@ -28,10 +28,8 @@
 	 * a new instance per block by passing an attributes array.
 	 *
 	 * @name    BlockSupportServiceProvider
-	 * @package StorePress/Image_Hotspot_Blocks_Pro
+	 * @phpstan-consistent-constructor
 	 * @since   1.0.0
-	 *
-	 * @phpstan-use SingletonTrait<BlockSupportServiceProvider>
 	 *
 	 * @example BlockSupportServiceProvider::instance()->register();
 	 * @example $factory = $container->get( BlockSupports::class ); $supports = $factory( $attributes );

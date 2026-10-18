@@ -22,6 +22,7 @@
 	 * Binds and boots the DeactivationFeedback service.
 	 *
 	 * @name DeactivationServiceProvider
+	 * @phpstan-consistent-constructor
 	 */
 class DeactivationServiceProvider extends AbstractServiceProvider {
 

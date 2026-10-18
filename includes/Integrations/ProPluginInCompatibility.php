@@ -21,6 +21,7 @@
 	 * Detects and handles incompatible pro plugin versions.
 	 *
 	 * @name ProPluginInCompatibility
+	 * @phpstan-consistent-constructor
 	 */
 class ProPluginInCompatibility extends AbstractProPluginInCompatibility {
 

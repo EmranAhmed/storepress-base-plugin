@@ -22,6 +22,7 @@
 	 * Binds and boots the Blocks service.
 	 *
 	 * @name BlocksServiceProvider
+	 * @phpstan-consistent-constructor
 	 */
 class BlocksServiceProvider extends AbstractServiceProvider {
 

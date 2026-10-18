@@ -22,6 +22,7 @@
 	 * Handles the deactivation feedback dialog for the plugin.
 	 *
 	 * @name DeactivationFeedback
+	 * @phpstan-consistent-constructor
 	 */
 class DeactivationFeedback extends AbstractDeactivationFeedback {
 

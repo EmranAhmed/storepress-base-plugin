@@ -30,6 +30,8 @@
 	 *
 	 * @since 1.0.0
 	 *
+	 * @phpstan-consistent-constructor
+	 *
 	 * @see wp_style_engine_get_styles() WordPress Style Engine function.
 	 */
 class BlockSupport {

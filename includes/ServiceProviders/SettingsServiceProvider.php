@@ -22,6 +22,7 @@
 	 * Binds and boots the Settings service.
 	 *
 	 * @name SettingsServiceProvider
+	 * @phpstan-consistent-constructor
 	 */
 class SettingsServiceProvider extends AbstractServiceProvider {
 
