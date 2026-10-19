@@ -34,6 +34,9 @@ test.describe( 'Buttons', () => {
 		.locator( 'role=button[name="Add default block"i]' )
 		.click();
 		await page.keyboard.type( '/buttons' );
+		await expect(
+			page.getByRole( 'option', { name: 'Buttons', selected: true } )
+		).toBeVisible();
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.type( 'Content' );
 
@@ -60,7 +63,7 @@ test.describe( 'Buttons', () => {
 		).toBeFocused();
 		await pageUtils.pressKeys( 'primary+k' );
 		await expect(
-			page.locator( 'role=combobox[name="Link"i]' )
+			page.getByRole( 'combobox', { name: 'Search or type URL' } )
 		).toBeFocused();
 		await page.keyboard.press( 'Escape' );
 		await expect(

@@ -26,4 +26,4 @@ parameters:
 		- ../../../wp-includes/compat.php
 #	scanDirectories:
 #		- ../woocommerce
-		# - ../woocommerce-subscriptions
+#		- ../woocommerce-subscriptions

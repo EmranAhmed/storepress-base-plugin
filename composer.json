@@ -30,18 +30,17 @@
 	"require-dev": {
 		"automattic/vipwpcs": "^3.1",
 		"dealerdirect/phpcodesniffer-composer-installer": "^v1.2",
-		"squizlabs/php_codesniffer": "^3.13.6",
 		"woocommerce/woocommerce-sniffs": "^2.0.0",
-		"phpcompatibility/php-compatibility": "9.3.5",
-		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.7|^3.0.0-alpha",
 		"php-stubs/woocommerce-stubs": "^v11.2",
 		"phpstan/extension-installer": "^1.4.3",
 		"phpstan/phpstan": "^2.3",
 		"szepeviktor/phpstan-wordpress": "^v2.0",
 		"wp-cli/i18n-command": "^v3.0",
 		"wp-coding-standards/wpcs": "^3.4",
+		"phpunit/phpunit": "^8.5|^9.6",
 		"wp-phpunit/wp-phpunit": "^7.1",
-		"yoast/phpunit-polyfills": "1.1.5",
+		"yoast/phpunit-polyfills": "^4.0",
 		"plugin-check/phpcs-sniffs": "@dev"
 	},
 	"repositories": [
@@ -60,7 +59,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"PluginTests\\": "tests/php/includes/"
+			"PluginTests\\": "tests/php/"
 		}
 	},
 	"config": {
@@ -77,7 +76,11 @@
 		}
 	},
 	"scripts": {
-		"phpunit": "./vendor/bin/phpunit",
+		"test-install": "bash bin/install-wp-tests.sh wordpress_test root 'root' 127.0.0.1 latest",
+		"test": "./vendor/bin/phpunit --testdox",
+		"test:unit": "./vendor/bin/phpunit --testsuite Unit  --testdox",
+		"test:integration": "./vendor/bin/phpunit --testsuite Integration  --testdox",
+		"test:coverage": "./vendor/bin/phpunit --coverage-html coverage",
 		"phpstan" : "./vendor/bin/phpstan --memory-limit=2G",
 		"phpstan-report" : "./vendor/bin/phpstan --memory-limit=4G -vvv > phpstan-report.txt",
 		"phpstan-clear" : "./vendor/bin/phpstan clear-result-cache",

@@ -62,7 +62,7 @@ class Plugin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	protected function __construct() {
 
 		$this->includes();
 

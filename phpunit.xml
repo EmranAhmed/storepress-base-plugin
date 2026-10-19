@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	convertDeprecationsToExceptions="true"
+	defaultTestSuite="Unit"
+	cacheResultFile="./tests/.cache/phpunit.result.cache"
+>
+	<testsuites>
+		<testsuite name="Unit">
+			<directory suffix="Test.php">tests/php/Unit</directory>
+		</testsuite>
+		<testsuite name="Integration">
+			<directory suffix="Test.php">tests/php/Integration</directory>
+		</testsuite>
+	</testsuites>
+	<coverage processUncoveredFiles="false">
+		<include>
+			<directory suffix=".php">includes</directory>
+			<!--<file>sample-api.php</file>-->
+		</include>
+		<exclude>
+			<directory>vendor</directory>
+			<directory>tests</directory>
+			<directory>node_modules</directory>
+			<directory>build</directory>
+		</exclude>
+		<report>
+			<clover outputFile="tests/_output/php-coverage.xml"/>
+			<html outputDirectory="tests/_output/html"/>
+		</report>
+	</coverage>
+</phpunit>

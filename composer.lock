@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10467bb55e6f2a1eff62cb59ca54cd28",
+    "content-hash": "e79144834e47db62812ba8a734327642",
     "packages": [
         {
             "name": "automattic/jetpack-autoloader",
@@ -125,16 +125,16 @@
         },
         {
             "name": "storepress/admin-utils",
-            "version": "4.1.0",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EmranAhmed/storepress-admin-utils.git",
-                "reference": "a600c9560ea51b54c28e26185b2a4cc73e455626"
+                "reference": "f74e6aaf5f82d6eac8a32970477399fa2a7c1186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EmranAhmed/storepress-admin-utils/zipball/a600c9560ea51b54c28e26185b2a4cc73e455626",
-                "reference": "a600c9560ea51b54c28e26185b2a4cc73e455626",
+                "url": "https://api.github.com/repos/EmranAhmed/storepress-admin-utils/zipball/f74e6aaf5f82d6eac8a32970477399fa2a7c1186",
+                "reference": "f74e6aaf5f82d6eac8a32970477399fa2a7c1186",
                 "shasum": ""
             },
             "require": {
@@ -146,12 +146,11 @@
                 "brain/monkey": "^2.7",
                 "dealerdirect/phpcodesniffer-composer-installer": "^v1.2",
                 "php-stubs/wordpress-stubs": "^7.1",
-                "phpcompatibility/phpcompatibility-wp": "^2.1",
+                "phpcompatibility/phpcompatibility-wp": "^2.1|^3.0.0-alpha",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^2.3",
                 "phpunit/phpunit": "^9.6",
                 "plugin-check/phpcs-sniffs": "@dev",
-                "squizlabs/php_codesniffer": "^3.13",
                 "szepeviktor/phpstan-wordpress": "^2.0",
                 "woocommerce/woocommerce-sniffs": "^2.0",
                 "wp-cli/i18n-command": "^v3.0.1",
@@ -188,9 +187,9 @@
             ],
             "support": {
                 "issues": "https://github.com/EmranAhmed/storepress-admin-utils/issues",
-                "source": "https://github.com/EmranAhmed/storepress-admin-utils/tree/4.1.0"
+                "source": "https://github.com/EmranAhmed/storepress-admin-utils/tree/4.1.1"
             },
-            "time": "2026-10-18T14:28:10+00:00"
+            "time": "2026-10-19T12:52:04+00:00"
         }
     ],
     "packages-dev": [
@@ -3806,26 +3805,26 @@
         },
         {
             "name": "yoast/phpunit-polyfills",
-            "version": "1.1.5",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast/PHPUnit-Polyfills.git",
-                "reference": "41aaac462fbd80feb8dd129e489f4bbc53fe26b0"
+                "reference": "134921bfca9b02d8f374c48381451da1d98402f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/41aaac462fbd80feb8dd129e489f4bbc53fe26b0",
-                "reference": "41aaac462fbd80feb8dd129e489f4bbc53fe26b0",
+                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/134921bfca9b02d8f374c48381451da1d98402f9",
+                "reference": "134921bfca9b02d8f374c48381451da1d98402f9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
-                "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
+                "php": ">=7.1",
+                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0 || ^11.0 || ^12.0"
             },
             "require-dev": {
                 "php-parallel-lint/php-console-highlighter": "^1.0.0",
                 "php-parallel-lint/php-parallel-lint": "^1.4.0",
-                "yoast/yoastcs": "^3.2.0"
+                "yoast/yoastcs": "^3.1.0"
             },
             "type": "library",
             "extra": {
@@ -3865,7 +3864,7 @@
                 "security": "https://github.com/Yoast/PHPUnit-Polyfills/security/policy",
                 "source": "https://github.com/Yoast/PHPUnit-Polyfills"
             },
-            "time": "2025-08-10T04:54:36+00:00"
+            "time": "2025-02-09T18:58:54+00:00"
         }
     ],
     "aliases": [],

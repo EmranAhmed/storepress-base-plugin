@@ -14,73 +14,89 @@ Use this template as sample when creating new test files. It shows all conventio
 
 ```php
 <?php
-	/**
-	 * Test cases for Common trait.
-	 *
-	 * @package StorePress/AdminUtils/Tests
-	 */
 
-	declare( strict_types=1 );
+declare(strict_types=1);
 
-	use StorePress\AdminUtils\Traits\HelperMethodsTrait;
-	use StorePress\AdminUtils\Traits\SingletonTrait;
+namespace Unit\Features;
 
-	/**
-	 * Common Trait Test Case.
-	 */
-class HelperMethodsTest extends WP_UnitTestCase {
+use StorePress\Base\Features\Blocks;
+use WP_Block_Type_Registry;
+use WP_UnitTestCase;
 
-	use SingletonTrait;
-	use HelperMethodsTrait;
+class BlocksTest extends WP_UnitTestCase
+{
 
-	private HelperMethodsTest $test_instance;
-
-	/**
-	 * Set up test fixtures.
-	 */
-	public function set_up(): void {
+	public function set_up(): void
+	{
 		parent::set_up();
-		$this->test_instance = self::instance();
 	}
 
-	/**
-	 * Tear down test fixtures.
-	 */
-	public function tear_down(): void {
+	public function tear_down(): void
+	{
 		parent::tear_down();
-		$_GET     = array();
-		$_POST    = array();
-		$_REQUEST = array();
 	}
 
-	// =========================================================================
-	// Tests for get_var()
-	// =========================================================================
+	public function test_did_action_storepress_base_blocks_loaded()
+	{
+		$this->assertSame(1, did_action('storepress_base_blocks_loaded'));
+	}
 
-	/**
-	 * Test get_var returns variable value when set.
-	 */
-	public function test_get_var_returns_value_when_set(): void {
-		$variable = 'test_value';
-		$this->assertSame( 'test_value', $this->test_instance->get_var( $variable ) );
+	public function test_has_action_init()
+	{
+		$this->assertSame(10, has_action('init', [Blocks::instance(), 'handle_register_blocks']));
+	}
+
+	public function test_has_filter_block_categories_all()
+	{
+		$this->assertSame(10, has_filter('block_categories_all', [Blocks::instance(), 'handle_add_block_category']));
+	}
+
+	public function test_handle_add_block_category()
+	{
+
+		$default_categories = get_default_block_categories();
+		$block_categories = Blocks::instance()->handle_add_block_category($default_categories);
+		$available_slugs = wp_list_pluck($block_categories, 'slug');
+		$this->assertTrue(in_array('storepress', $available_slugs, true));
+	}
+
+	public function test_check_same_instance()
+	{
+		$this->assertSame(storepress_base_plugin()->get_container()->get(Blocks::class), Blocks::instance());
+	}
+
+	public function test_handle_frontend_scripts()
+	{
+		$this->assertFalse( wp_style_is( 'storepress-base-plugin-style', 'registered' ));
+		$this->assertFalse( wp_script_is( 'storepress-base-plugin-script', 'registered' ) );
+		do_action('wp_enqueue_scripts');
+		$this->assertTrue( wp_style_is( 'storepress-base-plugin-style', 'registered' ));
+		$this->assertTrue( wp_script_is( 'storepress-base-plugin-script', 'registered' ) );
+
+		// $this->assertTrue(true);
+	}
+
+	public function test_handle_block_editor_scripts()
+	{
+		$this->assertFalse(wp_script_is('storepress-base-plugin-editor-scripts'));
+		do_action('enqueue_block_editor_assets');
+		$this->assertTrue(wp_script_is('storepress-base-plugin-editor-scripts'));
 	}
 
 	/**
-	 * Test get_var returns default value when variable is not set.
+	 * @dataProvider register_blocks_data_provider
 	 */
-	public function test_get_var_returns_default_when_not_set(): void {
-		$variable = null;
-		unset( $variable );
-		$this->assertSame( 'default', $this->test_instance->get_var( $variable, 'default' ) );
+	public function test_register_blocks(string $block_name, bool $expected)
+	{
+		$this->assertSame($expected, WP_Block_Type_Registry::get_instance()->is_registered($block_name));
 	}
 
-	/**
-	 * Test get_var returns null as default when no default provided.
-	 */
-	public function test_get_var_returns_null_when_no_default(): void {
-		$variable = null;
-		unset( $variable );
-		$this->assertNull( $this->test_instance->get_var( $variable ) );
+	public function register_blocks_data_provider(): array
+	{
+		return [
+			'storepress/block-01 block' => ['storepress/block-01', true],
+			'storepress/interactive block' => ['storepress/interactive', true]
+		];
 	}
 }
 ```

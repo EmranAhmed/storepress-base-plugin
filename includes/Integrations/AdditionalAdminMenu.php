@@ -21,6 +21,7 @@
 	 * Additional admin menu page for the StorePress Base plugin.
 	 *
 	 * @name AdditionalAdminMenu
+	 *
 	 * @phpstan-consistent-constructor
 	 */
 class AdditionalAdminMenu extends AbstractAdminMenu {

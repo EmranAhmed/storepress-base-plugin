@@ -20,6 +20,7 @@
 	 * Registers and boots all plugin service providers.
 	 *
 	 * @name ServiceProviders
+	 *
 	 * @phpstan-consistent-constructor
 	 */
 class ServiceProviders extends ServiceProviderLoader {

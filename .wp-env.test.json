@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"testsEnvironment": false,
+	"core": null,
+	"phpVersion": "7.4",
+	"plugins": [ "." ],
+	"port": 8889,
+	"config": {
+		"WP_DEVELOPMENT_MODE": "plugin",
+		"WP_ENVIRONMENT_TYPE": "development",
+		"FS_METHOD": "direct",
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": "/var/www/html/wp-content/plugins/storepress-base-plugin/debug.log"
+	},
+	"lifecycleScripts": {
+		"afterStart": "wp-env run cli --config=.wp-env.test.json wp user update admin --user_pass=demo"
+	}
+}

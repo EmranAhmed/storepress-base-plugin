@@ -2,6 +2,7 @@
 # Operating System files
 .DS_Store
 Thumbs.db
+debug.log
 
 # IDE files
 .idea
