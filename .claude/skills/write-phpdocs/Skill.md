@@ -1,6 +1,6 @@
 ---
 name: Write PHPDocs
-description: Add or update PHP DocBlocks in any WordPress or WooCommerce plugin or theme, with types precise enough for PHPStan and IDE autocompletion. Covers file, class, method, property, and hook documentation, @since versions taken from git history, and translators comments. Documentation only — never changes code behaviour. Use whenever the user asks to write, add, fix, or update PHPDoc, docblocks, or code comments, document hooks, add @since tags, or resolve phpcs commenting errors.
+description: Add or update PHP DocBlocks in any WordPress or WooCommerce plugin or theme, with types precise enough for PHPStan and IDE autocompletion. Covers file, class, method, property, and hook documentation, @since versions taken from Plugin root file Version, and translators comments. Documentation only — never changes code behaviour. Use whenever the user asks to write, add, fix, or update PHPDoc, docblocks, or code comments, document hooks, add @since tags, or resolve phpcs commenting errors.
 ---
 
 # Write PHPDocs — WordPress / WooCommerce
@@ -36,6 +36,25 @@ detected in step 0.
 
 **Class / interface / trait** — summary and `@since`. Use `@method` and `@property` only for magic
 members, `@template` for generics, and `@phpstan-type` for an array shape used in 3+ places.
+
+**`class Plugin {}`** — the exception to the class rule above. Its DocBlock is always exactly this,
+replacing any existing one (no `@since`, no other tags):
+
+```php
+/**
+ * Class Plugin.
+ *
+ * @name Plugin
+ * @phpstan-consistent-constructor
+ */
+```
+
+### PHPStan consistent constructor
+
+Add `@phpstan-consistent-constructor` to the class DocBlock of every class that uses
+`SingletonTrait` from `StorePress\AdminUtils\Traits\SingletonTrait`. Check the `use` statements
+(both the imported name and any fully qualified `use \StorePress\AdminUtils\Traits\SingletonTrait;`
+inside the class body) — do not rely on the trait's short name alone.
 
 **Method / function** — summary in the third person ending with a period ("Gets the order
 total."), then `@since`, `@param`, `@return`, and `@throws` when it throws. Add `@see` for closely

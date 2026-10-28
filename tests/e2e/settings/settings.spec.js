@@ -12,7 +12,6 @@ test.describe( 'StorePress Settings Page', () => {
 		).toBeVisible();
 
 		await expect(page.getByRole('heading', { name: 'StorePress Base Plugin. -' })).toBeVisible();
-
 	} );
 
 	test( 'show hidden option', async ( { admin, page } ) => {
