@@ -31,6 +31,24 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
+	/**
+	 * Create an `onChange` handler that saves the new value to one attribute.
+	 *
+	 * @param {string} key Attribute name.
+	 * @return {(value: string|number|boolean|Object) => void} Handler that stores the value it receives.
+	 * @example
+	 * ```js
+	 * 	const { orientation } = attributes;
+	 * <ToggleGroupControl
+	 * 						label={ __( 'Orientation', 'default' ) }
+	 * 						value={ orientation }
+	 * 						onChange={ set( 'orientation' ) }
+	 * 						isBlock
+	 * 					/>
+	 * ```
+	 */
+	const set = ( key ) => ( value ) => setAttributes( { [ key ]: value } );
+
 	const blockProps = useBlockProps();
 
 	return (
