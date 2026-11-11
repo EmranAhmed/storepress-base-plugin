@@ -1,5 +1,7 @@
 ---
 name: blueprint
+version: 1.0.0
+last-updated: 2026-11-11
 description: Before writing code in this project, interview the user and write ten planning notes (PRD, TRD, App Flow, UI/UX brief, Backend schema, API spec, Security matrix, Testing plan, Release plan, Implementation plan) to docs/blueprint/, then follow them during all development. For WordPress plugins, code follows the StorePress base plugin conventions.
 ---
 

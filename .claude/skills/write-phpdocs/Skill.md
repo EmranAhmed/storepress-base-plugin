@@ -1,5 +1,7 @@
 ---
 name: Write PHPDocs
+version: 1.0.0
+last-updated: 2026-11-11
 description: Add or update PHP DocBlocks in any WordPress or WooCommerce plugin or theme, with types precise enough for PHPStan and IDE autocompletion. Covers file, class, method, property, and hook documentation, @since versions taken from Plugin root file Version, and translators comments. Documentation only — never changes code behaviour. Use whenever the user asks to write, add, fix, or update PHPDoc, docblocks, or code comments, document hooks, add @since tags, or resolve phpcs commenting errors.
 ---
 

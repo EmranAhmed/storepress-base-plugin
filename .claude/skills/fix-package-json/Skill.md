@@ -1,5 +1,7 @@
 ---
 name: Fix Package JSON
+version: 1.0.0
+last-updated: 2026-11-11
 description: Sort the `dependencies` and `devDependencies` blocks of package.json alphabetically so the project's package.json linter passes. Detects the lint command, reorders the entries only, and never changes versions, adds or removes packages, or touches the lockfile or any other field. Use whenever the user asks to fix or sort package.json, fix lint:pkg-json / npm-package-json-lint errors, or mentions a prefer-alphabetical-dependencies error.
 ---
 

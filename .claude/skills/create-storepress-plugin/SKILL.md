@@ -1,5 +1,7 @@
 ---
 name: create-storepress-plugin
+version: 1.0.0
+last-updated: 2026-11-11
 description: Write, extend, or refactor WordPress/WooCommerce plugin code exactly the way the StorePress base plugin does it — directory layout, namespaces, singleton + DI container + service-provider architecture, PHP/JS/SCSS code style, naming, docblocks, i18n, escaping, blocks, conventions, architecture, directory structure, naming, coding style, and documentation patterns and tests. Use whenever creating or editing any file in a StorePress plugin (or any plugin scaffolded from storepress-base-plugin), adding a feature, service, integration, settings tab, block, frontend script, or test, or when the user says "create like the base plugin", "StorePress Plugin Style", or "create like storepress plugin".
 ---
 

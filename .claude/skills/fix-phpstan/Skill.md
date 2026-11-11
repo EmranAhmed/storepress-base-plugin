@@ -1,5 +1,7 @@
 ---
 name: Fix PHPStan
+version: 1.0.0
+last-updated: 2026-11-11
 description: Fix PHPStan errors in any WordPress or WooCommerce plugin, at any level. Profiles the project first, then fixes producer files before consumer files, always updating PHPDoc and preferring honest runtime guards over silencing annotations. Asks for approval and shows the planned change before modifying any file. Never a baseline, an ignoreErrors entry, or a level drop. Use whenever the user asks to fix PHPStan, run static analysis, raise the PHPStan level, or mentions `stan`, a PHPStan report, or PHP type errors.
 ---
 

@@ -1,5 +1,7 @@
 ---
 name: Fix Textdomain
+version: 1.0.0
+last-updated: 2026-11-11
 description: Make hardcoded user-facing strings translatable in any WordPress plugin or theme. Detects the project's text domain and code style, wraps strings in the correct i18n function with the correct escaping, converts interpolated variables to sprintf placeholders with translators comments, handles plurals and strings containing HTML, and fixes wrong or missing text domains on existing calls. Changes strings only, never logic. Use whenever the user asks to fix the textdomain, add or fix i18n / l10n / translations, make strings translatable, prepare a .pot file, or resolve WordPress.WP.I18n phpcs errors.
 ---
 

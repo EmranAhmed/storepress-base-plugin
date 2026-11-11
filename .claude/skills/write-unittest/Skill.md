@@ -1,5 +1,7 @@
 ---
 name: write unittest
+version: 1.0.0
+last-updated: 2026-11-11
 description: Write PHP UnitTest for WordPress Plugin.
 ---
 

@@ -1,5 +1,7 @@
 ---
 name: update-structure
+version: 1.0.0
+last-updated: 2026-11-11
 description: Restructure a StorePress plugin's Files layout. Use when asked to apply the plugin re structure or namespace update to a plugin.
 ---
 
