@@ -25,7 +25,7 @@
 	],
 	"require": {
 		"automattic/jetpack-autoloader": "^v6.0",
-		"storepress/admin-utils": "^4.1"
+		"storepress/admin-utils": "^5.0"
 	},
 	"require-dev": {
 		"automattic/vipwpcs": "^3.1",
