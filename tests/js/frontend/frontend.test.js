@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
+import { describe, it, expect } from 'vitest'
 import { getOptionsFromAttribute } from '@storepress/utils'
-import { render, fireEvent, screen } from '@testing-library/react'
 
 // @example: https://developer.wordpress.org/block-editor/contributors/code/testing-overview/
 

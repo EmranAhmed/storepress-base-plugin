@@ -61,8 +61,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	// Fetch Attributes
 	useEffect( () => {
 		apiFetch( {
-			url: 'http://sites.local/woo-variation-swatches/wp-json/wc/store/v1/products/attributes',
-			// path : 'wc/store/v1/products/attributes',
+			// url: 'http://sites.local/woo-variation-swatches/wp-json/wc/store/v1/products/attributes',
+			path: 'wc/store/v1/products/attributes',
 		} ).then( ( result ) => {
 			if ( result && result.length > 0 ) {
 				setLoading( false );
