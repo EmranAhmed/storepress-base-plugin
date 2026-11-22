@@ -26,10 +26,10 @@ export default defineConfig({
 	},
 	test: {
 		environment: 'jsdom',
-		globals: false,
+		globals: true, // Lets Testing Library register cleanup automatically.
 		restoreMocks: true,
 		reporters: ['tree'], // List every test grouped under its file and describe block.
-		setupFiles: ['./vitest.setup.mjs'],
+		setupFiles: ['@testing-library/jest-dom/vitest'],
 		include: ['tests/js/**/*.test.{js,jsx}']
 	},
 });
